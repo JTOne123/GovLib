@@ -1,0 +1,37 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"taskName": "Build Solution",
+			"type": "shell",
+			"command": "dotnet",
+			"args": ["build"],
+			"problemMatcher": "$msCompile",
+			"group": "build"
+		},
+		{
+			"taskName": "Restore Nuget Packages",
+			"type": "shell",
+			"command": "dotnet",
+			"args": ["restore"],
+			"problemMatcher": "$msCompile",
+			"group": "build"
+		},
+		{
+			"taskName": "Run Unit Tests",
+			"type": "shell",
+			"command": "dotnet",
+			"args": ["test", "${workspaceRoot}/Gov.NET.Tests/Gov.NET.Tests.csproj"],
+			"problemMatcher": "$msCompile",
+			"group": "build"
+		},
+		{
+			"taskName": "Run System Tests",
+			"type": "shell",
+			"command": "dotnet",
+			"args": ["test", "${workspaceRoot}/Gov.NET.SystemTests/Gov.NET.SystemTests.csproj"],
+			"problemMatcher": "$msCompile",
+			"group": "build"
+		}
+	]
+}
