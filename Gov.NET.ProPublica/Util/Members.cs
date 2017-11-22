@@ -6,11 +6,11 @@ using Newtonsoft.Json.Linq;
 using Gov.NET;
 using Gov.NET.Models;
 using Gov.NET.ProPublica;
-using Gov.NET.ProPublica.CongressUrls;
+using Gov.NET.ProPublica.Urls;
 using Gov.NET.ProPublica.ApiModels;
 using Gov.NET.ProPublica.ApiModels.Wrappers;
 
-namespace Gov.NET.ProPublica.CongressUtils
+namespace Gov.NET.ProPublica.Util
 {
     public class Members
     {

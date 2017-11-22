@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Gov.NET
+namespace Gov.NET.Propublica.Util
 {
     internal static class HeaderProvider
     {

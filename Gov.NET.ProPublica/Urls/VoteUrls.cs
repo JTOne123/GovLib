@@ -1,4 +1,4 @@
-namespace Gov.NET.ProPublica.CongressUrls
+namespace Gov.NET.ProPublica.Urls
 {
     public static class VoteUrls
     {

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Gov.NET.ProPublica.CongressUtils;
+using Gov.NET.ProPublica.Util;
 
 namespace Gov.NET.ProPublica
 {

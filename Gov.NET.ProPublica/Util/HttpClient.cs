@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Gov.NET
+namespace Gov.NET.ProPublica.Util
 {
     internal class HttpClient: WebClient
     {

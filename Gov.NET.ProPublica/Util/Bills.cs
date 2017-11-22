@@ -1,184 +1,156 @@
 using System.Net;
 using Newtonsoft.Json.Linq;
-using Gov.NET.ProPublica.CongressUrls;
+using Gov.NET.ProPublica.Urls;
 
-namespace Gov.NET.ProPublica.CongressUtils
+namespace Gov.NET.ProPublica.Util
 {
-    public class Votes
+    public class Bills
     {
         private Congress _parent;
 
-        internal Votes(Congress parent)
+        internal Bills(Congress parent)
         {
             _parent = parent;
         }
 
-        public JObject GetSenateRollCall(int congress, int session, int num)
+        public JObject GetBillsPassed(int congress)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, congress, "senate", session, num);
+                var url = string.Format(BillUrls.RecentBills, congress, "both", "passed");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetHouseRollCall(int congress, int session, int num)
+        public JObject GetSenateBillsPassed(int congress)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, congress, "house", session, num);
+                var url = string.Format(BillUrls.RecentBills, congress, "senate", "passed");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetSenateMissedVotes(int congress)
+        public JObject GetHouseBillsPassed(int congress)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, congress, "senate", "missed");
+                var url = string.Format(BillUrls.RecentBills, congress, "house", "passed");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetHouseMissedVotes(int congress)
+        public JObject GetSenateBillsIntroduced(int congress)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, congress, "house", "missed");
+                var url = string.Format(BillUrls.RecentBills, congress, "senate", "introduced");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetSenatePartyVotes(int congress)
+        public JObject GetHouseBillsIntroduced(int congress)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, congress, "senate", "party");
+                var url = string.Format(BillUrls.RecentBills, congress, "house", "introduced");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetHousePartyVotes(int congress)
+        public JObject GetUpdatedSenateBills(int congress)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, congress, "house", "party");
+                var url = string.Format(BillUrls.RecentBills, congress, "senate", "updated");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetSenateLoneVotes(int congress)
+        public JObject GetUpdatedHouseBills(int congress)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, congress, "senate", "loneno");
+                var url = string.Format(BillUrls.RecentBills, congress, "house", "updated");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetHouseLoneVotes(int congress)
+        public JObject GetMajorSenateBills(int congress)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, congress, "house", "loneno");
+                var url = string.Format(BillUrls.RecentBills, congress, "senate", "major");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetSenatePerfectVotes(int congress)
+        public JObject GetMajorHouseBills(int congress)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, congress, "senate", "perfect");
+                var url = string.Format(BillUrls.RecentBills, congress, "house", "major");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetHousePerfectVotes(int congress)
+        public JObject GetBillsByMember(string id)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, congress, "house", "perfect");
+                var url = string.Format(BillUrls.MemberBills, id, "introduced");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetSenateVotesByDate(int congress, int year, int month)
+        public JObject GetBillsUpdatedByMember(string id)
         {
             using (var wc = new WebClient())
             {
-                var str = "";
-                if (month < 10) str = $"0{month}";
-                else str = month.ToString();
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, "senate", year, str);
+                var url = string.Format(BillUrls.MemberBills, id, "updated");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetHouseVotesByDate(int congress, int year, int month)
+        public JObject GetBillByID(int congress, string id)
         {
             using (var wc = new WebClient())
             {
-                var str = "";
-                if (month < 10) str = $"0{month}";
-                else str = month.ToString();
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, "house", year, str);
+                var url = string.Format(BillUrls.GetBill, congress, id);
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
         }
 
-        public JObject GetSenateVotesByRange(string d1, string d2)
+        public JObject GetRelatedBills(int congress, string id)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, "senate", d1, d2);
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject GetHouseVotesByRange(string d1, string d2)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, "house", d1, d2);
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject GetNominationVotes(int congress)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(VoteUrls.RollCall, congress);
+                var url = string.Format(BillUrls.GetBill, congress, id, "related");
                 var jsonStr = wc.DownloadString(url);
                 return JObject.Parse(jsonStr);
             }
