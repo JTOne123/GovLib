@@ -61,7 +61,7 @@ namespace TestApp
 
         static void PrintAllSens()
         {
-            var members = Congress.Members.GetAllSenators(115);
+            var members = Congress.Members.GetAllSenators(116);
             SortedPrint(members);
         }
 
