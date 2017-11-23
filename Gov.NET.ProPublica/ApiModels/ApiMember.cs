@@ -1,5 +1,6 @@
 using System;
 using Gov.NET.Util;
+using Gov.NET.Models;
 
 namespace Gov.NET.ProPublica.ApiModels
 {
@@ -30,16 +31,16 @@ namespace Gov.NET.ProPublica.ApiModels
         public string most_recent_vote { get; set; }
         public ApiRole[] roles { get; set; }
 
-        public static Gov.NET.Models.Politician Convert(ApiMember entity, string chamber)
+        public static Politician Convert(ApiMember entity, string chamber)
         {
             if (entity == null)
                 return null;
 
-            Gov.NET.Models.Politician politician;
+            Politician politician;
 
             if (chamber == "senate")
             {
-                politician = new Gov.NET.Models.Senator()
+                politician = new Senator()
                 {
                     Rank = Text.Capitalize(entity.roles[0].state_rank),
                     Class = Int32.Parse(entity.roles[0].senate_class)
@@ -47,7 +48,7 @@ namespace Gov.NET.ProPublica.ApiModels
             }
             else
             {
-                politician = new Gov.NET.Models.Representative()
+                politician = new Representative()
                 {
                     District = Int32.Parse(entity.roles[0].district)
                 };
@@ -64,20 +65,20 @@ namespace Gov.NET.ProPublica.ApiModels
             politician.State = entity.roles[0].state;
             politician.Seniority = Int32.Parse(entity.roles[0].seniority);
             politician.OcdID = entity.roles[0].ocd_id;
-
+            politician.Gender = (Politician.GenderEnum)Enum.Parse(typeof(Politician.GenderEnum), entity.gender);
             return politician;
         }
 
-        public static Gov.NET.Models.Politician ConvertMember(ApiMember entity)
+        public static Politician ConvertMember(ApiMember entity)
         {
             if (entity == null)
                 return null;
 
-            Gov.NET.Models.Politician politician;
+            Politician politician;
 
             if (entity.roles[0].chamber == "Senate")
             {
-                politician = new Gov.NET.Models.Senator
+                politician = new Senator
                 {
                     Rank = Text.Capitalize(entity.roles[0].state_rank),
                     Class = Int32.Parse(entity.roles[0].senate_class)
@@ -85,7 +86,7 @@ namespace Gov.NET.ProPublica.ApiModels
             }
             else
             {
-                politician = new Gov.NET.Models.Representative
+                politician = new Representative
                 {
                     District = Int32.Parse(entity.roles[0].district)
                 };

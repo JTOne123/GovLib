@@ -15,20 +15,20 @@ namespace Gov.NET.ProPublica.ApiModels
         public string start_date { get; set; }
         public string district { get; set; }
     
-        public static Gov.NET.Models.Politician Convert(ApiNewMembers entity)
+        public static Politician Convert(ApiNewMembers entity)
         {
             if (entity == null)
                 return null;
 
-            Gov.NET.Models.Politician politician;
+            Politician politician;
 
             if (entity.chamber == "Senate")
             {
-                politician = new Gov.NET.Models.Senator();
+                politician = new Senator();
             }
             else
             {
-                politician = new Gov.NET.Models.Representative()
+                politician = new Representative()
                 {
                     District = Int32.Parse(entity.district)
                 };

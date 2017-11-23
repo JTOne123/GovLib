@@ -5,6 +5,12 @@ namespace Gov.NET.Models
 {
     public abstract class Politician
     {
+        public enum GenderEnum
+        {
+            Male,
+            Female
+        }
+        
         public string ID { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -13,7 +19,7 @@ namespace Gov.NET.Models
         public string Party { get; set; }
         public string State { get; set; }
         public DateTime BirthDate { get; set; }
-        public string Gender { get; set; }
+        public GenderEnum Gender { get; set; }
         public string Url { get; set; }
         public string Twitter { get; set; }
         public string Facebook { get; set; }
@@ -26,10 +32,9 @@ namespace Gov.NET.Models
         public int NextElection { get; set; }
         public string OcdID { get; set; }
 
-
         private string GetFullName()
         {
-            if (MiddleName == null) return $"{FirstName} {LastName}";
+            if (string.IsNullOrEmpty(MiddleName)) return $"{FirstName} {LastName}";
             else return $"{FirstName} {MiddleName} {LastName}";
         }
     }
