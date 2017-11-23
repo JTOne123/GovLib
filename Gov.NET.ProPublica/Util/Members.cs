@@ -31,7 +31,7 @@ namespace Gov.NET.ProPublica.Util
             }
         }
 
-        public Representative[] GetAllReps(int congress)
+        public Representative[] GetAllRepresentatives(int congress)
         {
             using (var client = new HttpClient())
             {

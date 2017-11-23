@@ -6,86 +6,86 @@ using Xunit;
 
 namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
 {
-    public class GetAllSenatorsTests
+    public class GetAllRepresentativesTests
     {
         public string ApiKey { get; }
         public Congress Congress { get; }
-        public Senator[] AllSenators { get; }
+        public Representative[] AllRepresentatives { get; }
 
-        public GetAllSenatorsTests()
+        public GetAllRepresentativesTests()
         {
             // Sleep before making api call to limit request spam.
             Thread.Sleep(60);
             ApiKey = Environment.GetEnvironmentVariable("PROPUBLICA_KEY");
             Congress = new Congress(ApiKey);
-            AllSenators = Congress.Members.GetAllSenators(115);
+            AllRepresentatives = Congress.Members.GetAllRepresentatives(115);
         }
 
         [Fact]
         public void CollectionIsNotNull()
         {
-            Assert.NotNull(AllSenators);
+            Assert.NotNull(AllRepresentatives);
         }
 
         [Fact]
         public void CollectionIsNotEmpty()
         {
-            Assert.NotEmpty(AllSenators);
+            Assert.NotEmpty(AllRepresentatives);
         }
 
         [Fact]
-        public void AllSenatorsArentNull()
+        public void AllRepresentativesArentNull()
         {
-            foreach (var senator in AllSenators)
+            foreach (var senator in AllRepresentatives)
                 Assert.NotNull(senator);
         }
 
         [Fact]
-        public void AllSenatorsHaveFirstName()
+        public void AllRepresentativesHaveFirstName()
         {
-            foreach (var senator in AllSenators)
+            foreach (var senator in AllRepresentatives)
                 Assert.False(string.IsNullOrEmpty(senator.FirstName));
         }
 
         [Fact]
-        public void AllSenatorsHaveLastName()
+        public void AllRepresentativesHaveLastName()
         {
-            foreach (var senator in AllSenators)
+            foreach (var senator in AllRepresentatives)
                 Assert.False(string.IsNullOrEmpty(senator.LastName));
         }
 
         [Fact]
-        public void AllSenatorsHaveFullName()
+        public void AllRepresentativesHaveFullName()
         {
-            foreach (var senator in AllSenators)
+            foreach (var senator in AllRepresentatives)
                 Assert.False(string.IsNullOrEmpty(senator.FullName));
         }
 
         [Fact]
-        public void AllSenatorsHaveAnID()
+        public void AllRepresentativesHaveAnID()
         {
-            foreach (var senator in AllSenators)
+            foreach (var senator in AllRepresentatives)
                 Assert.False(string.IsNullOrEmpty(senator.ID));
         }
 
         [Fact]
-        public void AllSenatorsHaveAHomeState()
+        public void AllRepresentativesHaveAHomeState()
         {
-            foreach (var senator in AllSenators)
+            foreach (var senator in AllRepresentatives)
                 Assert.False(string.IsNullOrEmpty(senator.State));
         }
 
         [Fact]
-        public void AllSenatorsHaveABirthDate()
+        public void AllRepresentativesHaveABirthDate()
         {
-            foreach (var senator in AllSenators)
+            foreach (var senator in AllRepresentatives)
                 Assert.False(string.IsNullOrEmpty(senator.BirthDate.ToString()));
         }
 
         [Fact]
-        public void AllSenatorsHaveANextElection()
+        public void AllRepresentativesHaveANextElection()
         {
-            foreach (var senator in AllSenators)
+            foreach (var senator in AllRepresentatives)
                 Assert.False(string.IsNullOrEmpty(senator.NextElection.ToString()));
         }
     }
