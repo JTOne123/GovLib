@@ -4,4 +4,5 @@ mono: none
 dotnet: 2.0.3
 
 script:
-  - "dotnet test $TRAVIS_BUILD_DIR/Gov.NET.Tests.csproj"
+  - "ls -lhaF"
+  - "dotnet test ./Gov.NET.Tests.csproj"
