@@ -5,11 +5,11 @@ namespace Gov.NET.ProPublica
 {
     public class Congress
     {
-        public string ApiKey { get; }
-        public Members Members { get; private set; }
-        public Votes Votes { get; private set; }
-        public Bills Bills { get; private set; }
-        public Dictionary<string, string> Headers { get; private set; }
+        internal string ApiKey { get; }
+        public Members Members { get;}
+        public Votes Votes { get; }
+        public Bills Bills { get; }
+        internal Dictionary<string, string> Headers { get; }
 
         public Congress(string apiKey)
         {
