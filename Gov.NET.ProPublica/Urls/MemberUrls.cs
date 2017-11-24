@@ -2,7 +2,8 @@ namespace Gov.NET.ProPublica.Urls
 {
     public static class MemberUrls
     {
-        public static string AllMembers = "https://api.propublica.org/congress/v1/{0}/{1}/members.json";
+        public static string AllSenators = "https://api.propublica.org/congress/v1/{0}/senate/members.json";
+        public static string AllRepresentatives = "https://api.propublica.org/congress/v1/{0}/house/members.json";
         public static string Member = "https://api.propublica.org/congress/v1/members/{0}.json";
         public static string NewMembers = "https://api.propublica.org/congress/v1/members/new.json";
         public static string SenatorsByState = "https://api.propublica.org/congress/v1/members/senate/{0}/current.json";
