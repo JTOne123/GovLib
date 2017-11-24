@@ -73,6 +73,13 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
         }
 
         [Fact]
+        public void AllSenatorsHaveAParty()
+        {
+            foreach (var senator in Fixture.AllSenators)
+                Assert.False(string.IsNullOrEmpty(senator.Party));
+        }
+
+        [Fact]
         public void AllSenatorsHaveABirthDate()
         {
             foreach (var senator in Fixture.AllSenators)

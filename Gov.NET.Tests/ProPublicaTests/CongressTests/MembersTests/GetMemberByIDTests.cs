@@ -55,6 +55,12 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests.Fixtures
         }
 
         [Fact]
+        public void RepresentativeHasAParty()
+        {
+            Assert.False(string.IsNullOrEmpty(Fixture.Representative.Party));
+        }
+
+        [Fact]
         public void RepresentativeHasABirthDate()
         {
             Assert.False(string.IsNullOrEmpty(Fixture.Representative.BirthDate.ToString()));
@@ -87,81 +93,87 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests.Fixtures
 
         #region Senator Tests
         [Fact]
-        public void AllSenatorsArentNull()
+        public void SenatorArentNull()
         {
             Assert.NotNull(Fixture.Senator);
         }
 
         [Fact]
-        public void AllSenatorsHaveFirstName()
+        public void SenatorHasFirstName()
         {
             Assert.False(string.IsNullOrEmpty(Fixture.Senator.FirstName));
         }
 
         [Fact]
-        public void AllSenatorsHaveLastName()
+        public void SenatorHasLastName()
         {
             Assert.False(string.IsNullOrEmpty(Fixture.Senator.LastName));
         }
 
         [Fact]
-        public void AllSenatorsHaveFullName()
+        public void SenatorHasFullName()
         {
             Assert.False(string.IsNullOrEmpty(Fixture.Senator.FullName));
         }
 
         [Fact]
-        public void AllSenatorsHaveAnID()
+        public void SenatorHasAnID()
         {
             Assert.False(string.IsNullOrEmpty(Fixture.Senator.ID));
         }
 
         [Fact]
-        public void AllSenatorsHaveAGender()
+        public void SenatorHasAGender()
         {
             Assert.NotNull(Fixture.Senator.Gender);
         }
 
         [Fact]
-        public void AllSenatorsHaveAHomeState()
+        public void SenatorHasAHomeState()
         {
             Assert.False(string.IsNullOrEmpty(Fixture.Senator.State));
         }
 
         [Fact]
-        public void AllSenatorsHaveABirthDate()
+        public void SenatorHasAParty()
+        {
+            Assert.False(string.IsNullOrEmpty(Fixture.Senator.Party));
+        }
+
+        [Fact]
+        public void SenatorHasABirthDate()
         {
             Assert.False(string.IsNullOrEmpty(Fixture.Senator.BirthDate.ToString()));
         }
 
         [Fact]
-        public void AllSenatorsHaveANextElection()
+        public void SenatorHasANextElection()
         {
             Assert.False(string.IsNullOrEmpty(Fixture.Senator.NextElection.ToString()));
         }
 
         [Fact]
-        public void AllSenatorsHaveASenateClass()
+        public void SenatorHasASenateClass()
         {
             Assert.NotNull(Fixture.Senator.Class);
             Assert.False(Fixture.Senator.Class == 0);
         }
 
         [Fact]
-        public void AllSenatorsInOfficeHaveAStateRank()
+        public void SenatorInOfficeHasAStateRank()
         {
             if (Fixture.Senator.InOffice)
                 Assert.False(string.IsNullOrEmpty(Fixture.Senator.Rank));
         }
 
         [Fact]
-        public void AllSenatorsHavePartyLoyaltyRatio()
+        public void SenatorHasPartyLoyaltyRatio()
         {
             Assert.NotNull(Fixture.Senator.PartyLoyaltyRatio);
         }
 
         [Fact]
-        public void AllSenatorsHaveMissedVotesRatio()
+        public void SenatorHasMissedVotesRatio()
         {
             Assert.NotNull(Fixture.Senator.MissedVotesRatio);
         }

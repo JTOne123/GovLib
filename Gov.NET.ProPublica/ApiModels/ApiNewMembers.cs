@@ -1,5 +1,7 @@
 using System;
 using Gov.NET.Models;
+using Gov.NET.Common.Models.Cards;
+using System.Globalization;
 
 namespace Gov.NET.ProPublica.ApiModels
 {
@@ -14,37 +16,50 @@ namespace Gov.NET.ProPublica.ApiModels
         public string state { get; set; }
         public string start_date { get; set; }
         public string district { get; set; }
-    
-        public static Politician Convert(ApiNewMembers entity)
+
+        public static PoliticianCard Convert(ApiNewMembers entity)
         {
             if (entity == null)
                 return null;
 
-            Politician politician;
+            var chamber = entity.chamber.ToLower();
+            PoliticianCard pol;
 
-            if (entity.chamber == "Senate")
+            if (chamber == "senate")
+                pol = new SenatorCard();
+            else
+                pol = new RepresentativeCard();
+
+            pol.ID = entity.id;
+            pol.FirstName = entity.first_name;
+            pol.LastName = entity.last_name;
+            pol.Party = entity.party;
+            pol.State = entity.state;
+            pol.StartDate = DateTime.ParseExact(entity.start_date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+            if (!string.IsNullOrEmpty(entity.middle_name))
+                pol.MiddleName = entity.middle_name;
+
+            if (chamber == "senate")
+                return pol;
+            else
+                return ConvertRepresentative((RepresentativeCard) pol, entity);
+        }
+
+        private static RepresentativeCard ConvertRepresentative(RepresentativeCard rep, ApiNewMembers entity)
+        {
+            if (entity.district == "At-Large")
             {
-                politician = new Senator();
+                rep.District = 1;
+                rep.AtLargeDistrict = true;
             }
             else
             {
-                politician = new Representative()
-                {
-                    District = Int32.Parse(entity.district)
-                };
+                rep.District = Int32.Parse(entity.district);
+                rep.AtLargeDistrict = false;
             }
 
-            politician.ID = entity.id;
-            politician.FirstName = entity.first_name;
-
-            if (!string.IsNullOrEmpty(entity.middle_name))
-                politician.MiddleName = entity.middle_name;
-
-            politician.LastName = entity.last_name;
-            politician.Party = entity.party;
-            politician.State = entity.state;
-
-            return politician;
+            return rep;
         }
     }
 }

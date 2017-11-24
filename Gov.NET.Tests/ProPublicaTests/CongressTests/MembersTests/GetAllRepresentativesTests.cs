@@ -73,6 +73,13 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
         }
 
         [Fact]
+        public void AllRepresentativesHaveAParty()
+        {
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.False(string.IsNullOrEmpty(representative.Party));
+        }
+
+        [Fact]
         public void AllRepresentativesHaveABirthDate()
         {
             foreach (var representative in Fixture.AllRepresentatives)

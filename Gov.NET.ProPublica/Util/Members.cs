@@ -9,16 +9,21 @@ using Gov.NET.ProPublica;
 using Gov.NET.ProPublica.Urls;
 using Gov.NET.ProPublica.ApiModels;
 using Gov.NET.ProPublica.ApiModels.Wrappers;
+using Gov.NET.Common.Models.Cards;
 
 namespace Gov.NET.ProPublica.Util
 {
     public class Members
     {
         private Congress _parent { get; }
+        public Dictionary<string, Senator> Senators { get; }
+        public Dictionary<string, Representative> Representatives { get; }
 
         internal Members(Congress parent)
         {
             _parent = parent;
+            Senators = new Dictionary<string, Senator>();
+            Representatives = new Dictionary<string, Representative>();
         }
 
         public Senator[] GetAllSenators(int congress)
@@ -51,7 +56,7 @@ namespace Gov.NET.ProPublica.Util
             }
         }
 
-        public Politician[] GetNewMembers()
+        public PoliticianCard[] GetNewMembers()
         {
             using (var client = new HttpClient())
             {
