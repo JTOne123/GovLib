@@ -31,7 +31,7 @@ namespace Gov.NET.ProPublica.Util
             using (var client = new HttpClient())
             {
                 var url = string.Format(MemberUrls.AllMembers, congressNum, "senate");
-                var result = client.Get<ResultWrapper<AllSenatorsWrapper>>(url, _parent.Headers);
+                var result = client.Get<ResultWrapper<ContainerWrapper<ApiAllSenators>>>(url, _parent.Headers);
                 return result?.results?[0].members?.Select(s => ApiAllSenators.Convert(s)).ToArray();
             }
         }
@@ -41,7 +41,7 @@ namespace Gov.NET.ProPublica.Util
             using (var client = new HttpClient())
             {
                 var url = string.Format(MemberUrls.AllMembers, congressNum, "house");
-                var result = client.Get<ResultWrapper<AllRepsWrapper>>(url, _parent.Headers);
+                var result = client.Get<ResultWrapper<ContainerWrapper<ApiAllReps>>>(url, _parent.Headers);
                 return result?.results?[0].members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r)).ToArray();
             }
         }
@@ -86,7 +86,7 @@ namespace Gov.NET.ProPublica.Util
             }
         }
 
-        public RepresentativeCard GetRepresentaiveFromDistrict(string state, int district)
+        public RepresentativeCard GetRepresentiveFromDistrict(string state, int district)
         {
             using (var client = new HttpClient())
             {
@@ -96,193 +96,23 @@ namespace Gov.NET.ProPublica.Util
             }
         }
 
-        public JObject GetSenatorsLeavingOffice(int congressNum)
+        public SenatorCard[] GetSenatorsLeavingOffice(int congressNum)
         {
-            using (var wc = new WebClient())
+            using (var client = new HttpClient())
             {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.Leaving,  congressNum, "senate");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
+                var url = string.Format(MemberUrls.SenatorsLeaving, congressNum);
+                var result = client.Get<ResultWrapper<ContainerWrapper<ApiSenatorsLeaving>>>(url, _parent.Headers);
+                return result?.results?[0].members.Select(r => ApiSenatorsLeaving.Convert(r)).ToArray();
             }
         }
 
-        public JObject GetRepsLeavingOffice(int congressNum)
+        public RepresentativeCard[] GetRepresentativesLeavingOffice(int congressNum)
         {
-            using (var wc = new WebClient())
+            using (var client = new HttpClient())
             {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.Leaving, congressNum, "house");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject GetVotingRecord(string govTrackID)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.VoteRecord, govTrackID);
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject CompareVotes(Senator s1, Senator s2, int congressNum)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.CompVote, s1.ID, s2.ID, congressNum, "senate");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject CompareVotes(Representative r1, Representative r2, int congressNum)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.CompVote, r1.ID, r2.ID, congressNum, "house");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject CompareSponsorship(Senator s1, Senator s2, int congressNum)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.CompSponsor, s1.ID, s2.ID, congressNum, "senate");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject CompareSponsorship(Representative r1, Representative r2, int congressNum)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.CompSponsor, r1.ID, r2.ID, congressNum, "house");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject GetCosponsoredBills(Senator s)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.Cosponsor, s.ID, "cosponsored");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject GetCosponsoredBills(Representative r)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.Cosponsor, r.ID, "cosponsored");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject GetWithdrawnBills(Senator s)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.Cosponsor, s.ID, "withdrawn");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject GetWithdrawnBills(Representative r)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.Cosponsor, r.ID, "withdrawn");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-
-
-
-        public JObject GetCosponsoredBills(string r)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.Cosponsor, r, "cosponsored");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject GetWithdrawnBills(string s)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.Cosponsor, s, "withdrawn");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject CompareSenSponsorship(string s1, string s2, int congressNum)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.CompSponsor, s1, s2, congressNum, "senate");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject CompareRepSponsorship(string r1, string r2, int congressNum)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.CompSponsor, r1, r2, congressNum, "senate");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject CompareSenVotes(string s1, string s2, int congressNum)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.CompVote, s1, s2, congressNum, "senate");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
-            }
-        }
-
-        public JObject CompareRepVotes(string r1, string r2, int congressNum)
-        {
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.CompVote, r1, r2, congressNum, "house");
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
+                var url = string.Format(MemberUrls.RepresentativesLeaving, congressNum);
+                var result = client.Get<ResultWrapper<ContainerWrapper<ApiRepsLeaving>>>(url, _parent.Headers);
+                return result?.results?[0].members.Select(r => ApiRepsLeaving.Convert(r)).ToArray();
             }
         }
     }
