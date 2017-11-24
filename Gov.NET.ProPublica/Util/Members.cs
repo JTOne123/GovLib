@@ -37,7 +37,7 @@ namespace Gov.NET.ProPublica.Util
             {
                 var url = string.Format(MemberUrls.AllMembers, congress, "house");
                 var result = client.Get<ResultWrapper<AllRepsWrapper>>(url, _parent.Headers);
-                return result?.results?[0].members?.Select(r => ApiAllReps.Convert(r)).ToArray();
+                return result?.results?[0].members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r)).ToArray();
             }
         }
 

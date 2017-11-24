@@ -10,6 +10,7 @@ namespace Gov.NET.ProPublica.ApiModels
         public string first_name { get; set; }
         public string middle_name { get; set; }
         public string last_name { get; set; }
+        public string title { get; set; }
         public string date_of_birth { get; set; }
         public string party { get; set; }
         public string govtrack_id { get; set; }
@@ -46,6 +47,8 @@ namespace Gov.NET.ProPublica.ApiModels
             pol.OcdID = entity.ocd_id;
             pol.BirthDate = DateTime.ParseExact(entity.date_of_birth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             pol.InOffice = (bool) entity.in_office;
+            pol.MissedVotesRatio = double.Parse(entity.missed_votes_pct) / 100;
+            pol.PartyLoyaltyRatio = double.Parse(entity.votes_with_party_pct) / 100;
 
             if (entity.next_election != null)
                 pol.NextElection = Int32.Parse(entity.next_election);

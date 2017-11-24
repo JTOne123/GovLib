@@ -15,6 +15,7 @@ namespace Gov.NET.Models
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+        public string FullName => GetFullName();
         public string Party { get; set; }
         public string State { get; set; }
         public DateTime? BirthDate { get; set; }
@@ -31,7 +32,8 @@ namespace Gov.NET.Models
         public bool InOffice { get; set; }
         public int? NextElection { get; set; }
         public string OcdID { get; set; }
-        public string FullName => GetFullName();
+        public double? MissedVotesRatio { get; set; }
+        public double? PartyLoyaltyRatio { get; set; }
         
         private string GetFullName()
         {

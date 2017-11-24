@@ -31,5 +31,10 @@ namespace Gov.NET.ProPublica.ApiModels
             
             return rep;
         }
+
+        internal bool IsVotingMember()
+        {
+            return this.title == "Representative";
+        }
     }
 }

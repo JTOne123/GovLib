@@ -98,5 +98,19 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
                     Assert.False(string.IsNullOrEmpty(senator.Rank));
             }
         }
+
+        [Fact]
+        public void AllSenatorsHavePartyLoyaltyRatio()
+        {
+            foreach (var senator in Fixture.AllSenators)
+                Assert.NotNull(senator.PartyLoyaltyRatio);
+        }
+
+        [Fact]
+        public void AllSenatorsHaveMissedVotesRatio()
+        {
+            foreach (var senator in Fixture.AllSenators)
+                Assert.NotNull(senator.MissedVotesRatio);
+        }
     }
 }

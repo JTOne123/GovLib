@@ -85,5 +85,19 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
             foreach (var representative in Fixture.AllRepresentatives)
                 Assert.NotNull(representative.AtLargeDistrict);
         }
+
+        [Fact]
+        public void AllRepresentativesHavePartyLoyaltyRatio()
+        {
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.NotNull(representative.PartyLoyaltyRatio);
+        }
+
+        [Fact]
+        public void AllRepresentativesHaveMissedVotesRatio()
+        {
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.NotNull(representative.MissedVotesRatio);
+        }
     }
 }
