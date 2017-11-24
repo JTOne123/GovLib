@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gov.NET.ProPublica", "Gov.NET.ProPublica\Gov.NET.ProPublica.csproj", "{887290F7-4DE8-46A0-834D-EB1701A6999F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gov.NET.TestApp", "Gov.NET.TestApp\Gov.NET.TestApp.csproj", "{93AD562E-EB03-4581-A93C-0A696B387A59}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gov.NET.Common", "Gov.NET.Common\Gov.NET.Common.csproj", "{FD843EFF-441C-43A4-8064-6DD6E177029F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gov.NET.Tests", "Gov.NET.Tests\Gov.NET.Tests.csproj", "{7B7B8C37-C0C4-4FBE-9B4A-9A4C5F101E8B}"
