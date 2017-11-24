@@ -19,18 +19,18 @@ namespace Gov.NET.ProPublica.ApiModels
         public string google_entity_id { get; set; }
         public string url { get; set; }
         public bool? in_office { get; set; }
-        public string seniority { get; set; }
+        public int? seniority { get; set; }
         public string next_election { get; set; }
-        public string total_votes { get; set; }
-        public string missed_votes { get; set; }
-        public string total_present { get; set; }
+        public int? total_votes { get; set; }
+        public int? missed_votes { get; set; }
+        public int? total_present { get; set; }
         public string ocd_id { get; set; }
         public string office { get; set; }
         public string phone { get; set; }
         public string fax { get; set; }
         public string state { get; set; }
-        public string missed_votes_pct { get; set; }
-        public string votes_with_party_pct { get; set; }
+        public double? missed_votes_pct { get; set; }
+        public double? votes_with_party_pct { get; set; }
 
         public static Politician Convert(ApiAllMembers entity)
         {
@@ -43,12 +43,15 @@ namespace Gov.NET.ProPublica.ApiModels
             pol.LastName = entity.last_name;
             pol.Party = entity.party;
             pol.State = entity.state;
-            pol.Seniority = Int32.Parse(entity.seniority);
+            pol.Seniority = entity.seniority;
             pol.OcdID = entity.ocd_id;
             pol.BirthDate = DateTime.ParseExact(entity.date_of_birth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             pol.InOffice = (bool) entity.in_office;
-            pol.MissedVotesRatio = double.Parse(entity.missed_votes_pct) / 100;
-            pol.PartyLoyaltyRatio = double.Parse(entity.votes_with_party_pct) / 100;
+            pol.MissedVotesRatio = entity.missed_votes_pct / 100;
+            pol.PartyLoyaltyRatio = entity.votes_with_party_pct / 100;
+            pol.VotesCast = entity.total_votes;
+            pol.VotesMissed = entity.missed_votes;
+            pol.VotesPresent = entity.total_present;
 
             if (entity.next_election != null)
                 pol.NextElection = Int32.Parse(entity.next_election);

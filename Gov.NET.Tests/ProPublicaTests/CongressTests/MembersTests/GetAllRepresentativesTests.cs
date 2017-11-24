@@ -99,5 +99,26 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
             foreach (var representative in Fixture.AllRepresentatives)
                 Assert.NotNull(representative.MissedVotesRatio);
         }
+
+        [Fact]
+        public void AllRepresentativesHaveTotalVotesCast()
+        {
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.NotNull(representative.VotesCast);
+        }
+
+        [Fact]
+        public void AllRepresentativesHaveTotalVotesMissed()
+        {
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.NotNull(representative.VotesMissed);
+        }
+
+        [Fact]
+        public void AllRepresentativesHaveTotalVotesPresent()
+        {
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.NotNull(representative.VotesPresent);
+        }
     }
 }

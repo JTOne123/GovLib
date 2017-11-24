@@ -32,6 +32,9 @@ namespace Gov.NET.Models
         public bool InOffice { get; set; }
         public int? NextElection { get; set; }
         public string OcdID { get; set; }
+        public int? VotesCast { get; set; }
+        public int? VotesMissed { get; set; }
+        public int? VotesPresent { get; set; }
         public double? MissedVotesRatio { get; set; }
         public double? PartyLoyaltyRatio { get; set; }
         

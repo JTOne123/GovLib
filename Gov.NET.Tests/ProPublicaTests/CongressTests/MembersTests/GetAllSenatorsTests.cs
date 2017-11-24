@@ -112,5 +112,26 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
             foreach (var senator in Fixture.AllSenators)
                 Assert.NotNull(senator.MissedVotesRatio);
         }
+
+        [Fact]
+        public void AllSenatorsHaveTotalVotesCast()
+        {
+            foreach (var senator in Fixture.AllSenators)
+                Assert.NotNull(senator.VotesCast);
+        }
+
+        [Fact]
+        public void AllSenatorsHaveTotalVotesMissed()
+        {
+            foreach (var senator in Fixture.AllSenators)
+                Assert.NotNull(senator.VotesMissed);
+        }
+
+        [Fact]
+        public void AllSenatorsHaveTotalVotesPresent()
+        {
+            foreach (var senator in Fixture.AllSenators)
+                Assert.NotNull(senator.VotesPresent);
+        }
     }
 }
