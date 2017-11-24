@@ -5,15 +5,15 @@ using Gov.NET.ProPublica;
 
 namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
 {
-    public class NewMembersFixture : CongressFixture
+    public class SenatorsByStateFixture : CongressFixture
     {
-        public PoliticianCard[] PoliticianCards { get; }
+        public SenatorCard[] SenatorCards { get; }
 
-        public NewMembersFixture()
+        public SenatorsByStateFixture()
         {
             // Sleep before making api call to limit request spam.
             Thread.Sleep(60);
-            PoliticianCards = Congress.Members.GetNewMembers();
+            SenatorCards = Congress.Members.GetSenatorsByState("CO");
         }
     }
 }

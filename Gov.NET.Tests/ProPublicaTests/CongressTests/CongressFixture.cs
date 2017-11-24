@@ -11,8 +11,6 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests
 
         public CongressFixture()
         {
-            // Sleep before making api call to limit request spam.
-            Thread.Sleep(60);
             ApiKey = Environment.GetEnvironmentVariable("PROPUBLICA_API_KEY");
             Congress = new Congress(ApiKey);
         }

@@ -14,7 +14,6 @@ namespace Gov.NET.ProPublica.ApiModels
         public string party { get; set; }
         public string chamber { get; set; }
         public string state { get; set; }
-        public string start_date { get; set; }
         public string district { get; set; }
 
         public static PoliticianCard Convert(ApiNewMembers entity)
@@ -35,7 +34,6 @@ namespace Gov.NET.ProPublica.ApiModels
             pol.LastName = entity.last_name;
             pol.Party = entity.party;
             pol.State = entity.state;
-            pol.StartDate = DateTime.ParseExact(entity.start_date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
             if (!string.IsNullOrEmpty(entity.middle_name))
                 pol.MiddleName = entity.middle_name;

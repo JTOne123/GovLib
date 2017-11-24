@@ -26,21 +26,21 @@ namespace Gov.NET.ProPublica.Util
             Representatives = new Dictionary<string, Representative>();
         }
 
-        public Senator[] GetAllSenators(int congress)
+        public Senator[] GetAllSenators(int congressNum)
         {
             using (var client = new HttpClient())
             {
-                var url = string.Format(MemberUrls.AllMembers, congress, "senate");
+                var url = string.Format(MemberUrls.AllMembers, congressNum, "senate");
                 var result = client.Get<ResultWrapper<AllSenatorsWrapper>>(url, _parent.Headers);
                 return result?.results?[0].members?.Select(s => ApiAllSenators.Convert(s)).ToArray();
             }
         }
 
-        public Representative[] GetAllRepresentatives(int congress)
+        public Representative[] GetAllRepresentatives(int congressNum)
         {
             using (var client = new HttpClient())
             {
-                var url = string.Format(MemberUrls.AllMembers, congress, "house");
+                var url = string.Format(MemberUrls.AllMembers, congressNum, "house");
                 var result = client.Get<ResultWrapper<AllRepsWrapper>>(url, _parent.Headers);
                 return result?.results?[0].members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r)).ToArray();
             }
@@ -66,25 +66,33 @@ namespace Gov.NET.ProPublica.Util
             }
         }
 
-        public JObject GetSenatorsByState(string state)
+        public SenatorCard[] GetSenatorsByState(string state)
         {
-            using (var wc = new WebClient())
+            using (var client = new HttpClient())
             {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.MemberByState, "senate", state);
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
+                var url = string.Format(MemberUrls.SenatorsByState, state);
+                var result = client.Get<ResultWrapper<ApiSenatorsByState>>(url, _parent.Headers);
+                return result?.results?.Select(s => ApiSenatorsByState.Convert(s, state)).ToArray();
             }
         }
 
-        public JObject GetRepsByDistrict(string state, int district)
+        public RepresentativeCard[] GetRepresentaivesByState(string state)
         {
-            using (var wc = new WebClient())
+            using (var client = new HttpClient())
             {
-                wc.Headers.Add("X-API-Key", _parent.ApiKey);
-                var url = string.Format(MemberUrls.MemberByState, "house", state, district);
-                var jsonStr = wc.DownloadString(url);
-                return JObject.Parse(jsonStr);
+                var url = string.Format(MemberUrls.RepresentativesByState, state);
+                var result = client.Get<ResultWrapper<ApiRepresentativesByState>>(url, _parent.Headers);
+                return result?.results?.Select(r => ApiRepresentativesByState.Convert(r, state)).ToArray();
+            }
+        }
+
+        public RepresentativeCard GetRepresentaiveFromDistrict(string state, int district)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = string.Format(MemberUrls.RepresentativeFromDistrict, state, district);
+                var result = client.Get<ResultWrapper<ApiRepresentativesByState>>(url, _parent.Headers);
+                return result?.results?.Select(r => ApiRepresentativesByState.Convert(r, state)).FirstOrDefault();
             }
         }
 

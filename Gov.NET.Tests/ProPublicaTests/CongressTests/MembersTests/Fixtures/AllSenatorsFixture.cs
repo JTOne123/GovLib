@@ -1,3 +1,4 @@
+using System.Threading;
 using Gov.NET.Models;
 using Gov.NET.ProPublica;
 
@@ -9,6 +10,8 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public AllSenatorsFixture()
         {
+            // Sleep before making api call to limit request spam.
+            Thread.Sleep(60);
             AllSenators = Congress.Members.GetAllSenators(115);
         }
     }
