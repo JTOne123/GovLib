@@ -5,11 +5,11 @@ export HERE=$(dirname "$(readlink -f "${0}")")
 mkdir -p "$HERE/Examples"
 
 # All Senators
-curl "https://api.propublica.org/congress/v1/115/senate/members.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/all-senators.json"
+curl "https://api.propublica.org/congress/v1/115/senate/members.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/get-all-senators.json"
 sleep 1
 
 # All Representatives
-curl "https://api.propublica.org/congress/v1/115/house/members.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/all-representatives.json"
+curl "https://api.propublica.org/congress/v1/115/house/members.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/get-all-representatives.json"
 sleep 1
 
 # Get Specific Member
@@ -38,3 +38,12 @@ sleep 1
 
 # Get Representative From District
 curl "https://api.propublica.org/congress/v1/members/house/GA/6/current.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/get-representative-from-disctrict.json"
+sleep 1
+
+# Get Senators Leaving Office
+curl "https://api.propublica.org/congress/v1/115/senate/members/leaving.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/get-senators-leaving-office.json"
+sleep 1
+
+# Get Senators Leaving Office
+curl "https://api.propublica.org/congress/v1/115/house/members/leaving.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/get-representatives-leaving-office.json"
+sleep 1
