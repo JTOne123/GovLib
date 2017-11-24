@@ -78,5 +78,25 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
             foreach (var senator in Fixture.AllSenators)
                 Assert.False(string.IsNullOrEmpty(senator.NextElection.ToString()));
         }
+
+        [Fact]
+        public void AllSenatorsHaveASenateClass()
+        {
+            foreach (var senator in Fixture.AllSenators)
+            {
+                Assert.NotNull(senator.Class);
+                Assert.False(senator.Class == 0);
+            }
+        }
+
+        [Fact]
+        public void AllSenatorsInOfficeHaveAStateRank()
+        {
+            foreach (var senator in Fixture.AllSenators)
+            {
+                if (senator.InOffice)
+                    Assert.False(string.IsNullOrEmpty(senator.Rank));
+            }
+        }
     }
 }

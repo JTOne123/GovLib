@@ -26,57 +26,64 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
         [Fact]
         public void AllRepresentativesArentNull()
         {
-            foreach (var senator in Fixture.AllRepresentatives)
-                Assert.NotNull(senator);
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.NotNull(representative);
         }
 
         [Fact]
         public void AllRepresentativesHaveFirstName()
         {
-            foreach (var senator in Fixture.AllRepresentatives)
-                Assert.False(string.IsNullOrEmpty(senator.FirstName));
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.False(string.IsNullOrEmpty(representative.FirstName));
         }
 
         [Fact]
         public void AllRepresentativesHaveLastName()
         {
-            foreach (var senator in Fixture.AllRepresentatives)
-                Assert.False(string.IsNullOrEmpty(senator.LastName));
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.False(string.IsNullOrEmpty(representative.LastName));
         }
 
         [Fact]
         public void AllRepresentativesHaveFullName()
         {
-            foreach (var senator in Fixture.AllRepresentatives)
-                Assert.False(string.IsNullOrEmpty(senator.FullName));
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.False(string.IsNullOrEmpty(representative.FullName));
         }
 
         [Fact]
         public void AllRepresentativesHaveAnID()
         {
-            foreach (var senator in Fixture.AllRepresentatives)
-                Assert.False(string.IsNullOrEmpty(senator.ID));
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.False(string.IsNullOrEmpty(representative.ID));
         }
 
         [Fact]
         public void AllRepresentativesHaveAHomeState()
         {
-            foreach (var senator in Fixture.AllRepresentatives)
-                Assert.False(string.IsNullOrEmpty(senator.State));
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.False(string.IsNullOrEmpty(representative.State));
         }
 
         [Fact]
         public void AllRepresentativesHaveABirthDate()
         {
-            foreach (var senator in Fixture.AllRepresentatives)
-                Assert.False(string.IsNullOrEmpty(senator.BirthDate.ToString()));
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.False(string.IsNullOrEmpty(representative.BirthDate.ToString()));
         }
 
         [Fact]
-        public void AllRepresentativesHaveANextElection()
+        public void AllRepresentativesInOfficeHaveADistrict()
         {
-            foreach (var senator in Fixture.AllRepresentatives)
-                Assert.False(string.IsNullOrEmpty(senator.NextElection.ToString()));
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.NotNull(representative.District);
+        }
+
+        [Fact]
+        public void AllRepresentativesInOfficeHaveAnAtLargeBool()
+        {
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.NotNull(representative.AtLargeDistrict);
         }
     }
 }

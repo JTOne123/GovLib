@@ -7,7 +7,7 @@ namespace Gov.NET.Models
     public class Senator : Politician
     {
         public string Rank { get; set; }
-        public int Class { get; set; }
+        public int? Class { get; set; }
 
         public override string ToString()
         {

@@ -1,25 +1,22 @@
 using System;
+using System.Globalization;
 using Gov.NET.Models;
+using AutoMapper;
 
 namespace Gov.NET.ProPublica.ApiModels
 {
     public class ApiAllReps : ApiAllMembers
     {
+        private static readonly MapperConfiguration _mapperConfig =
+            new MapperConfiguration(cfg => cfg.CreateMap<Politician, Representative>());
+        private static readonly IMapper _mapper = _mapperConfig.CreateMapper();
+
         public string district { get; set; }
+        public bool at_large { get; set; }
 
         public static Representative Convert(ApiAllReps entity)
         {
-            if (entity == null)
-                return null;
-            
-            var rep = new Representative();
-            rep.ID = entity.id;
-            rep.FirstName = entity.first_name;
-            rep.LastName = entity.last_name;
-            rep.Party = entity.party;
-            rep.State = entity.state;
-            rep.Seniority = Int32.Parse(entity.seniority);
-            rep.OcdID = entity.ocd_id;
+            var rep = _mapper.Map<Representative>(ApiAllMembers.Convert(entity));
 
             if (entity.district == "At-Large")
             {
@@ -31,10 +28,7 @@ namespace Gov.NET.ProPublica.ApiModels
                 rep.District = Int32.Parse(entity.district);
                 rep.AtLargeDistrict = false;
             }
-
-            if (!string.IsNullOrEmpty(entity.middle_name))
-                rep.MiddleName = entity.middle_name;
-
+            
             return rep;
         }
     }

@@ -1,34 +1,31 @@
 using System;
+using System.Globalization;
+using Gov.NET.Models;
 using Gov.NET.Util;
+using AutoMapper;
 
 namespace Gov.NET.ProPublica.ApiModels
 {
     public class ApiAllSenators : ApiAllMembers
     {
+        private static readonly MapperConfiguration _mapperConfig =
+            new MapperConfiguration(cfg => cfg.CreateMap<Politician, Senator>());
+        private static readonly IMapper _mapper = _mapperConfig.CreateMapper();
+
         public string senate_class { get; set; }
         public string state_rank { get; set; }
 
-        public static Gov.NET.Models.Senator Convert(ApiAllSenators entity)
+        public static Senator Convert(ApiAllSenators entity)
         {
-            if (entity == null)
-                return null;
+            var sen = _mapper.Map<Senator>(ApiAllMembers.Convert(entity));
 
-            var sen = new Gov.NET.Models.Senator
+            sen.Class = Int32.Parse(entity.senate_class);
+
+            if (sen.InOffice)
             {
-                ID = entity.id,
-                FirstName = entity.first_name,
-                LastName = entity.last_name,
-                Party = entity.party,
-                State = entity.state,
-                Seniority = Int32.Parse(entity.seniority),
-                OcdID = entity.ocd_id,
-                Class = Int32.Parse(entity.senate_class),
-                Rank = Text.Capitalize(entity.state_rank)
-            };
-
-            if (!string.IsNullOrEmpty(entity.middle_name))
-                sen.MiddleName = entity.middle_name;
-
+                sen.Rank = Text.Capitalize(entity.state_rank);
+            }
+            
             return sen;
         }
     }
