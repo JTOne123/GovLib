@@ -59,6 +59,13 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
         }
 
         [Fact]
+        public void AllSenatorsHaveAGender()
+        {
+            foreach (var senator in Fixture.AllSenators)
+                Assert.NotNull(senator.Gender);
+        }
+
+        [Fact]
         public void AllSenatorsHaveAHomeState()
         {
             foreach (var senator in Fixture.AllSenators)

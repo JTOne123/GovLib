@@ -1,6 +1,7 @@
 using System;
 using Gov.NET.Util;
 using Gov.NET.Models;
+using System.Globalization;
 
 namespace Gov.NET.ProPublica.ApiModels
 {
@@ -26,85 +27,74 @@ namespace Gov.NET.ProPublica.ApiModels
         public string google_entity_id { get; set; }
         public string rss_url { get; set; }
         public string domain { get; set; }
-        public string in_office { get; set; }
+        public bool? in_office { get; set; }
         public string current_party { get; set; }
         public string most_recent_vote { get; set; }
         public ApiRole[] roles { get; set; }
 
-        public static Politician Convert(ApiMember entity, string chamber)
+        public static Politician Convert(ApiMember entity)
         {
             if (entity == null)
                 return null;
 
-            Politician politician;
+            var chamber = entity.roles[0].chamber.ToLower();
+            Politician pol;
 
             if (chamber == "senate")
-            {
-                politician = new Senator()
-                {
-                    Rank = Text.Capitalize(entity.roles[0].state_rank),
-                    Class = Int32.Parse(entity.roles[0].senate_class)
-                };
-            }
+                pol = new Senator();
             else
-            {
-                politician = new Representative()
-                {
-                    District = Int32.Parse(entity.roles[0].district)
-                };
-            }
+                pol = new Representative();
 
-            politician.ID = entity.member_id;
-            politician.FirstName = entity.first_name;
+            pol.ID = entity.member_id;
+            pol.FirstName = entity.first_name;
+            pol.LastName = entity.last_name;
+            pol.Party = entity.current_party;
+            pol.State = entity.roles[0].state;
+            pol.Seniority = entity.roles[0].seniority;
+            pol.OcdID = entity.roles[0].ocd_id;
+            pol.BirthDate = DateTime.ParseExact(entity.date_of_birth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            pol.InOffice = (bool) entity.in_office;
+            pol.MissedVotesRatio = entity.roles[0].missed_votes_pct / 100;
+            pol.PartyLoyaltyRatio = entity.roles[0].votes_with_party_pct / 100;
+            pol.NextElection = 1788 + (Int32.Parse(entity.roles[0].congress) * 2);
+
+            if (entity.gender == "M")
+                pol.Gender = Politician.GenderEnum.Male;
+            else if (entity.gender == "F")
+                pol.Gender = Politician.GenderEnum.Female;
+            else
+                pol.Gender = Politician.GenderEnum.NonBinary;
 
             if (!string.IsNullOrEmpty(entity.middle_name))
-                politician.MiddleName = entity.middle_name;
+                pol.MiddleName = entity.middle_name;
 
-            politician.LastName = entity.last_name;
-            politician.Party = entity.current_party;
-            politician.State = entity.roles[0].state;
-            politician.Seniority = Int32.Parse(entity.roles[0].seniority);
-            politician.OcdID = entity.roles[0].ocd_id;
-            politician.Gender = (Politician.GenderEnum)Enum.Parse(typeof(Politician.GenderEnum), entity.gender);
-            return politician;
+            if (chamber == "senate")
+                return ConvertSenator((Senator) pol, entity);
+            else
+                return ConvertRepresentative((Representative) pol, entity);
         }
 
-        public static Politician ConvertMember(ApiMember entity)
+        private static Representative ConvertRepresentative(Representative rep, ApiMember entity)
         {
-            if (entity == null)
-                return null;
-
-            Politician politician;
-
-            if (entity.roles[0].chamber == "Senate")
+            if (entity.roles[0].district == "At-Large")
             {
-                politician = new Senator
-                {
-                    Rank = Text.Capitalize(entity.roles[0].state_rank),
-                    Class = Int32.Parse(entity.roles[0].senate_class)
-                };
+                rep.District = 1;
+                rep.AtLargeDistrict = true;
             }
             else
             {
-                politician = new Representative
-                {
-                    District = Int32.Parse(entity.roles[0].district)
-                };
+                rep.District = Int32.Parse(entity.roles[0].district);
+                rep.AtLargeDistrict = false;
             }
 
-            politician.ID = entity.member_id;
-            politician.FirstName = entity.first_name;
+            return rep;
+        }
 
-            if (!string.IsNullOrEmpty(entity.middle_name))
-                politician.MiddleName = entity.middle_name;
-
-            politician.LastName = entity.last_name;
-            politician.Party = entity.current_party;
-            politician.State = entity.roles[0].state;
-            politician.Seniority = Int32.Parse(entity.roles[0].seniority);
-            politician.OcdID = entity.roles[0].ocd_id;
-
-            return politician;
+        private static Senator ConvertSenator(Senator sen, ApiMember entity)
+        {
+            sen.Rank = Text.Capitalize(entity.roles[0].state_rank);
+            sen.Class = entity.roles[0].senate_class;
+            return sen;
         }
     }
 }

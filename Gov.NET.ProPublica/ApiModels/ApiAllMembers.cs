@@ -11,6 +11,7 @@ namespace Gov.NET.ProPublica.ApiModels
         public string middle_name { get; set; }
         public string last_name { get; set; }
         public string title { get; set; }
+        public string gender { get; set; }
         public string date_of_birth { get; set; }
         public string party { get; set; }
         public string govtrack_id { get; set; }
@@ -52,6 +53,13 @@ namespace Gov.NET.ProPublica.ApiModels
             pol.VotesCast = entity.total_votes;
             pol.VotesMissed = entity.missed_votes;
             pol.VotesPresent = entity.total_present;
+            
+            if (entity.gender == "M")
+                pol.Gender = Politician.GenderEnum.Male;
+            else if (entity.gender == "F")
+                pol.Gender = Politician.GenderEnum.Female;
+            else
+                pol.Gender = Politician.GenderEnum.NonBinary;
 
             if (entity.next_election != null)
                 pol.NextElection = Int32.Parse(entity.next_election);

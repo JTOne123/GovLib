@@ -47,7 +47,7 @@ namespace Gov.NET.ProPublica.Util
             {
                 var url = string.Format(MemberUrls.Member, id);
                 var result = client.Get<ResultWrapper<ApiMember>>(url, _parent.Headers);
-                return result?.results?.Select(r => ApiMember.ConvertMember(r)).FirstOrDefault();
+                return result?.results?.Select(p => ApiMember.Convert(p)).FirstOrDefault();
             }
         }
 

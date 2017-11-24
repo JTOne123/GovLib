@@ -8,7 +8,8 @@ namespace Gov.NET.Models
         public enum GenderEnum
         {
             Male,
-            Female
+            Female,
+            NonBinary
         }
         
         public string ID { get; set; }

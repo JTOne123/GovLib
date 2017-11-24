@@ -10,8 +10,8 @@ namespace Gov.NET.ProPublica
         public string party { get; set; }
         public string leadership_role { get; set; }
         public string fec_candidate_id { get; set; }
-        public string seniority { get; set; }
-        public string senate_class { get; set; }
+        public int? seniority { get; set; }
+        public int? senate_class { get; set; }
         public string state_rank { get; set; }
         public string district { get; set; }
         public string lis_id { get; set; }
@@ -22,10 +22,10 @@ namespace Gov.NET.ProPublica
         public string phone { get; set; }
         public string fax { get; set; }
         public string contact_form { get; set; }
-        public string bills_sponsored { get; set; }
-        public string bills_cosponsored { get; set; }
-        public string missed_voted_pct { get; set; }
-        public string votes_with_party_pct { get; set; }
+        public int? bills_sponsored { get; set; }
+        public int? bills_cosponsored { get; set; }
+        public double? missed_votes_pct { get; set; }
+        public double? votes_with_party_pct { get; set; }
         public ApiCommittee[] committees { get; set; }
     }
 }

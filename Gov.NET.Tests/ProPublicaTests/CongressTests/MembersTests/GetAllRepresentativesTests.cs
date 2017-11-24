@@ -59,6 +59,13 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
         }
 
         [Fact]
+        public void AllRepresentativesHaveAGender()
+        {
+            foreach (var representative in Fixture.AllRepresentatives)
+                Assert.NotNull(representative.Gender);
+        }
+
+        [Fact]
         public void AllRepresentativesHaveAHomeState()
         {
             foreach (var representative in Fixture.AllRepresentatives)

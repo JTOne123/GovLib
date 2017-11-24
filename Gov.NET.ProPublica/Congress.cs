@@ -6,7 +6,7 @@ namespace Gov.NET.ProPublica
     public class Congress
     {
         internal string ApiKey { get; }
-        public Members Members { get;}
+        public Members Members { get; }
         public Votes Votes { get; }
         public Bills Bills { get; }
         internal Dictionary<string, string> Headers { get; }
