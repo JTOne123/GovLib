@@ -14,7 +14,7 @@ namespace Gov.NET.ProPublica.Util
 {
     public class Members
     {
-        private Congress _parent;
+        private Congress _parent { get; }
 
         internal Members(Congress parent)
         {

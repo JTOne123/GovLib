@@ -6,7 +6,7 @@ namespace Gov.NET.ProPublica.Util
 {
     public class Votes
     {
-        private Congress _parent;
+        private Congress _parent { get; }
 
         internal Votes(Congress parent)
         {
