@@ -30,7 +30,7 @@ namespace Gov.NET.ProPublica.Util
         {
             using (var client = new HttpClient())
             {
-                var url = string.Format(MemberUrls.AllMembers, congressNum, "senate");
+                var url = string.Format(MemberUrls.AllSenators, congressNum);
                 var result = client.Get<ResultWrapper<ContainerWrapper<ApiAllSenators>>>(url, _parent.Headers);
                 return result?.results?[0].members?.Select(s => ApiAllSenators.Convert(s)).ToArray();
             }
@@ -40,7 +40,7 @@ namespace Gov.NET.ProPublica.Util
         {
             using (var client = new HttpClient())
             {
-                var url = string.Format(MemberUrls.AllMembers, congressNum, "house");
+                var url = string.Format(MemberUrls.AllRepresentatives, congressNum);
                 var result = client.Get<ResultWrapper<ContainerWrapper<ApiAllReps>>>(url, _parent.Headers);
                 return result?.results?[0].members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r)).ToArray();
             }
