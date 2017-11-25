@@ -7,11 +7,12 @@ using Gov.NET;
 using Gov.NET.Models;
 using Gov.NET.ProPublica;
 using Gov.NET.ProPublica.Urls;
+using Gov.NET.ProPublica.Util;
 using Gov.NET.ProPublica.ApiModels;
 using Gov.NET.ProPublica.ApiModels.Wrappers;
 using Gov.NET.Common.Models.Cards;
 
-namespace Gov.NET.ProPublica.Util
+namespace Gov.NET.ProPublica.Modules
 {
     public class Members
     {
