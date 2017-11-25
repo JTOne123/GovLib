@@ -5,24 +5,17 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": ".NET Core Launch (console)",
+			"name": "Debug Unit Tests",
 			"type": "coreclr",
 			"request": "launch",
 			"preLaunchTask": "Build Solution",
 			// If you have changed target frameworks, make sure to update the program path.
-			"program": "${workspaceRoot}/.vscode/build/Gov.NET.TestApp/netcoreapp2.0/Gov.NET.TestApp.dll",
-			"args": [],
-			"cwd": "${workspaceRoot}/Gov.NET.TestApp",
+			"program": "dotnet",
+			"args": ["vstest", "${workspaceRoot}/.vscode/build/Gov.NET.Tests/netcoreapp2.0/Gov.NET.Tests.dll"],
 			// For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
 			"console": "internalConsole",
 			"stopAtEntry": false,
 			"internalConsoleOptions": "openOnSessionStart"
-		},
-		{
-			"name": ".NET Core Attach",
-			"type": "coreclr",
-			"request": "attach",
-			"processId": "${command:pickProcess}"
 		}
 	]
 }
