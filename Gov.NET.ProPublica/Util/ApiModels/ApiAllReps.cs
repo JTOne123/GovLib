@@ -3,9 +3,9 @@ using System.Globalization;
 using Gov.NET.Models;
 using AutoMapper;
 
-namespace Gov.NET.ProPublica.ApiModels
+namespace Gov.NET.ProPublica.Util
 {
-    public class ApiAllReps : ApiAllMembers
+    internal class ApiAllReps : ApiAllMembers
     {
         private static readonly MapperConfiguration _mapperConfig =
             new MapperConfiguration(cfg => cfg.CreateMap<Politician, Representative>());

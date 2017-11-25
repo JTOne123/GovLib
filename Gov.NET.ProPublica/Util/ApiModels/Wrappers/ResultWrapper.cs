@@ -1,6 +1,6 @@
-namespace Gov.NET.ProPublica.ApiModels.Wrappers
+namespace Gov.NET.ProPublica.Util
 {
-    public class ResultWrapper<T>
+    internal class ResultWrapper<T>
     {
         public string status { get; set; }
         public string copyright { get; set; }

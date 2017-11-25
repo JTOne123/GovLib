@@ -1,8 +1,8 @@
 using System;
 
-namespace Gov.NET.ProPublica
+namespace Gov.NET.ProPublica.Util
 {
-    public class ApiCommittee
+    internal class ApiCommittee
     {
         public string name {get;set;}
         public string code {get;set;}

@@ -1,6 +1,6 @@
-namespace Gov.NET.ProPublica.ApiModels.Wrappers
+namespace Gov.NET.ProPublica.Util
 {
-    public class ContainerWrapper<T>
+    internal class ContainerWrapper<T>
     {
         public string congress { get; set; }
         public string chamber { get; set; }

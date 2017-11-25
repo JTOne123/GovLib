@@ -3,9 +3,9 @@ using Gov.NET.Models;
 using Gov.NET.Common.Models.Cards;
 using System.Globalization;
 
-namespace Gov.NET.ProPublica.ApiModels
+namespace Gov.NET.ProPublica.Util
 {
-    public class ApiNewMembers
+    internal class ApiNewMembers
     {
         public string id { get; set; }
         public string first_name { get; set; }

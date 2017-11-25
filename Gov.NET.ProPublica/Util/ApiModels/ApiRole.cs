@@ -1,7 +1,7 @@
 using System;
-namespace Gov.NET.ProPublica
+namespace Gov.NET.ProPublica.Util
 {
-    public class ApiRole
+    internal class ApiRole
     {
         public string congress { get; set; }
         public string chamber { get; set; }

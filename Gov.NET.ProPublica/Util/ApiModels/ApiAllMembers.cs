@@ -2,9 +2,9 @@ using System;
 using System.Globalization;
 using Gov.NET.Models;
 
-namespace Gov.NET.ProPublica.ApiModels
+namespace Gov.NET.ProPublica.Util
 {
-    public class ApiAllMembers
+    internal class ApiAllMembers
     {
         public string id { get; set; }
         public string first_name { get; set; }

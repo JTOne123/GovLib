@@ -3,9 +3,9 @@ using Gov.NET.Util;
 using Gov.NET.Models;
 using System.Globalization;
 
-namespace Gov.NET.ProPublica.ApiModels
+namespace Gov.NET.ProPublica.Util
 {
-    public class ApiMember
+    internal class ApiMember
     {
         public string member_id { get; set; }
         public string first_name { get; set; }

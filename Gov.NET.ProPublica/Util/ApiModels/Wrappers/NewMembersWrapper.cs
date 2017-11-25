@@ -1,6 +1,6 @@
-namespace Gov.NET.ProPublica.ApiModels.Wrappers
+namespace Gov.NET.ProPublica.Util
 {
-    public class NewMembersWrapper
+    internal class NewMembersWrapper
     {
         public string num_results { get; set; }
         public string offset { get; set; }

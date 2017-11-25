@@ -3,17 +3,18 @@ using Gov.NET.Models;
 using Gov.NET.Common.Models.Cards;
 using System.Globalization;
 
-namespace Gov.NET.ProPublica.ApiModels
+namespace Gov.NET.ProPublica.Util
 {
-    public class ApiSenatorsByState
+    internal class ApiSenatorsLeaving
     {
         public string id { get; set; }
         public string first_name { get; set; }
         public string middle_name { get; set; }
         public string last_name { get; set; }
         public string party { get; set; }
+        public string state { get; set; }
 
-        public static SenatorCard Convert(ApiSenatorsByState entity, string state)
+        public static SenatorCard Convert(ApiSenatorsLeaving entity)
         {
             var sen = new SenatorCard();
 
@@ -21,7 +22,7 @@ namespace Gov.NET.ProPublica.ApiModels
             sen.FirstName = entity.first_name;
             sen.LastName = entity.last_name;
             sen.Party = entity.party;
-            sen.State = state;
+            sen.State = entity.state;
 
             if (!string.IsNullOrEmpty(entity.middle_name))
                 sen.MiddleName = entity.middle_name;
