@@ -12,10 +12,15 @@ using Gov.NET.Common.Models.Cards;
 
 namespace Gov.NET.ProPublica.Modules
 {
+    /// <summary>Get information about members of congress.</summary>
     public class Members
     {
         private Congress _parent { get; }
+
+        /// <summary>Stored information of senators retrieved so far.</summary>
         public Dictionary<string, Senator> Senators { get; }
+
+        /// <summary>Stored information of representatives retrieved so far.</summary>
         public Dictionary<string, Representative> Representatives { get; }
 
         internal Members(Congress parent)
@@ -25,6 +30,7 @@ namespace Gov.NET.ProPublica.Modules
             Representatives = new Dictionary<string, Representative>();
         }
 
+        /// <summary>Fetch all senators from given congress session.</summary>
         public Senator[] GetAllSenators(int congressNum)
         {
             using (var client = new HttpClient())
@@ -35,6 +41,7 @@ namespace Gov.NET.ProPublica.Modules
             }
         }
 
+        /// <summary>Fetch all representatives from given congress session.</summary>
         public Representative[] GetAllRepresentatives(int congressNum)
         {
             using (var client = new HttpClient())
@@ -45,6 +52,7 @@ namespace Gov.NET.ProPublica.Modules
             }
         }
 
+        /// <summary>Find congress member by BioGuide ID.</summary>
         public Politician GetMemberByID(string id)
         {
             using (var client = new HttpClient())
@@ -55,6 +63,7 @@ namespace Gov.NET.ProPublica.Modules
             }
         }
 
+        /// <summary>Fetch new congress members from given congress session.</summary>
         public PoliticianCard[] GetNewMembers()
         {
             using (var client = new HttpClient())
@@ -65,6 +74,7 @@ namespace Gov.NET.ProPublica.Modules
             }
         }
 
+        /// <summary>Fetch both current senators from the given state.</summary>
         public SenatorCard[] GetSenatorsByState(string state)
         {
             using (var client = new HttpClient())
@@ -75,6 +85,7 @@ namespace Gov.NET.ProPublica.Modules
             }
         }
 
+        /// <summary>Fetch all current representatives from the given state.</summary>
         public RepresentativeCard[] GetRepresentaivesByState(string state)
         {
             using (var client = new HttpClient())
@@ -85,6 +96,7 @@ namespace Gov.NET.ProPublica.Modules
             }
         }
 
+        /// <summary>Fetch current representative from the given state and district.</summary>
         public RepresentativeCard GetRepresentiveFromDistrict(string state, int district)
         {
             using (var client = new HttpClient())
@@ -95,6 +107,7 @@ namespace Gov.NET.ProPublica.Modules
             }
         }
 
+        /// <summary>Fetch senators that were leaving office during the given congress session.</summary>
         public SenatorCard[] GetSenatorsLeavingOffice(int congressNum)
         {
             using (var client = new HttpClient())
@@ -105,6 +118,7 @@ namespace Gov.NET.ProPublica.Modules
             }
         }
 
+        /// <summary>Fetch representatives that were leaving office during the given congress session.</summary>
         public RepresentativeCard[] GetRepresentativesLeavingOffice(int congressNum)
         {
             using (var client = new HttpClient())
