@@ -92,7 +92,7 @@ namespace Gov.NET.ProPublica.Util
 
         private static Senator ConvertSenator(Senator sen, ApiMember entity)
         {
-            sen.Rank = Text.Capitalize(entity.roles[0].state_rank);
+            sen.Rank = TextHelper.Capitalize(entity.roles[0].state_rank);
             sen.Class = entity.roles[0].senate_class;
             return sen;
         }

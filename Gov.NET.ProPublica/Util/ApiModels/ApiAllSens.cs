@@ -8,10 +8,9 @@ namespace Gov.NET.ProPublica.Util
 {
     internal class ApiAllSenators : ApiAllMembers
     {
-        private static readonly MapperConfiguration _mapperConfig =
-            new MapperConfiguration(cfg => cfg.CreateMap<Politician, Senator>());
-        private static readonly IMapper _mapper = _mapperConfig.CreateMapper();
-
+        private static readonly IMapper _mapper = 
+            new MapperConfiguration(cfg => cfg.CreateMap<Politician, Senator>()).CreateMapper();
+            
         public string senate_class { get; set; }
         public string state_rank { get; set; }
 
@@ -23,7 +22,7 @@ namespace Gov.NET.ProPublica.Util
 
             if (sen.InOffice)
             {
-                sen.Rank = Text.Capitalize(entity.state_rank);
+                sen.Rank = TextHelper.Capitalize(entity.state_rank);
             }
             
             return sen;

@@ -2,8 +2,10 @@ using System.Linq;
 
 namespace Gov.NET.Util
 {
-    public static class Text
+    /// <summary>Small text utility helper class.</summary>
+    public static class TextHelper
     {
+        /// <summary>Capitalize the given word.</summary>
         public static string Capitalize(string str)
         {
             if (string.IsNullOrEmpty(str))
@@ -11,6 +13,7 @@ namespace Gov.NET.Util
             return str.First().ToString().ToUpper() + str.Substring(1);
         }
 
+        /// <summary>Attach an ordinal to the given number.</summary>
         public static string Ordinal(int num)
         {
             if (num >= 10 && num < 21) return num + "th";
@@ -37,5 +40,5 @@ namespace Gov.NET.Util
             }
             return answer;
         }
-        }
+    }
 }
