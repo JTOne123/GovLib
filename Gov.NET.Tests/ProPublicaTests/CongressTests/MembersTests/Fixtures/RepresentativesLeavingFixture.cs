@@ -1,13 +1,13 @@
 using System.Threading;
 using Gov.NET.Models;
-using Gov.NET.Common.Models.Cards;
+using Gov.NET.Models.Summaries;
 using Gov.NET.ProPublica;
 
 namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
 {
     public class RepresentativesLeavingFixture : CongressFixture
     {
-        public RepresentativeCard[] RepresentativeCards { get; }
+        public RepresentativeSummary[] RepresentativeCards { get; }
 
         public RepresentativesLeavingFixture()
         {

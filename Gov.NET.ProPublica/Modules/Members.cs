@@ -8,8 +8,8 @@ using Gov.NET.Models;
 using Gov.NET.ProPublica;
 using Gov.NET.ProPublica.Urls;
 using Gov.NET.ProPublica.Util;
-using Gov.NET.Common.Models.Cards;
-using Gov.NET.Common.Models.Contracts;
+using Gov.NET.Models.Summaries;
+using Gov.NET.Models.Contracts;
 using Gov.NET.Util;
 
 namespace Gov.NET.ProPublica.Modules
@@ -72,7 +72,7 @@ namespace Gov.NET.ProPublica.Modules
         }
 
         /// <summary>Fetch new congress members from given congress session.</summary>
-        public PoliticianCard[] GetNewMembers()
+        public PoliticianSummary[] GetNewMembers()
         {
             using (var client = new HttpClient())
             {
@@ -83,13 +83,13 @@ namespace Gov.NET.ProPublica.Modules
         }
 
         /// <summary>Fetch both current senators from the given state enum.</summary>
-        public SenatorCard[] GetSenatorsByState(Enums.State state)
+        public SenatorSummary[] GetSenatorsByState(Enums.State state)
         {
             return GetSenatorsByState(EnumConvert.StateEnumToCode(state));
         }
 
         /// <summary>Fetch both current senators from the given state.</summary>
-        public SenatorCard[] GetSenatorsByState(string state)
+        public SenatorSummary[] GetSenatorsByState(string state)
         {
             using (var client = new HttpClient())
             {
@@ -100,13 +100,13 @@ namespace Gov.NET.ProPublica.Modules
         }
 
         /// <summary>Fetch all current representatives from the given state enum.</summary>
-        public RepresentativeCard[] GetRepresentaivesByState(Enums.State state)
+        public RepresentativeSummary[] GetRepresentaivesByState(Enums.State state)
         {
             return GetRepresentaivesByState(EnumConvert.StateEnumToCode(state));
         }
 
         /// <summary>Fetch all current representatives from the given state.</summary>
-        public RepresentativeCard[] GetRepresentaivesByState(string state)
+        public RepresentativeSummary[] GetRepresentaivesByState(string state)
         {
             using (var client = new HttpClient())
             {
@@ -117,13 +117,13 @@ namespace Gov.NET.ProPublica.Modules
         }
 
         /// <summary>Fetch current representative from the given state enum and district.</summary>
-        public RepresentativeCard GetRepresentaivesByState(Enums.State state, int district)
+        public RepresentativeSummary GetRepresentaivesByState(Enums.State state, int district)
         {
             return GetRepresentiveFromDistrict(EnumConvert.StateEnumToCode(state), district);
         }
 
         /// <summary>Fetch current representative from the given state and district.</summary>
-        public RepresentativeCard GetRepresentiveFromDistrict(string state, int district)
+        public RepresentativeSummary GetRepresentiveFromDistrict(string state, int district)
         {
             using (var client = new HttpClient())
             {
@@ -134,7 +134,7 @@ namespace Gov.NET.ProPublica.Modules
         }
 
         /// <summary>Fetch senators that were leaving office during the given congress session.</summary>
-        public SenatorCard[] GetSenatorsLeavingOffice(int congressNum)
+        public SenatorSummary[] GetSenatorsLeavingOffice(int congressNum)
         {
             using (var client = new HttpClient())
             {
@@ -145,7 +145,7 @@ namespace Gov.NET.ProPublica.Modules
         }
 
         /// <summary>Fetch representatives that were leaving office during the given congress session.</summary>
-        public RepresentativeCard[] GetRepresentativesLeavingOffice(int congressNum)
+        public RepresentativeSummary[] GetRepresentativesLeavingOffice(int congressNum)
         {
             using (var client = new HttpClient())
             {

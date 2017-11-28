@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Gov.NET.Common.Models.Contracts;
+using Gov.NET.Models.Contracts;
+using Gov.NET.Models.Summaries;
 
 namespace Gov.NET.Models
 {

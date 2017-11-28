@@ -1,6 +1,6 @@
 using System;
 using Gov.NET.Models;
-using Gov.NET.Common.Models.Cards;
+using Gov.NET.Models.Summaries;
 using System.Globalization;
 using Gov.NET.Util;
 
@@ -16,9 +16,9 @@ namespace Gov.NET.ProPublica.Util
         public string state { get; set; }
         public string district { get; set; }
 
-        public static RepresentativeCard Convert(ApiRepsLeaving entity)
+        public static RepresentativeSummary Convert(ApiRepsLeaving entity)
         {
-            var rep = new RepresentativeCard();
+            var rep = new RepresentativeSummary();
 
             rep.ID = entity.id;
             rep.FirstName = entity.first_name;

@@ -1,6 +1,6 @@
 using System;
 using Gov.NET.Models;
-using Gov.NET.Common.Models.Cards;
+using Gov.NET.Models.Summaries;
 using System.Globalization;
 using Gov.NET.Util;
 
@@ -17,18 +17,18 @@ namespace Gov.NET.ProPublica.Util
         public string state { get; set; }
         public string district { get; set; }
 
-        public static PoliticianCard Convert(ApiNewMembers entity)
+        public static PoliticianSummary Convert(ApiNewMembers entity)
         {
             if (entity == null)
                 return null;
 
             var chamber = entity.chamber.ToLower();
-            PoliticianCard pol;
+            PoliticianSummary pol;
 
             if (chamber == "senate")
-                pol = new SenatorCard();
+                pol = new SenatorSummary();
             else
-                pol = new RepresentativeCard();
+                pol = new RepresentativeSummary();
 
             pol.ID = entity.id;
             pol.FirstName = entity.first_name;
@@ -42,10 +42,10 @@ namespace Gov.NET.ProPublica.Util
             if (chamber == "senate")
                 return pol;
             else
-                return ConvertRepresentative((RepresentativeCard) pol, entity);
+                return ConvertRepresentative((RepresentativeSummary) pol, entity);
         }
 
-        private static RepresentativeCard ConvertRepresentative(RepresentativeCard rep, ApiNewMembers entity)
+        private static RepresentativeSummary ConvertRepresentative(RepresentativeSummary rep, ApiNewMembers entity)
         {
             if (entity.district == "At-Large")
             {

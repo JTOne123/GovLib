@@ -1,8 +1,6 @@
-namespace Gov.NET.Common.Models.Contracts
+namespace Gov.NET.Models.Contracts
 {
-    public interface ISenator
+    public interface ISenator : IPolitician
     {
-        string Rank { get; set; }
-        int Class { get; set; }
     }
 }

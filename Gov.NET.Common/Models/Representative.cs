@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Gov.NET.Common.Models.Contracts;
+using Gov.NET.Models.Contracts;
+using Gov.NET.Models.Summaries;
 
 namespace Gov.NET.Models
 {
@@ -8,10 +9,5 @@ namespace Gov.NET.Models
     {
         public int District { get; set; }
         public bool AtLargeDistrict { get; set; }
-
-        public override string ToString()
-        {
-            return $"Representative {FullName} ({Party}) [{State}-{District}]";
-        }
     }
 }

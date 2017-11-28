@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Gov.NET.Common.Models.Contracts;
+using Gov.NET.Models.Contracts;
+using Gov.NET.Models.Summaries;
 using static Gov.NET.Models.Enums;
 
 namespace Gov.NET.Models
 {
-    public class Politician : IPolitician
+    public class Politician : PoliticianSummary
     {
         
         public string ID { get; set; }

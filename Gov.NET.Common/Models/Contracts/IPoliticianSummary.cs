@@ -1,6 +1,10 @@
+using System;
+using Gov.NET.Models.Contracts;
+using Gov.NET.Models;
+
 namespace Gov.NET.Models.Contracts
 {
-    public interface IPolitician
+    public interface IPoliticianSummary : IPolitician
     {
         string ID { get; set; }
         string FirstName { get; set; }

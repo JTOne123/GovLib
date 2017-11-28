@@ -1,6 +1,6 @@
 using System;
 using Gov.NET.Models;
-using Gov.NET.Common.Models.Cards;
+using Gov.NET.Models.Summaries;
 using System.Globalization;
 using Gov.NET.Util;
 
@@ -14,9 +14,9 @@ namespace Gov.NET.ProPublica.Util
         public string last_name { get; set; }
         public string party { get; set; }
 
-        public static SenatorCard Convert(ApiSenatorsByState entity, string state)
+        public static SenatorSummary Convert(ApiSenatorsByState entity, string state)
         {
-            var sen = new SenatorCard();
+            var sen = new SenatorSummary();
 
             sen.ID = entity.id;
             sen.FirstName = entity.first_name;
