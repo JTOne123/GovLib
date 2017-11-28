@@ -45,15 +45,15 @@ namespace Gov.NET.ProPublica.Util
             pol.LastName = entity.last_name;
             pol.Party = entity.party;
             pol.State = (Enums.State) EnumConvert.StateCodeToEnum(entity.state);
-            pol.Seniority = entity.seniority;
+            pol.Seniority = (int) entity.seniority;
             pol.OcdID = entity.ocd_id;
             pol.BirthDate = DateTime.ParseExact(entity.date_of_birth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             pol.InOffice = (bool) entity.in_office;
-            pol.MissedVotesRatio = entity.missed_votes_pct / 100;
-            pol.PartyLoyaltyRatio = entity.votes_with_party_pct / 100;
-            pol.VotesCast = entity.total_votes;
-            pol.VotesMissed = entity.missed_votes;
-            pol.VotesPresent = entity.total_present;
+            pol.MissedVotesRatio = (double) entity.missed_votes_pct / 100;
+            pol.PartyLoyaltyRatio = (double) entity.votes_with_party_pct / 100;
+            pol.VotesCast = (int) entity.total_votes;
+            pol.VotesMissed = (int) entity.missed_votes;
+            pol.VotesPresent = (int) entity.total_present;
             
             if (entity.gender == "M")
                 pol.Gender = Models.Enums.Gender.Male;

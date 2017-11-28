@@ -51,12 +51,12 @@ namespace Gov.NET.ProPublica.Util
             pol.LastName = entity.last_name;
             pol.Party = entity.current_party;
             pol.State = (Enums.State) EnumConvert.StateCodeToEnum(entity.roles[0].state);
-            pol.Seniority = entity.roles[0].seniority;
+            pol.Seniority = (int) entity.roles[0].seniority;
             pol.OcdID = entity.roles[0].ocd_id;
             pol.BirthDate = DateTime.ParseExact(entity.date_of_birth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             pol.InOffice = (bool) entity.in_office;
-            pol.MissedVotesRatio = entity.roles[0].missed_votes_pct / 100;
-            pol.PartyLoyaltyRatio = entity.roles[0].votes_with_party_pct / 100;
+            pol.MissedVotesRatio = (int) entity.roles[0].missed_votes_pct / 100;
+            pol.PartyLoyaltyRatio = (int) entity.roles[0].votes_with_party_pct / 100;
             pol.NextElection = 1788 + (Int32.Parse(entity.roles[0].congress) * 2);
 
             if (entity.gender == "M")
