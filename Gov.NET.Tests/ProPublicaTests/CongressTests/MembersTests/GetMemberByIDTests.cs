@@ -51,7 +51,7 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests.Fixtures
         [Fact]
         public void RepresentativeHasAHomeState()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Representative.State));
+            Assert.NotNull(Fixture.Representative.State);
         }
 
         [Fact]
@@ -131,7 +131,7 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests.Fixtures
         [Fact]
         public void SenatorHasAHomeState()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Senator.State));
+            Assert.NotNull(Fixture.Senator.State);
         }
 
         [Fact]

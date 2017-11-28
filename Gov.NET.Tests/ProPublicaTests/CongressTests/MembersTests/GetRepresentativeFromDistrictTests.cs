@@ -45,7 +45,7 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
         [Fact]
         public void MemberCardsHaveAHomeState()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.RepresentativeCard.State));
+            Assert.NotNull(Fixture.RepresentativeCard.State);
         }
 
         [Fact]

@@ -9,6 +9,8 @@ using Gov.NET.ProPublica;
 using Gov.NET.ProPublica.Urls;
 using Gov.NET.ProPublica.Util;
 using Gov.NET.Common.Models.Cards;
+using Gov.NET.Common.Models.Contracts;
+using Gov.NET.Util;
 
 namespace Gov.NET.ProPublica.Modules
 {
@@ -59,8 +61,14 @@ namespace Gov.NET.ProPublica.Modules
             {
                 var url = string.Format(MemberUrls.Member, id);
                 var result = client.Get<ResultWrapper<ApiMember>>(url, _parent.Headers);
-                return result?.results?.Select(p => ApiMember.Convert(p)).FirstOrDefault();
+                return result?.results?.Where(r => r.IsVotingMember()).Select(p => ApiMember.Convert(p)).FirstOrDefault();
             }
+        }
+
+        /// <summary>Get full Politician info from a contract.</summary>
+        public Politician GetMemberByID(IPolitician politician)
+        {
+            return GetMemberByID(politician.ID);
         }
 
         /// <summary>Fetch new congress members from given congress session.</summary>
@@ -70,8 +78,14 @@ namespace Gov.NET.ProPublica.Modules
             {
                 var url = MemberUrls.NewMembers;
                 var result = client.Get<ResultWrapper<NewMembersWrapper>>(url, _parent.Headers);
-                return result?.results?[0].members?.Select(m => ApiNewMembers.Convert(m)).ToArray();
+                return result?.results?[0].members?.Where(r => r.IsVotingMember()).Select(m => ApiNewMembers.Convert(m)).ToArray();
             }
+        }
+
+        /// <summary>Fetch both current senators from the given state enum.</summary>
+        public SenatorCard[] GetSenatorsByState(Enums.State state)
+        {
+            return GetSenatorsByState(EnumConvert.StateEnumToCode(state));
         }
 
         /// <summary>Fetch both current senators from the given state.</summary>
@@ -85,6 +99,12 @@ namespace Gov.NET.ProPublica.Modules
             }
         }
 
+        /// <summary>Fetch all current representatives from the given state enum.</summary>
+        public RepresentativeCard[] GetRepresentaivesByState(Enums.State state)
+        {
+            return GetRepresentaivesByState(EnumConvert.StateEnumToCode(state));
+        }
+
         /// <summary>Fetch all current representatives from the given state.</summary>
         public RepresentativeCard[] GetRepresentaivesByState(string state)
         {
@@ -94,6 +114,12 @@ namespace Gov.NET.ProPublica.Modules
                 var result = client.Get<ResultWrapper<ApiRepresentativesByState>>(url, _parent.Headers);
                 return result?.results?.Select(r => ApiRepresentativesByState.Convert(r, state)).ToArray();
             }
+        }
+
+        /// <summary>Fetch current representative from the given state enum and district.</summary>
+        public RepresentativeCard GetRepresentaivesByState(Enums.State state, int district)
+        {
+            return GetRepresentiveFromDistrict(EnumConvert.StateEnumToCode(state), district);
         }
 
         /// <summary>Fetch current representative from the given state and district.</summary>

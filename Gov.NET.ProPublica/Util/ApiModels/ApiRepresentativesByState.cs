@@ -2,6 +2,7 @@ using System;
 using Gov.NET.Models;
 using Gov.NET.Common.Models.Cards;
 using System.Globalization;
+using Gov.NET.Util;
 
 namespace Gov.NET.ProPublica.Util
 {
@@ -22,7 +23,7 @@ namespace Gov.NET.ProPublica.Util
             rep.FirstName = entity.first_name;
             rep.LastName = entity.last_name;
             rep.Party = entity.party;
-            rep.State = state;
+            rep.State = (Enums.State) EnumConvert.StateCodeToEnum(state);
 
             if (!string.IsNullOrEmpty(entity.middle_name))
                 rep.MiddleName = entity.middle_name;

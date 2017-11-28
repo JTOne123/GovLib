@@ -2,6 +2,7 @@ using System;
 using Gov.NET.Models;
 using Gov.NET.Common.Models.Cards;
 using System.Globalization;
+using Gov.NET.Util;
 
 namespace Gov.NET.ProPublica.Util
 {
@@ -33,7 +34,7 @@ namespace Gov.NET.ProPublica.Util
             pol.FirstName = entity.first_name;
             pol.LastName = entity.last_name;
             pol.Party = entity.party;
-            pol.State = entity.state;
+            pol.State = (Enums.State) EnumConvert.StateCodeToEnum(entity.state);
 
             if (!string.IsNullOrEmpty(entity.middle_name))
                 pol.MiddleName = entity.middle_name;
@@ -58,6 +59,11 @@ namespace Gov.NET.ProPublica.Util
             }
 
             return rep;
+        }
+        
+        internal bool IsVotingMember()
+        {
+            return EnumConvert.StateCodeToEnum(this.state) != null;
         }
     }
 }

@@ -63,7 +63,7 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
         public void MemberCardsHaveAHomeState()
         {
             foreach (var senatorCard in Fixture.SenatorCards)
-                Assert.False(string.IsNullOrEmpty(senatorCard.State));
+                Assert.NotNull(senatorCard.State);
         }
 
         [Fact]

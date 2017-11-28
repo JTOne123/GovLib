@@ -1,16 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Gov.NET.Common.Models.Contracts;
+using static Gov.NET.Models.Enums;
 
 namespace Gov.NET.Models
 {
-    public class Politician
+    public class Politician : IPolitician
     {
-        public enum GenderEnum
-        {
-            Male,
-            Female,
-            NonBinary
-        }
         
         public string ID { get; set; }
         public string FirstName { get; set; }
@@ -18,10 +14,10 @@ namespace Gov.NET.Models
         public string LastName { get; set; }
         public string FullName => GetFullName();
         public string Party { get; set; }
-        public string State { get; set; }
-        public DateTime? BirthDate { get; set; }
-        public int? Age => DateTime.Now.Year - BirthDate?.Year;
-        public GenderEnum? Gender { get; set; }
+        public State State { get; set; }
+        public DateTime BirthDate { get; set; }
+        public int? Age => DateTime.Now.Year - BirthDate.Year;
+        public Enums.Gender Gender { get; set; }
         public string Url { get; set; }
         public string Twitter { get; set; }
         public string Facebook { get; set; }

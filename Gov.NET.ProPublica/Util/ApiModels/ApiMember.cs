@@ -2,6 +2,7 @@ using System;
 using Gov.NET.Util;
 using Gov.NET.Models;
 using System.Globalization;
+using Gov.NET.ProPublica.Util;
 
 namespace Gov.NET.ProPublica.Util
 {
@@ -49,7 +50,7 @@ namespace Gov.NET.ProPublica.Util
             pol.FirstName = entity.first_name;
             pol.LastName = entity.last_name;
             pol.Party = entity.current_party;
-            pol.State = entity.roles[0].state;
+            pol.State = (Enums.State) EnumConvert.StateCodeToEnum(entity.roles[0].state);
             pol.Seniority = entity.roles[0].seniority;
             pol.OcdID = entity.roles[0].ocd_id;
             pol.BirthDate = DateTime.ParseExact(entity.date_of_birth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -59,11 +60,11 @@ namespace Gov.NET.ProPublica.Util
             pol.NextElection = 1788 + (Int32.Parse(entity.roles[0].congress) * 2);
 
             if (entity.gender == "M")
-                pol.Gender = Politician.GenderEnum.Male;
+                pol.Gender = Models.Enums.Gender.Male;
             else if (entity.gender == "F")
-                pol.Gender = Politician.GenderEnum.Female;
+                pol.Gender = Models.Enums.Gender.Female;
             else
-                pol.Gender = Politician.GenderEnum.NonBinary;
+                pol.Gender = Models.Enums.Gender.NonBinary;
 
             if (!string.IsNullOrEmpty(entity.middle_name))
                 pol.MiddleName = entity.middle_name;
@@ -93,8 +94,13 @@ namespace Gov.NET.ProPublica.Util
         private static Senator ConvertSenator(Senator sen, ApiMember entity)
         {
             sen.Rank = TextHelper.Capitalize(entity.roles[0].state_rank);
-            sen.Class = entity.roles[0].senate_class;
+            sen.Class = (int) entity.roles[0].senate_class;
             return sen;
+        }
+        
+        internal bool IsVotingMember()
+        {
+            return EnumConvert.StateCodeToEnum(this.roles[0].state) != null;
         }
     }
 }
