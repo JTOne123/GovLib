@@ -6,8 +6,8 @@
 			"label": "Build Solution",
 			"command": "dotnet",
 			"args": ["build"],
-			"problemMatcher": "$msCompile",
-			"group": "build"
+			"group": "build",
+			"problemMatcher": []
 		},
 		{
 			"label": "Restore Nuget Packages",
@@ -19,7 +19,7 @@
 		{
 			"label": "Run All Unit Tests",
 			"command": "dotnet",
-			"args": ["test", "${workspaceRoot}/Gov.NET.Tests"],
+			"args": ["test","${workspaceRoot}/Gov.NET.Tests"],
 			"problemMatcher": "$msCompile",
 			"group": "build"
 		}
