@@ -117,7 +117,7 @@ namespace Gov.NET.ProPublica.Modules
         }
 
         /// <summary>Fetch current representative from the given state enum and district.</summary>
-        public RepresentativeSummary GetRepresentaivesByState(State state, int district)
+        public RepresentativeSummary GetRepresentiveFromDistrict(State state, int district)
         {
             return GetRepresentiveFromDistrict(EnumConvert.StateEnumToCode(state), district);
         }
