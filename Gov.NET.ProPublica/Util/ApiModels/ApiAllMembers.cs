@@ -44,7 +44,7 @@ namespace Gov.NET.ProPublica.Util
             pol.FirstName = entity.first_name;
             pol.LastName = entity.last_name;
             pol.Party = entity.party;
-            pol.State = (Enums.State) EnumConvert.StateCodeToEnum(entity.state);
+            pol.State = (State) EnumConvert.StateCodeToEnum(entity.state);
             pol.Seniority = (int) entity.seniority;
             pol.OcdID = entity.ocd_id;
             pol.BirthDate = DateTime.ParseExact(entity.date_of_birth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -56,11 +56,11 @@ namespace Gov.NET.ProPublica.Util
             pol.VotesPresent = (int) entity.total_present;
             
             if (entity.gender == "M")
-                pol.Gender = Models.Enums.Gender.Male;
+                pol.Gender = Gender.Male;
             else if (entity.gender == "F")
-                pol.Gender = Models.Enums.Gender.Female;
+                pol.Gender = Gender.Female;
             else
-                pol.Gender = Models.Enums.Gender.NonBinary;
+                pol.Gender = Gender.NonBinary;
 
             if (entity.next_election != null)
                 pol.NextElection = Int32.Parse(entity.next_election);

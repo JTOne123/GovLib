@@ -1,17 +1,17 @@
-using System;
-using Gov.NET.Models.Contracts;
-using Gov.NET.Models;
-
 namespace Gov.NET.Models.Contracts
 {
-    public interface IPoliticianSummary : IPolitician
+    public interface IPolitician
     {
+        #pragma warning disable CS1591
+        
         string ID { get; set; }
         string FirstName { get; set; }
         string MiddleName { get; set; }
         string LastName { get; set; }
         string FullName { get; }
         string Party { get; set; }
-        Enums.State State { get; set; }
+        State State { get; set; }
+
+        #pragma warning restore CS1591
     }
 }

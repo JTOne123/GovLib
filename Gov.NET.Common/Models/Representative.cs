@@ -7,7 +7,11 @@ namespace Gov.NET.Models
 {
     public class Representative : Politician, IRepresentative
     {
+        #pragma warning disable CS1591
+
         public int District { get; set; }
         public bool AtLargeDistrict { get; set; }
+        
+        #pragma warning restore CS1591
     }
 }

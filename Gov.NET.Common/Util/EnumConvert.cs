@@ -1,4 +1,4 @@
-using static Gov.NET.Models.Enums;
+using Gov.NET.Models;
 
 namespace Gov.NET.Util
 {

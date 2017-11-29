@@ -2,19 +2,13 @@ using System;
 using System.Collections.Generic;
 using Gov.NET.Models.Contracts;
 using Gov.NET.Models.Summaries;
-using static Gov.NET.Models.Enums;
 
 namespace Gov.NET.Models
 {
     public class Politician : PoliticianSummary
     {
-        public string ID { get; set; }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public string FullName => GetFullName();
-        public string Party { get; set; }
-        public State State { get; set; }
+        #pragma warning disable CS1591
+
         public DateTime BirthDate { get; set; }
         public int Age => DateTime.Now.Year - BirthDate.Year;
         public Gender Gender { get; set; }
@@ -35,10 +29,6 @@ namespace Gov.NET.Models
         public double MissedVotesRatio { get; set; }
         public double PartyLoyaltyRatio { get; set; }
         
-        private string GetFullName()
-        {
-            if (string.IsNullOrEmpty(MiddleName)) return $"{FirstName} {LastName}";
-            else return $"{FirstName} {MiddleName} {LastName}";
-        }
+        #pragma warning restore CS1591
     }
 }

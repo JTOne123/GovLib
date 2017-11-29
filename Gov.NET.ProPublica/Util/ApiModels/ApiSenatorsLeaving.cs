@@ -23,7 +23,7 @@ namespace Gov.NET.ProPublica.Util
             sen.FirstName = entity.first_name;
             sen.LastName = entity.last_name;
             sen.Party = entity.party;
-            sen.State = (Enums.State) EnumConvert.StateCodeToEnum(entity.state);
+            sen.State = (State) EnumConvert.StateCodeToEnum(entity.state);
 
             if (!string.IsNullOrEmpty(entity.middle_name))
                 sen.MiddleName = entity.middle_name;

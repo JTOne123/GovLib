@@ -13,7 +13,7 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
         {
             // Sleep before making api call to limit request spam.
             Thread.Sleep(60);
-            SenatorCards = Congress.Members.GetSenatorsByState("CO");
+            SenatorCards = Congress.Members.GetSenatorsByState(State.Georgia);
         }
     }
 }

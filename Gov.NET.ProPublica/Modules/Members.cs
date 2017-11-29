@@ -83,7 +83,7 @@ namespace Gov.NET.ProPublica.Modules
         }
 
         /// <summary>Fetch both current senators from the given state enum.</summary>
-        public SenatorSummary[] GetSenatorsByState(Enums.State state)
+        public SenatorSummary[] GetSenatorsByState(State state)
         {
             return GetSenatorsByState(EnumConvert.StateEnumToCode(state));
         }
@@ -100,7 +100,7 @@ namespace Gov.NET.ProPublica.Modules
         }
 
         /// <summary>Fetch all current representatives from the given state enum.</summary>
-        public RepresentativeSummary[] GetRepresentaivesByState(Enums.State state)
+        public RepresentativeSummary[] GetRepresentaivesByState(State state)
         {
             return GetRepresentaivesByState(EnumConvert.StateEnumToCode(state));
         }
@@ -117,7 +117,7 @@ namespace Gov.NET.ProPublica.Modules
         }
 
         /// <summary>Fetch current representative from the given state enum and district.</summary>
-        public RepresentativeSummary GetRepresentaivesByState(Enums.State state, int district)
+        public RepresentativeSummary GetRepresentaivesByState(State state, int district)
         {
             return GetRepresentiveFromDistrict(EnumConvert.StateEnumToCode(state), district);
         }
