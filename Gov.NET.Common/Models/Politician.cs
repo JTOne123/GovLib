@@ -8,7 +8,6 @@ namespace Gov.NET.Models
 {
     public class Politician : PoliticianSummary
     {
-        
         public string ID { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

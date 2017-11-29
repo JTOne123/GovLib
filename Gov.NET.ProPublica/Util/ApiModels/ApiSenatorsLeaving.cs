@@ -8,14 +8,14 @@ namespace Gov.NET.ProPublica.Util
 {
     internal class ApiSenatorsLeaving
     {
-        public string id { get; set; }
-        public string first_name { get; set; }
-        public string middle_name { get; set; }
-        public string last_name { get; set; }
-        public string party { get; set; }
-        public string state { get; set; }
+        private string id { get; set; }
+        private string first_name { get; set; }
+        private string middle_name { get; set; }
+        private string last_name { get; set; }
+        private string party { get; set; }
+        private string state { get; set; }
 
-        public static SenatorSummary Convert(ApiSenatorsLeaving entity)
+        internal static SenatorSummary Convert(ApiSenatorsLeaving entity)
         {
             var sen = new SenatorSummary();
 
