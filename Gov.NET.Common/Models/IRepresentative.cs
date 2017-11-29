@@ -1,5 +1,6 @@
 namespace Gov.NET.Models.Contracts
 {
+    /// <summary>Base contract for implementing all representative types.</summary>
     public interface IRepresentative : IPolitician
     {
         #pragma warning disable CS1591

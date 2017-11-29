@@ -61,10 +61,8 @@ namespace Gov.NET.ProPublica.Util
 
             if (entity.gender == "M")
                 pol.Gender = Gender.Male;
-            else if (entity.gender == "F")
-                pol.Gender = Gender.Female;
             else
-                pol.Gender = Gender.NonBinary;
+                pol.Gender = Gender.Female;
 
             if (!string.IsNullOrEmpty(entity.middle_name))
                 pol.MiddleName = entity.middle_name;

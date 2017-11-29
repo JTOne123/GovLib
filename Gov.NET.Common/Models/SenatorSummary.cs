@@ -2,6 +2,7 @@ using Gov.NET.Models.Contracts;
 
 namespace Gov.NET.Models.Summaries
 {
+    /// <summary>Sentor implementation of a PoliticianSummary. Contains limited information.</summary>
     public class SenatorSummary : PoliticianSummary, ISenator
     {
         #pragma warning disable CS1591

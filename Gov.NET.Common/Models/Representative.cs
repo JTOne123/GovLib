@@ -5,6 +5,7 @@ using Gov.NET.Models.Summaries;
 
 namespace Gov.NET.Models
 {
+    /// <summary>Full implementation for a house representative.</summary>
     public class Representative : Politician, IRepresentative
     {
         #pragma warning disable CS1591

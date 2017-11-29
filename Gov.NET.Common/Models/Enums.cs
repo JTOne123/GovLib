@@ -5,8 +5,7 @@ namespace Gov.NET.Models
     public enum Gender
     {
         Male,
-        Female,
-        NonBinary
+        Female
     }
 
     public enum State

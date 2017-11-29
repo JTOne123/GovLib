@@ -6,6 +6,7 @@ using Gov.NET.Models.Summaries;
 
 namespace Gov.NET.Models
 {
+    /// <summary>Full implementation for a senator.</summary>
     public class Senator : Politician, ISenator
     {
         #pragma warning disable CS1591

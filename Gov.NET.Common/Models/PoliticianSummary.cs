@@ -3,6 +3,7 @@ using Gov.NET.Models.Contracts;
 
 namespace Gov.NET.Models.Summaries
 {
+    /// <summary>Abstract implementation of the IPolitician interface. Contains only basic information.</summary>
     public abstract class PoliticianSummary : IPolitician
     {
         #pragma warning disable CS1591

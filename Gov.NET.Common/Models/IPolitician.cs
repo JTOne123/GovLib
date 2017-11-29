@@ -1,5 +1,6 @@
 namespace Gov.NET.Models.Contracts
 {
+    /// <summary>Base contract for implementing all politician types.</summary>
     public interface IPolitician
     {
         #pragma warning disable CS1591
