@@ -8,3 +8,11 @@ before_script:
 
 script:
   - "dotnet test $TRAVIS_BUILD_DIR/Gov.NET.Tests/Gov.NET.Tests.csproj"
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  before_script: dotnet pack -c Release
+  script: echo "hello"
+  on:
+    branch: master
