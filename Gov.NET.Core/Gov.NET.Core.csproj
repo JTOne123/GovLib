@@ -3,8 +3,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <IsPackable>false</IsPackable>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>government;api;netstandard;core</PackageTags>
   </PropertyGroup>
   
 </Project>

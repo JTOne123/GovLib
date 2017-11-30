@@ -3,12 +3,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyTitle>Gov.NET.ProPublica</AssemblyTitle>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>api;propublica;congress</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../Gov.NET.Common/Gov.NET.Common.csproj" />
+    <ProjectReference Include="../Gov.NET.Core/Gov.NET.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Gov.NET</AssemblyName>
+    <PackageId>Gov.NET</PackageId>
+    <PackageTags>api;government;propublica;civic;congress</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Gov.NET.Core/Gov.NET.Core.csproj" />
+    <ProjectReference Include="../Gov.NET.ProPublica/Gov.NET.ProPublica.csproj" />
+  </ItemGroup>
+
+</Project>

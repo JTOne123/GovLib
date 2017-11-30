@@ -2,18 +2,18 @@
  
   <PropertyGroup>
     <Authors>Phil Hawkins</Authors>
-    <Version>0.0.1</Version>
-    <VersionSuffix>dev</VersionSuffix>
-    <Copyright>MIT</Copyright>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <VersionSuffix>unstable</VersionSuffix>
+    <Copyright>MIT - Phil Hawkins</Copyright>
     <PackageProjectUrl>https://phil-harmoniq.github.io/Gov.NET</PackageProjectUrl>
     <RepositoryUrl>https://github.com/phil-harmoniq/Gov.NET</RepositoryUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/phil-harmoniq/Gov.NET/master/LICENSE.md</PackageLicenseUrl>
-    <PackageTags>netstandard;api;government;congress;propublica</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>  
-    <OutputPath>../.vscode/build/$(MSBuildProjectName)/bin/$(Configuration)</OutputPath>
+    <OutputPath>$(MSBuildThisFileDirectory)/.vscode/build/$(MSBuildProjectName)/bin/$(Configuration)</OutputPath>
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)/.vscode/build/$(MSBuildProjectName)/obj</BaseIntermediateOutputPath>
   </PropertyGroup>
 
