@@ -21,7 +21,6 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
-lib/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -219,3 +218,6 @@ _Pvt_Extensions
 
 # Experimental AppImages
 *.AppImage
+
+# API examples folder
+Examples/

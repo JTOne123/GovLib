@@ -2,7 +2,7 @@
  
   <PropertyGroup>
     <Authors>Phil Hawkins</Authors>
-    <VersionPrefix>0.0.1.1</VersionPrefix>
+    <VersionPrefix>0.0.1.2</VersionPrefix>
     <VersionSuffix>pre-alpha</VersionSuffix>
     <Copyright>MIT - Phil Hawkins</Copyright>
     <PackageProjectUrl>https://phil-harmoniq.github.io/Gov.NET</PackageProjectUrl>
