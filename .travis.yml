@@ -17,4 +17,4 @@ deploy:
   provider: script
   script: dotnet pack -c Release && dotnet nuget push .vscode/build/Gov.NET.Core/bin/Release/Gov.NET.Core.*.nupkg -k $NUGET_API_KEY -s $NUGET_API && dotnet nuget push .vscode/build/Gov.NET.ProPublica/bin/Release/Gov.NET.ProPublica.*.nupkg -k $NUGET_API_KEY -s $NUGET_API && dotnet nuget push .vscode/build/Gov.NET.MetaPack/bin/Release/Gov.NET.*.nupkg -k $NUGET_API_KEY -s $NUGET_API
   on:
-    branch: master
+    branch: deploy
