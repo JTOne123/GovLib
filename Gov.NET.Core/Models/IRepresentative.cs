@@ -1,4 +1,4 @@
-namespace Gov.NET.Models.Contracts
+namespace Gov.NET.Models
 {
     /// <summary>Base contract for implementing all representative types.</summary>
     public interface IRepresentative : IPolitician

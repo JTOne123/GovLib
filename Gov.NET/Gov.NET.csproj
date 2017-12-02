@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Gov.NET</AssemblyName>
-    <PackageId>Gov.NET</PackageId>
     <Description>Interact intuitively with US government data and statistics.</Description>
     <PackageTags>api;government;propublica;civic;congress</PackageTags>
   </PropertyGroup>

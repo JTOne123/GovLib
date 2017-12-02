@@ -1,6 +1,6 @@
-using Gov.NET.Models.Contracts;
+using Gov.NET.Models;
 
-namespace Gov.NET.Models.Summaries
+namespace Gov.NET.Models
 {
     /// <summary>Sentor implementation of a PoliticianSummary. Contains limited information.</summary>
     public class SenatorSummary : PoliticianSummary, ISenator

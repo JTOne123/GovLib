@@ -1,15 +1,8 @@
-using System;
 using System.Linq;
-using System.Net;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
-using Gov.NET;
 using Gov.NET.Models;
-using Gov.NET.ProPublica;
 using Gov.NET.ProPublica.Urls;
 using Gov.NET.ProPublica.Util;
-using Gov.NET.Models.Summaries;
-using Gov.NET.Models.Contracts;
 using Gov.NET.Util;
 
 namespace Gov.NET.ProPublica.Modules

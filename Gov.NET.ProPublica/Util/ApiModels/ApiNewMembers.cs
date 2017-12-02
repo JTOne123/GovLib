@@ -1,6 +1,5 @@
 using System;
 using Gov.NET.Models;
-using Gov.NET.Models.Summaries;
 using System.Globalization;
 using Gov.NET.Util;
 

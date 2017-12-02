@@ -1,6 +1,5 @@
 using System.Threading;
 using Gov.NET.Models;
-using Gov.NET.Models.Summaries;
 using Gov.NET.ProPublica;
 
 namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests

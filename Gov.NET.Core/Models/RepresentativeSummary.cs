@@ -1,6 +1,6 @@
-using Gov.NET.Models.Contracts;
+using Gov.NET.Models;
 
-namespace Gov.NET.Models.Summaries
+namespace Gov.NET.Models
 {
     /// <summary>Representative implementation of a PoliticianSummary. Contains limited information.</summary>
     public class RepresentativeSummary : PoliticianSummary, IRepresentative

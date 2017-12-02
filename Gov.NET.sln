@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gov.NET.Core", "Gov.NET.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gov.NET.Tests", "Gov.NET.Tests\Gov.NET.Tests.csproj", "{7B7B8C37-C0C4-4FBE-9B4A-9A4C5F101E8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gov.NET.MetaPack", "Gov.NET.MetaPack\Gov.NET.MetaPack.csproj", "{C31FDD01-16DE-41D1-ABFA-349E114193E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gov.NET", "Gov.NET\Gov.NET.csproj", "{C31FDD01-16DE-41D1-ABFA-349E114193E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

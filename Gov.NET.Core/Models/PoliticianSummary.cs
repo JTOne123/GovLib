@@ -1,7 +1,6 @@
 using Gov.NET.Models;
-using Gov.NET.Models.Contracts;
 
-namespace Gov.NET.Models.Summaries
+namespace Gov.NET.Models
 {
     /// <summary>Abstract implementation of the IPolitician interface. Contains only basic information.</summary>
     public abstract class PoliticianSummary : IPolitician
