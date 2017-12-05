@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Gov.NET.Models;
 using Gov.NET.ProPublica.Urls;
 using Gov.NET.ProPublica.Util;
+using Gov.NET.ProPublica.Util.MemberModels;
 using Gov.NET.Util;
 
 namespace Gov.NET.ProPublica.Modules

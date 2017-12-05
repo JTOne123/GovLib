@@ -3,7 +3,7 @@ using Gov.NET.Models;
 using System.Globalization;
 using Gov.NET.Util;
 
-namespace Gov.NET.ProPublica.Util
+namespace Gov.NET.ProPublica.Util.MemberModels
 {
     internal class ApiSenatorsByState
     {

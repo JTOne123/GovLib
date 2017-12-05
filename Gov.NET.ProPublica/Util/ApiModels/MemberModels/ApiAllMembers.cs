@@ -3,7 +3,7 @@ using System.Globalization;
 using Gov.NET.Util;
 using Gov.NET.Models;
 
-namespace Gov.NET.ProPublica.Util
+namespace Gov.NET.ProPublica.Util.MemberModels
 {
     internal class ApiAllMembers
     {

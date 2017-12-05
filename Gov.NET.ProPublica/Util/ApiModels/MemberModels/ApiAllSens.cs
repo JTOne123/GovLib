@@ -4,7 +4,7 @@ using Gov.NET.Models;
 using Gov.NET.Util;
 using AutoMapper;
 
-namespace Gov.NET.ProPublica.Util
+namespace Gov.NET.ProPublica.Util.MemberModels
 {
     internal class ApiAllSenators : ApiAllMembers
     {

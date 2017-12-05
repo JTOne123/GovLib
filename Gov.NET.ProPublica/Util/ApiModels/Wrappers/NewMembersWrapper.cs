@@ -1,3 +1,5 @@
+using Gov.NET.ProPublica.Util.MemberModels;
+
 namespace Gov.NET.ProPublica.Util
 {
     internal class NewMembersWrapper

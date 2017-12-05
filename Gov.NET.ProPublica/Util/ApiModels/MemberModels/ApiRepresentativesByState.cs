@@ -3,19 +3,18 @@ using Gov.NET.Models;
 using System.Globalization;
 using Gov.NET.Util;
 
-namespace Gov.NET.ProPublica.Util
+namespace Gov.NET.ProPublica.Util.MemberModels
 {
-    internal class ApiRepsLeaving
+    internal class ApiRepresentativesByState
     {
         public string id { get; set; }
         public string first_name { get; set; }
         public string middle_name { get; set; }
         public string last_name { get; set; }
         public string party { get; set; }
-        public string state { get; set; }
         public string district { get; set; }
 
-        public static RepresentativeSummary Convert(ApiRepsLeaving entity)
+        public static RepresentativeSummary Convert(ApiRepresentativesByState entity, string state)
         {
             var rep = new RepresentativeSummary();
 
@@ -23,11 +22,11 @@ namespace Gov.NET.ProPublica.Util
             rep.FirstName = entity.first_name;
             rep.LastName = entity.last_name;
             rep.Party = entity.party;
-            rep.State = (State) EnumConvert.StateCodeToEnum(entity.state);
+            rep.State = (State) EnumConvert.StateCodeToEnum(state);
 
             if (!string.IsNullOrEmpty(entity.middle_name))
                 rep.MiddleName = entity.middle_name;
-            
+
             if (entity.district == "At-Large")
             {
                 rep.District = 1;

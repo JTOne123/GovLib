@@ -1,6 +1,6 @@
 using System;
 
-namespace Gov.NET.ProPublica.Util
+namespace Gov.NET.ProPublica.Util.MemberModels
 {
     internal class ApiCommittee
     {
