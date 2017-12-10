@@ -51,6 +51,7 @@ namespace Gov.NET.ProPublica.Util.ApiModels.BillModels
             bill.Text = entity.summary;
             bill.TextSnippet = entity.summary_short;
             
+            return bill;
         }
     }
 }
