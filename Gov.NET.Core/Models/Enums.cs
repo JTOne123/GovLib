@@ -1,6 +1,12 @@
 namespace Gov.NET.Models
 {
     #pragma warning disable CS1591
+    
+    public enum Chamber
+    {
+        Senate,
+        House
+    }
 
     public enum Gender
     {

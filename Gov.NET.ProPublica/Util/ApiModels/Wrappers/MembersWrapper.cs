@@ -1,6 +1,6 @@
 namespace Gov.NET.ProPublica.Util
 {
-    internal class ContainerWrapper<T>
+    internal class MembersWrapper<T>
     {
         public string congress { get; set; }
         public string chamber { get; set; }

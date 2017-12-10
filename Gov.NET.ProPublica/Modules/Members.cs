@@ -32,7 +32,7 @@ namespace Gov.NET.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(MemberUrls.AllSenators, congressNum);
-                var result = client.Get<ResultWrapper<ContainerWrapper<ApiAllSenators>>>(url, _parent.Headers);
+                var result = client.Get<ResultWrapper<MembersWrapper<ApiAllSenators>>>(url, _parent.Headers);
                 return result?.results?[0].members?.Select(s => ApiAllSenators.Convert(s)).ToArray();
             }
         }
@@ -43,7 +43,7 @@ namespace Gov.NET.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(MemberUrls.AllRepresentatives, congressNum);
-                var result = client.Get<ResultWrapper<ContainerWrapper<ApiAllReps>>>(url, _parent.Headers);
+                var result = client.Get<ResultWrapper<MembersWrapper<ApiAllReps>>>(url, _parent.Headers);
                 return result?.results?[0].members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r)).ToArray();
             }
         }
@@ -133,7 +133,7 @@ namespace Gov.NET.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(MemberUrls.SenatorsLeaving, congressNum);
-                var result = client.Get<ResultWrapper<ContainerWrapper<ApiSenatorsLeaving>>>(url, _parent.Headers);
+                var result = client.Get<ResultWrapper<MembersWrapper<ApiSenatorsLeaving>>>(url, _parent.Headers);
                 return result?.results?[0].members.Select(r => ApiSenatorsLeaving.Convert(r)).ToArray();
             }
         }
@@ -144,7 +144,7 @@ namespace Gov.NET.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(MemberUrls.RepresentativesLeaving, congressNum);
-                var result = client.Get<ResultWrapper<ContainerWrapper<ApiRepsLeaving>>>(url, _parent.Headers);
+                var result = client.Get<ResultWrapper<MembersWrapper<ApiRepsLeaving>>>(url, _parent.Headers);
                 return result?.results?[0].members.Select(r => ApiRepsLeaving.Convert(r)).ToArray();
             }
         }
