@@ -10,8 +10,6 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public RepresentativeFromDistrictFixture()
         {
-            // Sleep before making api call to limit request spam.
-            Thread.Sleep(60);
             RepresentativeCard = Congress.Members.GetRepresentiveFromDistrict(State.Oregon, 3);
         }
     }

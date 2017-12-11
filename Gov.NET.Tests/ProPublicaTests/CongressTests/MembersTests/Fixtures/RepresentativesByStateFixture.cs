@@ -11,8 +11,6 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public RepresentativesByStateFixture()
         {
-            // Sleep before making api call to limit request spam.
-            Thread.Sleep(60);
             RepresentativeCards = Congress.Members.GetRepresentaivesByState(State.California);
         }
     }

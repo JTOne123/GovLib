@@ -10,8 +10,6 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public NewMembersFixture()
         {
-            // Sleep before making api call to limit request spam.
-            Thread.Sleep(60);
             PoliticianCards = Congress.Members.GetNewMembers();
             System.Console.WriteLine();
         }
