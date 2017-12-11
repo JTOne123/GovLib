@@ -27,8 +27,25 @@ namespace Gov.NET.ProPublica.Modules
                 var chamberString = EnumConvert.ChamberEnumToString(chamber);
                 var statusString = EnumConvert.BillStatusEnumToString(status);
                 var url = string.Format(BillUrls.RecentBills, congress, chamberString, statusString);
-                var result = client.Get<ResultWrapper<BillsWrapper<ApiRecentBills>>>(url, _parent.Headers);
-                return result?.results?[0].bills.Select(b => ApiRecentBills.Convert(b)).ToArray();
+                var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
+                return result?.results?[0].bills.Select(b => ApiBill.Convert(b)).ToArray();
+            }
+        }
+
+        /// <summary> Get recent bills by member.</summary>
+        public Bill[] GetRecentBillsByMember(IPolitician politician)
+        {
+            return GetRecentBillsByMember(politician.ID);
+        }
+
+        /// <summary> Get recent bills by member id.</summary>
+        public Bill[] GetRecentBillsByMember(string id)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = string.Format(BillUrls.MemberBills, id, "introduced");
+                var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
+                return result?.results?[0].bills.Select(b => ApiBill.Convert(b)).ToArray();
             }
         }
     }

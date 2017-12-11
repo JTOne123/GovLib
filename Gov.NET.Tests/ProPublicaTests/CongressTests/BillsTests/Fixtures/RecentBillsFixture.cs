@@ -10,8 +10,6 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.BillsTests
 
         public RecentBillsFixture()
         {
-            // Sleep before making api call to limit request spam.
-            Thread.Sleep(60);
             RecentBills = Congress.Bills.GetRecentBills(Chamber.Senate, 115, BillStatus.Passed);
         }
     }

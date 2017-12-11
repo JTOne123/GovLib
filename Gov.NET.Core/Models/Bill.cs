@@ -11,6 +11,8 @@ namespace Gov.NET.Models
         public Chamber Chamber { get; set; }
         public string Title { get; set; }
         public string Sponsor { get; set; }
+        public string GovTrackUrl { get; set; }
+        public string CongressUrl { get; set; }
         public string Text { get; set; }
         public string TextSnippet { get; set; }
 

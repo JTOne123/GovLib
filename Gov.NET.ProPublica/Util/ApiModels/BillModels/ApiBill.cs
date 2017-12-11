@@ -2,7 +2,7 @@ using Gov.NET.Models;
 
 namespace Gov.NET.ProPublica.Util.ApiModels.BillModels
 {
-    internal class ApiRecentBills
+    internal class ApiBill
     {
         public string bill_id;
         public string bill_type;
@@ -35,7 +35,7 @@ namespace Gov.NET.ProPublica.Util.ApiModels.BillModels
         public string latest_major_action_date;
         public string latest_major_action;
 
-        public static Bill Convert(ApiRecentBills entity)
+        public static Bill Convert(ApiBill entity)
         {
             if (entity == null)
                 return null;

@@ -1,5 +1,4 @@
 using Gov.NET.Models;
-using Gov.NET.Models;
 
 namespace Gov.NET.ProPublica.Util.ApiModels.BillModels
 {
