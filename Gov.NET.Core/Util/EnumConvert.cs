@@ -2,6 +2,7 @@ using Gov.NET.Models;
 
 namespace Gov.NET.Util
 {
+    #pragma warning disable CS1591
     public class EnumConvert
     {
         public static State? StateCodeToEnum(string state)
@@ -217,6 +218,40 @@ namespace Gov.NET.Util
                     return "WI";
                 case State.Wyoming:    
                     return "WY";
+                default:
+                    return null;
+            }
+        }
+
+        public static string ChamberEnumToString(Chamber chamber)
+        {
+            switch (chamber)
+            {
+                case Chamber.House:
+                    return "house";
+                case Chamber.Senate:
+                    return "senate";
+                default:
+                    return null;
+            }
+        }
+
+        public static string BillStatusEnumToString(BillStatus status)
+        {
+            switch (status)
+            {
+                case BillStatus.Active:
+                    return "active";
+                case BillStatus.Enacted:
+                    return "enacted";
+                case BillStatus.Introduced:
+                    return "introduced";
+                case BillStatus.Passed:
+                    return "passed";
+                case BillStatus.Updated:
+                    return "updated";
+                case BillStatus.Vetoed:
+                    return "vetoed";
                 default:
                     return null;
             }

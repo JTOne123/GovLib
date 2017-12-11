@@ -68,5 +68,13 @@ namespace Gov.NET.Models
         Wyoming
     }
 
-    #pragma warning restore CS1591
+    public enum BillStatus
+    {
+        Introduced,
+        Updated,
+        Active,
+        Passed,
+        Enacted,
+        Vetoed
+    }
 }

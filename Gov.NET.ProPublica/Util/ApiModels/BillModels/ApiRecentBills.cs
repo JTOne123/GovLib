@@ -1,15 +1,15 @@
 using Gov.NET.Models;
-using Gov.NET.Models;
 
 namespace Gov.NET.ProPublica.Util.ApiModels.BillModels
 {
-    internal class ApiSearchBills
+    internal class ApiRecentBills
     {
         public string bill_id;
         public string bill_type;
         public string number;
         public string bill_uri;
         public string title;
+        public string short_title;
         public string sponsor_title;
         public string sponsor_id;
         public string sponsor_name;
@@ -20,11 +20,11 @@ namespace Gov.NET.ProPublica.Util.ApiModels.BillModels
         public string congressdotgov_url;
         public string govtrack_url;
         public string introduced_date;
-        public bool? active;
-        public bool? house_passage;
-        public bool? senate_passage;
-        public bool? enacted;
-        public bool? vetoed;
+        public string active;
+        public string house_passage;
+        public string senate_passage;
+        public string enacted;
+        public string vetoed;
         public int cosponsors;
         public string committees;
         public string[] committee_codes;
@@ -35,7 +35,7 @@ namespace Gov.NET.ProPublica.Util.ApiModels.BillModels
         public string latest_major_action_date;
         public string latest_major_action;
 
-        public static Bill Convert(ApiSearchBills entity)
+        public static Bill Convert(ApiRecentBills entity)
         {
             if (entity == null)
                 return null;
@@ -48,8 +48,7 @@ namespace Gov.NET.ProPublica.Util.ApiModels.BillModels
             bill.ID = entity.bill_id;
             bill.Url = entity.bill_uri;
             bill.Title = entity.title;
-            bill.Text = entity.summary;
-            bill.TextSnippet = entity.summary_short;
+            bill.Text = entity.short_title;
             
             return bill;
         }

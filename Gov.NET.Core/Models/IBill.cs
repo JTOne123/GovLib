@@ -1,6 +1,6 @@
 using Gov.NET.Models;
 
-namespace Gov.NET.Core.Models
+namespace Gov.NET.Models
 {
     public interface IBill
     {
@@ -10,7 +10,7 @@ namespace Gov.NET.Core.Models
         string Url { get; set; }
         Chamber Chamber { get; }
         string Title { get; set; }
-        Politician Sponsor { get; set; }
+        string Sponsor { get; set; }
         string Text { get; set; }
         string TextSnippet { get; set; }
 

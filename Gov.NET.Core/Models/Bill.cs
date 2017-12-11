@@ -1,6 +1,6 @@
 using Gov.NET.Models;
 
-namespace Gov.NET.Core.Models
+namespace Gov.NET.Models
 {
     public class Bill : IBill
     {
@@ -10,7 +10,7 @@ namespace Gov.NET.Core.Models
         public string Url { get; set; }
         public Chamber Chamber { get; set; }
         public string Title { get; set; }
-        public Politician Sponsor { get; set; }
+        public string Sponsor { get; set; }
         public string Text { get; set; }
         public string TextSnippet { get; set; }
 

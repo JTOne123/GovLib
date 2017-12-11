@@ -1,6 +1,6 @@
 using Gov.NET.Models;
 
-namespace Gov.NET.Core.Models
+namespace Gov.NET.Models
 {
     public class SenateBill: Bill
     {
