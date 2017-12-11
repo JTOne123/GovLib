@@ -38,17 +38,10 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.BillsTests
         }
 
         [Fact]
-        public void BillsHaveAnTitle()
+        public void BillsHaveATitle()
         {
             foreach (var bill in Fixture.RecentBills)
                 Assert.False(string.IsNullOrEmpty(bill.Title));
-        }
-
-        [Fact]
-        public void BillsHaveText()
-        {
-            foreach (var bill in Fixture.RecentBills)
-                Assert.False(string.IsNullOrEmpty(bill.Text));
         }
 
         [Fact]
@@ -56,6 +49,13 @@ namespace Gov.NET.Tests.ProPublicaTests.CongressTests.BillsTests
         {
             foreach (var bill in Fixture.RecentBills)
                 Assert.NotNull(bill.Chamber);
+        }
+
+        [Fact]
+        public void BillsHaveAnIntroducedDate()
+        {
+            foreach (var bill in Fixture.RecentBills)
+                Assert.NotNull(bill.Introduced);
         }
     }
 }

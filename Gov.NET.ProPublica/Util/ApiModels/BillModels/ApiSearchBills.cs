@@ -1,3 +1,4 @@
+using System;
 using Gov.NET.Models;
 
 namespace Gov.NET.ProPublica.Util.ApiModels.BillModels
@@ -47,8 +48,7 @@ namespace Gov.NET.ProPublica.Util.ApiModels.BillModels
             bill.ID = entity.bill_id;
             bill.Url = entity.bill_uri;
             bill.Title = entity.title;
-            bill.Text = entity.summary;
-            bill.TextSnippet = entity.summary_short;
+            bill.Introduced = DateTime.Parse(entity.introduced_date);
             
             return bill;
         }
