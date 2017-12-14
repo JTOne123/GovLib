@@ -3,7 +3,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Gov.NET modules for interacting with ProPublica APIs</Description>
+    <Description>Gov.NET module for interacting with ProPublica APIs</Description>
     <PackageTags>api;propublica;congress</PackageTags>
   </PropertyGroup>
 
