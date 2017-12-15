@@ -16,8 +16,8 @@ namespace Gov.NET.Util
         /// <summary>Attach an ordinal to the given number.</summary>
         public static string Ordinal(int num)
         {
-            if (num >= 10 && num < 21) return num + "th";
-            return num + GetEnd(num);
+            if (num >= 10 && num < 21) return $"{num}th";
+            return $"{num}{GetEnd(num)}";
         }
 
         private static string GetEnd(int num)
