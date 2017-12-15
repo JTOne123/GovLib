@@ -9,8 +9,8 @@ namespace Gov.NET.Util
         public static string Capitalize(string str)
         {
             if (string.IsNullOrEmpty(str))
-                return "";
-            return str.First().ToString().ToUpper() + str.Substring(1);
+                return str;
+            return $"{str.Substring(0, 1).ToUpper()} {str.Substring(1)}";
         }
 
         /// <summary>Attach an ordinal to the given number.</summary>
