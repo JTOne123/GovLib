@@ -1,5 +1,3 @@
-using Gov.NET.Models;
-
 namespace Gov.NET.Models
 {
     public class SenateBill: Bill

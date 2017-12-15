@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Gov.NET.Models;
-
 namespace Gov.NET.Models
 {
     /// <summary>Full implementation for a senator.</summary>

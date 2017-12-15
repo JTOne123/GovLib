@@ -1,5 +1,3 @@
-using Gov.NET.Models;
-
 namespace Gov.NET.Models
 {
     /// <summary>Abstract implementation of the IPolitician interface. Contains only basic information.</summary>

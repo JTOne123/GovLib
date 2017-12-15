@@ -1,5 +1,3 @@
-using Gov.NET.Models;
-
 namespace Gov.NET.Models
 {
     /// <summary>Representative implementation of a PoliticianSummary. Contains limited information.</summary>

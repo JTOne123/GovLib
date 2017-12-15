@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using Gov.NET.Models;
 
 namespace Gov.NET.Models
 {

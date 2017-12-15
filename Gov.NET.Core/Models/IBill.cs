@@ -1,5 +1,4 @@
 using System;
-using Gov.NET.Models;
 
 namespace Gov.NET.Models
 {

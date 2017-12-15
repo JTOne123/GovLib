@@ -1,5 +1,3 @@
-using Gov.NET.Models;
-
 namespace Gov.NET.Models
 {
     /// <summary>Sentor implementation of a PoliticianSummary. Contains limited information.</summary>
