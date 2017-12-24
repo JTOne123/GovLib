@@ -7,7 +7,7 @@
 			"request": "launch",
 			"preLaunchTask": "Build Solution",
 			"program": "dotnet",
-			"args": ["vstest", "${workspaceRoot}/.vscode/build/Gov.NET.Tests/bin/Debug/netcoreapp2.0/Gov.NET.Tests.dll"],
+			"args": ["vstest", "${workspaceRoot}/.vscode/build/GovLib.Tests/bin/Debug/netcoreapp2.0/GovLib.Tests.dll"],
 			"console": "internalConsole",
 			"stopAtEntry": false,
 			"internalConsoleOptions": "openOnSessionStart"
