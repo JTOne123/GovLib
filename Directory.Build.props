@@ -5,9 +5,9 @@
     <VersionPrefix>0.0.1.6</VersionPrefix>
     <VersionSuffix>pre-alpha</VersionSuffix>
     <Copyright>MIT</Copyright>
-    <PackageProjectUrl>https://phil-harmoniq.github.io/Gov.NET</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/phil-harmoniq/Gov.NET</RepositoryUrl>
-    <PackageLicenseUrl>https://github.com/phil-harmoniq/Gov.NET/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://phil-harmoniq.github.io/GovLib</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/phil-harmoniq/GovLib</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/phil-harmoniq/GovLib/blob/master/LICENSE.md</PackageLicenseUrl>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 

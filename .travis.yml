@@ -10,11 +10,11 @@ before_script:
 - "ls -lhaF"
 
 script:
-- "dotnet test $TRAVIS_BUILD_DIR/Gov.NET.Tests/Gov.NET.Tests.csproj"
+- "dotnet test $TRAVIS_BUILD_DIR/GovLib.Tests/GovLib.Tests.csproj"
 
 deploy:
   skip_cleanup: true
   provider: script
-  script: dotnet pack -c Release && dotnet nuget push .vscode/build/Gov.NET.Core/bin/Release/Gov.NET.Core.*.nupkg -k $NUGET_API_KEY -s $NUGET_API && dotnet nuget push .vscode/build/Gov.NET.ProPublica/bin/Release/Gov.NET.ProPublica.*.nupkg -k $NUGET_API_KEY -s $NUGET_API && dotnet nuget push .vscode/build/Gov.NET/bin/Release/Gov.NET.*.nupkg -k $NUGET_API_KEY -s $NUGET_API
+  script: dotnet pack -c Release && dotnet nuget push .vscode/build/GovLib.Core/bin/Release/GovLib.Core.*.nupkg -k $NUGET_API_KEY -s $NUGET_API && dotnet nuget push .vscode/build/GovLib.ProPublica/bin/Release/GovLib.ProPublica.*.nupkg -k $NUGET_API_KEY -s $NUGET_API && dotnet nuget push .vscode/build/GovLib/bin/Release/GovLib.*.nupkg -k $NUGET_API_KEY -s $NUGET_API
   on:
     branch: deploy
