@@ -19,7 +19,7 @@
 		{
 			"label": "Run All Unit Tests",
 			"command": "dotnet",
-			"args": ["test","${workspaceRoot}/Gov.NET.Tests"],
+			"args": ["test","${workspaceRoot}/GovLib.Tests"],
 			"problemMatcher": "$msCompile",
 			"group": "build"
 		}

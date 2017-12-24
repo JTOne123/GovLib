@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Interact intuitively with US government data and statistics. This meta-package includes all GovLib API modules.</Description>
+    <PackageTags>api;government;propublica;civic;congress</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../GovLib.Core/GovLib.Core.csproj" />
+    <ProjectReference Include="../GovLib.ProPublica/GovLib.ProPublica.csproj" />
+  </ItemGroup>
+
+</Project>
