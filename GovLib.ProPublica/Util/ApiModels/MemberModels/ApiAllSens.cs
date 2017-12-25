@@ -1,6 +1,6 @@
 using System;
 using System.Globalization;
-using GovLib.Models;
+using GovLib.Contracts;
 using GovLib.Util;
 using AutoMapper;
 
@@ -14,9 +14,9 @@ namespace GovLib.ProPublica.Util.MemberModels
         public string senate_class { get; set; }
         public string state_rank { get; set; }
 
-        public static Senator Convert(ApiAllSenators entity)
+        internal static Senator Convert(ApiAllSenators entity)
         {
-            var sen = _mapper.Map<Senator>(ApiAllMembers.Convert(entity));
+            var sen = _mapper.Map<Senator>(ApiAllMembers.Convert(entity, Chamber.Senate));
 
             sen.Class = Int32.Parse(entity.senate_class);
 

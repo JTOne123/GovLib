@@ -1,5 +1,5 @@
 using System.Threading;
-using GovLib.Models;
+using GovLib.Contracts;
 using GovLib.ProPublica;
 
 namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public AllReprentativesFixture()
         {
-            AllRepresentatives = Congress.Members.GetAllRepresentatives(115);
+            AllRepresentatives = Congress.MembersApi.GetAllRepresentatives(115);
         }
     }
 }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using GovLib.ProPublica.Modules;
+using GovLib.ProPublica.Util;
 
 namespace GovLib.ProPublica
 {
@@ -8,23 +10,37 @@ namespace GovLib.ProPublica
     {
         internal string ApiKey { get; }
         internal Dictionary<string, string> Headers { get; }
+        internal Dictionary<int, MemberCache> Cache { get; }
+        internal int CurrentCongress
+        {
+            get
+            {
+                var now = DateTime.UtcNow;
+                var firstCongress = new DateTime(1789, 1, 3);
+                var ticks = now.Subtract(firstCongress).Ticks;
+                var yearsPassed = new DateTime(ticks).Year + 1;
+                return yearsPassed / 2;
+            }
+        }
 
         /// <summary>Get information about members of congress.</summary>
-        public Members Members { get; }
+        public MembersApi MembersApi { get; }
 
         /// <summary>Get information about current or previous bills introduced.</summary>
-        public Bills Bills { get; }
+        public BillsApi BillsApi { get; }
 
         /// <summary>Get congressional vote statistics.</summary>
-        public Votes Votes { get; }
+        public VotesApi VotesApi { get; }
+
 
         /// <summary>Instantiate the library using your ProPublica Congress API key.</summary>
         public Congress(string apiKey)
         {
             ApiKey = apiKey;
-            Members = new Members(this);
-            Votes = new Votes(this);
-            Bills = new Bills(this);
+            MembersApi = new MembersApi(this);
+            VotesApi = new VotesApi(this);
+            BillsApi = new BillsApi(this);
+            Cache = new Dictionary<int, MemberCache>();
             Headers = new Dictionary<string, string>
             {
                 { "X-API-Key", ApiKey }

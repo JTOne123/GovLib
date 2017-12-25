@@ -15,43 +15,43 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
         [Fact]
         public void MemberCardsAreNotNull()
         {
-            Assert.NotNull(Fixture.RepresentativeCard);
+            Assert.NotNull(Fixture.DistrictRep);
         }
 
         [Fact]
         public void MemberCardsHaveFirstName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.RepresentativeCard.FirstName));
+            Assert.False(string.IsNullOrEmpty(Fixture.DistrictRep.FirstName));
         }
 
         [Fact]
         public void MemberCardsHaveLastName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.RepresentativeCard.LastName));
+            Assert.False(string.IsNullOrEmpty(Fixture.DistrictRep.LastName));
         }
 
         [Fact]
         public void MemberCardsHaveFullName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.RepresentativeCard.FullName));
+            Assert.False(string.IsNullOrEmpty(Fixture.DistrictRep.FullName));
         }
 
         [Fact]
         public void MemberCardsHaveAnID()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.RepresentativeCard.ID));
+            Assert.False(string.IsNullOrEmpty(Fixture.DistrictRep.CongressID));
         }
 
         [Fact]
         public void MemberCardsHaveAHomeState()
         {
-            Assert.NotNull(Fixture.RepresentativeCard.State);
+            Assert.NotNull(Fixture.DistrictRep.State);
         }
 
         [Fact]
         public void MemberCardsHaveAParty()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.RepresentativeCard.Party));
+            Assert.False(string.IsNullOrEmpty(Fixture.DistrictRep.Party));
         }
     }
 }

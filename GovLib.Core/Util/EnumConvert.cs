@@ -1,4 +1,4 @@
-using GovLib.Models;
+using GovLib.Contracts;
 
 namespace GovLib.Util
 {

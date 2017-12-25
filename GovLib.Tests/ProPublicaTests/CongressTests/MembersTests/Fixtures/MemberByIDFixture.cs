@@ -1,5 +1,5 @@
 using System.Threading;
-using GovLib.Models;
+using GovLib.Contracts;
 using GovLib.ProPublica;
 
 namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
@@ -11,8 +11,8 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public MemberByIDFixture()
         {
-            Senator = (Senator) Congress.Members.GetMemberByID("S000033");
-            Representative = (Representative) Congress.Members.GetMemberByID("R000570");
+            Senator = Congress.MembersApi.GetMemberByID("S000033") as Senator;
+            Representative = Congress.MembersApi.GetMemberByID("R000570") as Representative;
         }
     }
 }

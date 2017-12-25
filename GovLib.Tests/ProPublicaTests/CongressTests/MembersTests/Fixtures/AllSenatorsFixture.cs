@@ -1,5 +1,5 @@
 using System.Threading;
-using GovLib.Models;
+using GovLib.Contracts;
 using GovLib.ProPublica;
 
 namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public AllSenatorsFixture()
         {
-            AllSenators = Congress.Members.GetAllSenators(115);
+            AllSenators = Congress.MembersApi.GetAllSenators(115);
         }
     }
 }

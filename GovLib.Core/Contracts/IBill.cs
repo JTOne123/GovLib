@@ -1,6 +1,6 @@
 using System;
 
-namespace GovLib.Models
+namespace GovLib.Contracts
 {
     public interface IBill
     {
@@ -12,8 +12,6 @@ namespace GovLib.Models
         string Title { get; set; }
         string Sponsor { get; set; }
         DateTime Introduced { get; set; }
-
-        # pragma warning restore
 
     }
 }

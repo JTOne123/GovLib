@@ -1,16 +1,16 @@
 using System.Threading;
-using GovLib.Models;
+using GovLib.Contracts;
 using GovLib.ProPublica;
 
 namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 {
     public class RepresentativeFromDistrictFixture : CongressFixture
     {
-        public RepresentativeSummary RepresentativeCard { get; }
+        public Representative DistrictRep { get; }
 
         public RepresentativeFromDistrictFixture()
         {
-            RepresentativeCard = Congress.Members.GetRepresentiveFromDistrict(State.Oregon, 3);
+            DistrictRep = Congress.MembersApi.GetRepresentiveFromDistrict(State.Oregon, 3);
         }
     }
 }

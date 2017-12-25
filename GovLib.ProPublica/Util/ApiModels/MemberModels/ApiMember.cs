@@ -1,6 +1,6 @@
 using System;
 using GovLib.Util;
-using GovLib.Models;
+using GovLib.Contracts;
 using System.Globalization;
 using GovLib.ProPublica.Util;
 
@@ -46,7 +46,7 @@ namespace GovLib.ProPublica.Util.MemberModels
             else
                 pol = new Representative();
 
-            pol.ID = entity.member_id;
+            pol.CongressID = entity.member_id;
             pol.FirstName = entity.first_name;
             pol.LastName = entity.last_name;
             pol.Party = entity.current_party;

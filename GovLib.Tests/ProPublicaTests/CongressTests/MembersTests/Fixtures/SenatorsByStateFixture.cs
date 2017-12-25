@@ -1,16 +1,16 @@
 using System.Threading;
-using GovLib.Models;
+using GovLib.Contracts;
 using GovLib.ProPublica;
 
 namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 {
     public class SenatorsByStateFixture : CongressFixture
     {
-        public SenatorSummary[] SenatorCards { get; }
+        public Senator[] StateSenators { get; }
 
         public SenatorsByStateFixture()
         {
-            SenatorCards = Congress.Members.GetSenatorsByState(State.Georgia);
+            StateSenators = Congress.MembersApi.GetSenatorsByState(State.Georgia);
         }
     }
 }
