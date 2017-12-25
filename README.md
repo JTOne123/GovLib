@@ -2,6 +2,8 @@
 
 GovLib is a .NET Standard library that provides intuitive access to various government-related APIs. Currently only the [ProPublica Congress API](https://www.propublica.org/datastore/api/propublica-congress-api) is available, but more modules are planned. Currently under heavy development and may be subject to change.
 
+[Don't forget to request a ProPublica API key. It's free!](https://www.propublica.org/datastore/api/propublica-congress-api)
+
 ## Installing
 
 Install using the .NET CLI:
@@ -19,8 +21,6 @@ Install by adding the NuGet package reference to your `.csproj`:
 ```
 
 ## Usage guide
-
-[Don't forget to request a ProPublica API key](https://www.propublica.org/datastore/api/propublica-congress-api)
 
 Add a `using` reference:
 
