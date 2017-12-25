@@ -24,22 +24,22 @@ namespace GovLib.ProPublica
         }
 
         /// <summary>Get information about members of congress.</summary>
-        public MembersApi MembersApi { get; }
+        public MembersApi Members { get; }
 
         /// <summary>Get information about current or previous bills introduced.</summary>
-        public BillsApi BillsApi { get; }
+        public BillsApi Bills { get; }
 
         /// <summary>Get congressional vote statistics.</summary>
-        public VotesApi VotesApi { get; }
+        public VotesApi Votes { get; }
 
 
         /// <summary>Instantiate the library using your ProPublica Congress API key.</summary>
         public Congress(string apiKey)
         {
             ApiKey = apiKey;
-            MembersApi = new MembersApi(this);
-            VotesApi = new VotesApi(this);
-            BillsApi = new BillsApi(this);
+            Members = new MembersApi(this);
+            Votes = new VotesApi(this);
+            Bills = new BillsApi(this);
             Cache = new Dictionary<int, MemberCache>();
             Headers = new Dictionary<string, string>
             {

@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public RepresentativeFromDistrictFixture()
         {
-            DistrictRep = Congress.MembersApi.GetRepresentiveFromDistrict(State.Oregon, 3);
+            DistrictRep = Congress.Members.GetRepresentiveFromDistrict(State.Oregon, 3);
         }
     }
 }

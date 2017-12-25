@@ -11,7 +11,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public RepresentativesByStateFixture()
         {
-            StateReps = Congress.MembersApi.GetRepresentaivesByState(State.California);
+            StateReps = Congress.Members.GetRepresentaivesByState(State.California);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public NewMembersFixture()
         {
-            NewMembers = Congress.MembersApi.GetNewMembers();
+            NewMembers = Congress.Members.GetNewMembers();
             System.Console.WriteLine();
         }
     }

@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.BillsTests
 
         public BillsByMemberFixture()
         {
-            BillsByMember = Congress.BillsApi.GetRecentBillsByMember("L000287");
+            BillsByMember = Congress.Bills.GetRecentBillsByMember("L000287");
         }
     }
 }

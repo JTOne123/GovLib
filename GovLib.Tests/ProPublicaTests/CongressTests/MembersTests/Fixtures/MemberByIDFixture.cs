@@ -11,8 +11,8 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public MemberByIDFixture()
         {
-            Senator = Congress.MembersApi.GetMemberByID("S000033") as Senator;
-            Representative = Congress.MembersApi.GetMemberByID("R000570") as Representative;
+            Senator = Congress.Members.GetMemberByID("S000033") as Senator;
+            Representative = Congress.Members.GetMemberByID("R000570") as Representative;
         }
     }
 }
