@@ -41,7 +41,9 @@ var newMembers = congress.Members.GetNewMembers();
 
 ## Contributing
 
-PRs are always welcome! It is recommended you use VS Code to work with the GovLib source code. The workspace includes build tasks, editor settings, extension recommendations, and launch configurations to aid development in VS Code, but any editor that supports [Omnisharp](http://www.omnisharp.net/) will do.
+PRs are always welcome! It is recommended you use VS Code to work with the GovLib source code. The ProPublica tests require your ProPublica key to be stored in an environment variable named `PROPUBLICA_API_KEY`. This is not required when consuming/modifying the library, only for testing purposes.
+
+The workspace includes build tasks, editor settings, extension recommendations, and launch configurations to aid development in VS Code, but any editor that supports [Omnisharp](http://www.omnisharp.net/) will do.
 
 Type `Ctrl + Shift + B` (or `Cmd + Shift + B` on Macs) to bring up the build tasks menu:
 
