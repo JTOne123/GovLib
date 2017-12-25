@@ -1,5 +1,5 @@
 using System;
-using GovLib.Models;
+using GovLib.Contracts;
 
 namespace GovLib.ProPublica.Util.ApiModels.BillModels
 {

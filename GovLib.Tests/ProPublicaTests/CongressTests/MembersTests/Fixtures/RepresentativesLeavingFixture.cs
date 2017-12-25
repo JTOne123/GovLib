@@ -1,16 +1,16 @@
 using System.Threading;
-using GovLib.Models;
+using GovLib.Contracts;
 using GovLib.ProPublica;
 
 namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 {
     public class RepresentativesLeavingFixture : CongressFixture
     {
-        public RepresentativeSummary[] RepresentativeCards { get; }
+        public Representative[] RepsLeaving { get; }
 
         public RepresentativesLeavingFixture()
         {
-            RepresentativeCards = Congress.Members.GetRepresentativesLeavingOffice(115);
+            RepsLeaving = Congress.MembersApi.GetRepresentativesLeavingOffice(115);
         }
     }
 }

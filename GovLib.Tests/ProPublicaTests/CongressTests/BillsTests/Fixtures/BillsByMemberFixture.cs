@@ -1,5 +1,5 @@
 using System.Threading;
-using GovLib.Models;
+using GovLib.Contracts;
 using GovLib.ProPublica;
 
 namespace GovLib.Tests.ProPublicaTests.CongressTests.BillsTests
@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.BillsTests
 
         public BillsByMemberFixture()
         {
-            BillsByMember = Congress.Bills.GetRecentBillsByMember("L000287");
+            BillsByMember = Congress.BillsApi.GetRecentBillsByMember("L000287");
         }
     }
 }

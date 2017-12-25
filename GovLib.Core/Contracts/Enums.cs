@@ -1,4 +1,4 @@
-namespace GovLib.Models
+namespace GovLib.Contracts
 {
     #pragma warning disable CS1591
     

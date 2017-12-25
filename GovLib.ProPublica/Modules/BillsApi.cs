@@ -1,7 +1,7 @@
 using System.Net;
 using Newtonsoft.Json.Linq;
 using GovLib.ProPublica.Urls;
-using GovLib.Models;
+using GovLib.Contracts;
 using GovLib.ProPublica.Util;
 using GovLib.Util;
 using GovLib.ProPublica.Util.ApiModels.BillModels;
@@ -10,11 +10,11 @@ using System.Linq;
 namespace GovLib.ProPublica.Modules
 {
     /// <summary> Get information about bills introduced to congress.</summary>
-    public class Bills
+    public class BillsApi
     {
         private Congress _parent { get; }
 
-        internal Bills(Congress parent)
+        internal BillsApi(Congress parent)
         {
             _parent = parent;
         }
@@ -33,9 +33,9 @@ namespace GovLib.ProPublica.Modules
         }
 
         /// <summary> Get recent bills by member.</summary>
-        public Bill[] GetRecentBillsByMember(IPolitician politician)
+        public Bill[] GetRecentBillsByMember(ICongressMember politician)
         {
-            return GetRecentBillsByMember(politician.ID);
+            return GetRecentBillsByMember(politician.CongressID);
         }
 
         /// <summary> Get recent bills by member id.</summary>

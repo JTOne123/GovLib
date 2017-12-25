@@ -1,7 +1,7 @@
-namespace GovLib.Models
+namespace GovLib.ProPublica
 {
     /// <summary>Full implementation for a senator.</summary>
-    public class Senator : Politician, ISenator
+    public class Senator : Politician
     {
         #pragma warning disable CS1591
 
@@ -9,7 +9,5 @@ namespace GovLib.Models
         public int Class { get; set; }
 
         public override string ToString() => $"Senator {FullName} ({Party}) [{State}]";
-
-        #pragma warning restore CS1591
     }
 }

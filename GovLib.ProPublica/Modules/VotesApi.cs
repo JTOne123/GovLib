@@ -4,11 +4,11 @@ using GovLib.ProPublica.Urls;
 
 namespace GovLib.ProPublica.Modules
 {
-    public class Votes
+    public class VotesApi
     {
         private Congress _parent { get; }
 
-        internal Votes(Congress parent)
+        internal VotesApi(Congress parent)
         {
             _parent = parent;
         }

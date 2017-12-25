@@ -1,16 +1,16 @@
 using System.Threading;
-using GovLib.Models;
+using GovLib.Contracts;
 using GovLib.ProPublica;
 
 namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 {
     public class NewMembersFixture : CongressFixture
     {
-        public PoliticianSummary[] PoliticianCards { get; }
+        public Politician[] NewMembers { get; }
 
         public NewMembersFixture()
         {
-            PoliticianCards = Congress.Members.GetNewMembers();
+            NewMembers = Congress.MembersApi.GetNewMembers();
             System.Console.WriteLine();
         }
     }
