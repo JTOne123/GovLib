@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 using GovLib.Util;
-using GovLib.Models;
+using GovLib.Contracts;
 
 namespace GovLib.ProPublica.Util.MemberModels
 {
@@ -34,13 +34,19 @@ namespace GovLib.ProPublica.Util.MemberModels
         public double? missed_votes_pct { get; set; }
         public double? votes_with_party_pct { get; set; }
 
-        public static Politician Convert(ApiAllMembers entity)
+        internal static Politician Convert(ApiAllMembers entity, Chamber chamber)
         {
+            Politician pol;
+
             if (entity == null)
                 return null;
             
-            var pol = new Politician();
-            pol.ID = entity.id;
+            if (chamber == Chamber.Senate)
+                pol = new Senator();
+            else
+                pol = new Representative();
+
+            pol.CongressID = entity.id;
             pol.FirstName = entity.first_name;
             pol.LastName = entity.last_name;
             pol.Party = entity.party;

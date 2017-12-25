@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Interact intuitively with US government data and statistics. This meta-package includes all GovLib API modules.</Description>
+    <Description>NuGet library for interacting with US Government APIs</Description>
     <PackageTags>api;government;propublica;civic;congress</PackageTags>
   </PropertyGroup>
 

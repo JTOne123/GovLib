@@ -1,6 +1,6 @@
 using System;
 
-namespace GovLib.Models
+namespace GovLib.Contracts
 {
     public class Bill : IBill
     {
@@ -14,7 +14,5 @@ namespace GovLib.Models
         public string GovTrackUrl { get; set; }
         public string CongressUrl { get; set; }
         public DateTime Introduced { get; set; }
-
-        # pragma warning restore
     }
 }

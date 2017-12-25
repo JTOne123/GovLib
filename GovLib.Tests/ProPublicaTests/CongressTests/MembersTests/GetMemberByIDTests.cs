@@ -39,7 +39,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests.Fixtures
         [Fact]
         public void RepresentativeHasAnID()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Representative.ID));
+            Assert.False(string.IsNullOrEmpty(Fixture.Representative.CongressID));
         }
 
         [Fact]
@@ -119,7 +119,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests.Fixtures
         [Fact]
         public void SenatorHasAnID()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Senator.ID));
+            Assert.False(string.IsNullOrEmpty(Fixture.Senator.CongressID));
         }
 
         [Fact]

@@ -1,6 +1,6 @@
 using System;
 using System.Globalization;
-using GovLib.Models;
+using GovLib.Contracts;
 using AutoMapper;
 
 namespace GovLib.ProPublica.Util.MemberModels
@@ -14,9 +14,9 @@ namespace GovLib.ProPublica.Util.MemberModels
         public string district { get; set; }
         public bool at_large { get; set; }
 
-        public static Representative Convert(ApiAllReps entity)
+        internal static Representative Convert(ApiAllReps entity)
         {
-            var rep = _mapper.Map<Representative>(ApiAllMembers.Convert(entity));
+            var rep = _mapper.Map<Representative>(ApiAllMembers.Convert(entity, Chamber.House));
 
             if (entity.district == "At-Large")
             {

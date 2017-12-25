@@ -55,7 +55,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
         public void AllRepresentativesHaveAnID()
         {
             foreach (var representative in Fixture.AllRepresentatives)
-                Assert.False(string.IsNullOrEmpty(representative.ID));
+                Assert.False(string.IsNullOrEmpty(representative.CongressID));
         }
 
         [Fact]

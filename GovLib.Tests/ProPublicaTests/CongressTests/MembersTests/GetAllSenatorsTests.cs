@@ -55,7 +55,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
         public void AllSenatorsHaveAnID()
         {
             foreach (var senator in Fixture.AllSenators)
-                Assert.False(string.IsNullOrEmpty(senator.ID));
+                Assert.False(string.IsNullOrEmpty(senator.CongressID));
         }
 
         [Fact]
