@@ -27,9 +27,11 @@ namespace GovLib.ProPublica
         public MembersApi Members { get; }
 
         /// <summary>Get information about current or previous bills introduced.</summary>
+        [Obsolete("Unfished module, not recommended for use")]
         public BillsApi Bills { get; }
 
         /// <summary>Get congressional vote statistics.</summary>
+        [Obsolete("Unfished module, not recommended for use")]
         public VotesApi Votes { get; }
 
 
