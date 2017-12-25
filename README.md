@@ -1,11 +1,48 @@
 # GovLib [![Build Status](https://travis-ci.org/phil-harmoniq/GovLib.svg?branch=master)](https://travis-ci.org/phil-harmoniq/GovLib)
 
-Currently under heavy development. More details soon.
+GovLib is a .NET Standard library that provides intuitive access to various government-related APIs. Currently only the [ProPublica Congress API](https://www.propublica.org/datastore/api/propublica-congress-api) is available, but more modules are being planned.
 
-### Supporting Links
+## Installing
+
+Install using the .NET CLI:
+
+```bash
+dotnet add package GovLib --version 0.1.0-alpha
+```
+
+Install by adding the NuGet package reference to your `.csproj`:
+
+```xml
+<ItemGroup>
+    <PackageReference Include="GovLib" Version="0.1.0-alpha"/>
+</ItemGroup>
+```
+
+## Usage guide
+
+Add `using` reference:
+
+```c#
+using GovLib.ProPublica;
+```
+
+Instantiate the congress module using an API key string:
+
+```c#
+var congress = new Congress(apiKey);
+
+// Several API calls are available in the Members module
+var reps = congress.Members.GetAllRepresentatives();
+var sens = congress.Members.GetSenatorsByState(State.Colorado);
+var newMembers = congress.Members.GetNewMembers();
+```
+
+## Contributing
+
+PRs are always welcome! It is recommended you use VS Code to work with the GovLib source code. The workspace includes build tasks, editor settings, extension recommendations, and launch configurations to aid development in VS Code, but any editor that supports [Omnisharp](http://www.omnisharp.net/) will do.
+
+## Supporting Links
 
 - [Request an API key from ProPublica](https://www.propublica.org/datastore/api/propublica-congress-api)
 - More details can be found in the [ProPublica API guide](https://projects.propublica.org/api-docs/congress-api)
 - Icon made by [Freepik](http://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
-
-<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
