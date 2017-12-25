@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public SenatorsLeavingFixture()
         {
-            Senators = Congress.MembersApi.GetSenatorsLeavingOffice(115);
+            Senators = Congress.Members.GetSenatorsLeavingOffice(115);
         }
     }
 }

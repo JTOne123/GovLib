@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public AllReprentativesFixture()
         {
-            AllRepresentatives = Congress.MembersApi.GetAllRepresentatives(115);
+            AllRepresentatives = Congress.Members.GetAllRepresentatives(115);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public AllSenatorsFixture()
         {
-            AllSenators = Congress.MembersApi.GetAllSenators(115);
+            AllSenators = Congress.Members.GetAllSenators(115);
         }
     }
 }

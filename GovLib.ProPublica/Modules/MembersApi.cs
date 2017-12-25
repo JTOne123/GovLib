@@ -42,6 +42,12 @@ namespace GovLib.ProPublica.Modules
                 GetAllRepresentatives(congressNum);
         }
 
+        /// <summary>Fetch all senators from the current congress session.</summary>
+        public Senator[] GetAllSenators()
+        {
+            return GetAllSenators(_parent.CurrentCongress);
+        }
+
         /// <summary>Fetch all senators from given congress session.</summary>
         public Senator[] GetAllSenators(int congressNum)
         {
@@ -55,6 +61,12 @@ namespace GovLib.ProPublica.Modules
                 _parent.Cache[congressNum].UpdateMembers(sens);
                 return sens.ToArray();
             }
+        }
+
+        /// <summary>Fetch all senators from the current congress session.</summary>
+        public Representative[] GetAllRepresentatives()
+        {
+            return GetAllRepresentatives(_parent.CurrentCongress);
         }
 
         /// <summary>Fetch all representatives from given congress session.</summary>
@@ -162,6 +174,12 @@ namespace GovLib.ProPublica.Modules
             }
         }
 
+        /// <summary>Fetch all senators from the current congress session.</summary>
+        public Senator[] GetSenatorsLeavingOffice()
+        {
+            return GetSenatorsLeavingOffice(_parent.CurrentCongress);
+        }
+
         /// <summary>Fetch senators that were leaving office during the given congress session.</summary>
         public Senator[] GetSenatorsLeavingOffice(int congressNum)
         {
@@ -173,6 +191,12 @@ namespace GovLib.ProPublica.Modules
                 var result = client.Get<ResultWrapper<MembersWrapper<ApiSenatorsLeaving>>>(url, _parent.Headers);
                 return result?.results?[0].members.Select(s => _parent.Cache[_parent.CurrentCongress].Senators[s.id]).ToArray();
             }
+        }
+
+        /// <summary>Fetch all senators from the current congress session.</summary>
+        public Representative[] GetRepresentativesLeavingOffice()
+        {
+            return GetRepresentativesLeavingOffice(_parent.CurrentCongress);
         }
 
         /// <summary>Fetch representatives that were leaving office during the given congress session.</summary>

@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
 
         public SenatorsByStateFixture()
         {
-            StateSenators = Congress.MembersApi.GetSenatorsByState(State.Georgia);
+            StateSenators = Congress.Members.GetSenatorsByState(State.Georgia);
         }
     }
 }
