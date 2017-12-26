@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace GovLib.Tests.ProPublicaTests.CongressTests.BillsTests
+namespace GovLib.Tests.ProPublica.Congress.Bills
 {
     public class RecentBillsTests : IClassFixture<RecentBillsFixture>
     {

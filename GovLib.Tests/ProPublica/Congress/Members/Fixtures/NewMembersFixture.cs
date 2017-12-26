@@ -2,7 +2,7 @@ using System.Threading;
 using GovLib.Contracts;
 using GovLib.ProPublica;
 
-namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
+namespace GovLib.Tests.ProPublica.Congress.Members
 {
     public class NewMembersFixture : CongressFixture
     {
@@ -11,7 +11,6 @@ namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
         public NewMembersFixture()
         {
             NewMembers = Congress.Members.GetNewMembers();
-            System.Console.WriteLine();
         }
     }
 }

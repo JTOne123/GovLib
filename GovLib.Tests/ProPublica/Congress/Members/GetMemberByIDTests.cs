@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests.Fixtures
+namespace GovLib.Tests.ProPublica.Congress.Members.Fixtures
 {
     public class GetMemberByIDTests : IClassFixture<MemberByIDFixture>
     {

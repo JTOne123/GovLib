@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
+namespace GovLib.Tests.ProPublica.Congress.Members
 {
     public class GetRepresentativesLeavingTests : IClassFixture<RepresentativesLeavingFixture>
     {

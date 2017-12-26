@@ -3,7 +3,7 @@ using GovLib.Contracts;
 using GovLib.ProPublica;
 
 
-namespace GovLib.Tests.ProPublicaTests.CongressTests.MembersTests
+namespace GovLib.Tests.ProPublica.Congress.Members
 {
     public class RepresentativesByStateFixture : CongressFixture
     {
