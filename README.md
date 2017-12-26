@@ -16,7 +16,7 @@ Install by adding the NuGet package reference to your `.csproj`:
 
 ```xml
 <ItemGroup>
-    <PackageReference Include="GovLib" Version="0.1.0-alpha"/>
+  <PackageReference Include="GovLib" Version="0.1.0-alpha"/>
 </ItemGroup>
 ```
 
