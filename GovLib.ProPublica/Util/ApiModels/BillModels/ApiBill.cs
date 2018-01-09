@@ -43,10 +43,6 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
                 return null;
             
             var bill = new Bill();
-
-            if (entity.bill_type == "s") bill.Chamber = Chamber.Senate;
-            else bill.Chamber = Chamber.House;
-
             bill.ID = entity.bill_id;
             bill.Url = entity.bill_uri;
             bill.Title = entity.short_title;
