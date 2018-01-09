@@ -38,6 +38,9 @@ namespace GovLib.ProPublica
         /// <summary>Instantiate the library using your ProPublica Congress API key.</summary>
         public Congress(string apiKey)
         {
+            if (string.IsNullOrEmpty(apiKey))
+                throw new InvalidOperationException("ProPublica API key not provided.");
+
             ApiKey = apiKey;
             Members = new MembersApi(this);
             Votes = new VotesApi(this);
@@ -47,6 +50,7 @@ namespace GovLib.ProPublica
             {
                 { "X-API-Key", ApiKey }
             };
+            Members.PopulateCache(CurrentCongress);
         }
     }
 }
