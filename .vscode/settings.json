@@ -1,3 +1,12 @@
 {
-	"gitlens.codeLens.enabled": true
+	"gitlens.codeLens.enabled": true,
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		"**/bin": true,
+		"**/obj": true
+	}
 }
