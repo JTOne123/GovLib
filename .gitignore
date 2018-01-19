@@ -221,3 +221,6 @@ _Pvt_Extensions
 
 # API examples folder
 Examples/
+
+# Mac finder config
+*.DS_Store
