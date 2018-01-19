@@ -1,7 +1,7 @@
 dist: trusty
 language: csharp
 mono: none
-dotnet: 2.0.3
+dotnet: 2.1.4
 
 env:
 - NUGET_API=https://api.nuget.org/v3/index.json
