@@ -7,8 +7,11 @@ mkdir -p "$HERE/Examples/Bills"
 # Search Bills
 curl "https://api.propublica.org/congress/v1/bills/search.json?query=megahertz" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/Bills/search-bills.json"
 
-# Get Recent Bills
-curl "https://api.propublica.org/congress/v1/115/house/bills/introduced.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/Bills/get-recent-bills.json"
+# Get Recent House Bills
+curl "https://api.propublica.org/congress/v1/115/house/bills/introduced.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/Bills/get-recent-house-bills.json"
+
+# Get Recent Senate Bills
+curl "https://api.propublica.org/congress/v1/115/senate/bills/introduced.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/Bills/get-recent-senate-bills.json"
 
 # Get Bills By Member
 curl "https://api.propublica.org/congress/v1/members/L000287/bills/introduced.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$HERE/Examples/Bills/search-bills.json"

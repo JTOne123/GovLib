@@ -28,7 +28,7 @@ namespace GovLib.ProPublica.Modules
                 var statusString = EnumConvert.BillStatusEnumToString(status);
                 var url = string.Format(BillUrls.RecentBills, congress, chamberString, statusString);
                 var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
-                return result?.results?[0].bills.Select(b => ApiBill.Convert(b)).ToArray();
+                return result?.results?[0].bills.Select(b => ApiBill.Convert(b, _parent.Cache[congress])).ToArray();
             }
         }
 
@@ -45,7 +45,7 @@ namespace GovLib.ProPublica.Modules
             {
                 var url = string.Format(BillUrls.MemberBills, id, "introduced");
                 var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
-                return result?.results?[0].bills.Select(b => ApiBill.Convert(b)).ToArray();
+                return result?.results?[0].bills.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).ToArray();
             }
         }
     }

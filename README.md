@@ -1,4 +1,4 @@
-# GovLib [![Build Status](https://travis-ci.org/phil-harmoniq/GovLib.svg?branch=master)](https://travis-ci.org/phil-harmoniq/GovLib)
+# GovLib [![Build Status](https://travis-ci.org/phil-harmoniq/GovLib.svg?branch=master)](https://travis-ci.org/phil-harmoniq/GovLib) [![NuGet](https://img.shields.io/nuget/v/GovLib.svg)](https://www.nuget.org/packages/GovLib)
 
 GovLib is a .NET Standard library that provides intuitive access to various government-related APIs. Currently only the [ProPublica Congress API](https://www.propublica.org/datastore/api/propublica-congress-api) is available, but more modules are planned. Project under heavy development and may be subject to change.
 
@@ -9,14 +9,14 @@ GovLib is a .NET Standard library that provides intuitive access to various gove
 Install using the .NET CLI:
 
 ```bash
-dotnet add package GovLib --version 0.1.0-alpha
+dotnet add package GovLib --version 0.1.1-alpha
 ```
 
 Install by adding the NuGet package reference to your `.csproj`:
 
 ```xml
 <ItemGroup>
-    <PackageReference Include="GovLib" Version="0.1.0-alpha"/>
+  <PackageReference Include="GovLib" Version="0.1.1-alpha"/>
 </ItemGroup>
 ```
 

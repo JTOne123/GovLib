@@ -1,3 +1,5 @@
+using GovLib.Util;
+
 namespace GovLib.ProPublica
 {
     /// <summary>Full implementation for a senator.</summary>
@@ -8,6 +10,7 @@ namespace GovLib.ProPublica
         public string Rank { get; set; }
         public int Class { get; set; }
 
-        public override string ToString() => $"Senator {FullName} ({Party}) [{State}]";
+        public override string ToString() =>
+            $"Senator {FullName} ({Party}) [{EnumConvert.StateEnumToCode(State)}-{Class}]";
     }
 }

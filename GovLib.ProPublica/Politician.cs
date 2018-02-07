@@ -12,7 +12,8 @@ namespace GovLib.ProPublica
         public string FirstName { get; internal set; }
         public string MiddleName { get; internal set; }
         public string LastName { get; internal set; }
-        public string FullName => $"{FirstName} {LastName}";
+        public string FullName =>
+            string.IsNullOrEmpty(MiddleName) ? $"{FirstName} {LastName}" : $"{FirstName} {MiddleName} {LastName}";
         public string Party { get; internal set; }
         public State State { get; internal set; }
         public DateTime BirthDate { get; internal set; }

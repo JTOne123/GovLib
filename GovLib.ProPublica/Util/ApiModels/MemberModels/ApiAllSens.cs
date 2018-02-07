@@ -22,7 +22,8 @@ namespace GovLib.ProPublica.Util.MemberModels
 
             if (sen.InOffice)
             {
-                sen.Rank = TextHelper.Capitalize(entity.state_rank);
+                if (entity.state_rank == "") sen.Rank = "Junior";
+                else sen.Rank = TextHelper.Capitalize(entity.state_rank);
             }
             
             return sen;

@@ -22,7 +22,7 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
         public string congressdotgov_url;
         public string govtrack_url;
         public string introduced_date;
-        public string active;
+        public bool active;
         public string house_passage;
         public string senate_passage;
         public string enacted;
@@ -37,20 +37,26 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
         public string latest_major_action_date;
         public string latest_major_action;
 
-        public static Bill Convert(ApiBill entity)
+        public static Bill Convert(ApiBill entity, MemberCache cache)
         {
             if (entity == null)
                 return null;
             
             var bill = new Bill();
 
-            if (entity.bill_type == "s") bill.Chamber = Chamber.Senate;
-            else bill.Chamber = Chamber.House;
-
             bill.ID = entity.bill_id;
             bill.Url = entity.bill_uri;
             bill.Title = entity.short_title;
-            bill.Introduced = DateTime.Parse(entity.introduced_date);
+            bill.BillType = entity.bill_type;
+            bill.Introduced = DateTime.ParseExact(entity.introduced_date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            bill.LatestAction = entity.latest_major_action;
+            bill.LatestActionDate = DateTime.ParseExact(entity.latest_major_action_date, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            bill.SponsorID = entity.sponsor_id;
+
+            if (entity.sponsor_title == "Sen.")
+                bill.Sponsor = cache.Senators[entity.sponsor_id];
+            else
+                bill.Sponsor = cache.Representatives[entity.sponsor_id];
             
             return bill;
         }

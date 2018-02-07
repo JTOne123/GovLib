@@ -1,7 +1,7 @@
 dist: trusty
 language: csharp
 mono: none
-dotnet: 2.0.3
+dotnet: 2.1.4
 
 env:
 - NUGET_API=https://api.nuget.org/v3/index.json
@@ -15,6 +15,6 @@ script:
 deploy:
   skip_cleanup: true
   provider: script
-  script: dotnet pack -c Release && dotnet nuget push .vscode/build/GovLib.Core/bin/Release/GovLib.Core.*.nupkg -k $NUGET_API_KEY -s $NUGET_API && dotnet nuget push .vscode/build/GovLib.ProPublica/bin/Release/GovLib.ProPublica.*.nupkg -k $NUGET_API_KEY -s $NUGET_API && dotnet nuget push .vscode/build/GovLib/bin/Release/GovLib.*.nupkg -k $NUGET_API_KEY -s $NUGET_API
+  script: dotnet pack -c Release && dotnet nuget push GovLib.Core/bin/Release/GovLib.Core.*.nupkg -k $NUGET_API_KEY -s $NUGET_API && dotnet nuget push GovLib.ProPublica/bin/Release/GovLib.ProPublica.*.nupkg -k $NUGET_API_KEY -s $NUGET_API && dotnet nuget push GovLib/bin/Release/GovLib.*.nupkg -k $NUGET_API_KEY -s $NUGET_API
   on:
     branch: deploy
