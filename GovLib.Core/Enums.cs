@@ -70,11 +70,17 @@ namespace GovLib
 
     public enum BillStatus
     {
+        ///<summary>Bill has been introduced by a member of congress.</summary>
         Introduced,
+        ///<summary>Bill status has changed recently.</summary>
         Updated,
+        ///<summary>Bill has seen action beyond introduction and committee referral.</summary>
         Active,
+        ///<summary>Bill has been passed and awaits Presidential signature.</summary>
         Passed,
+        ///<summary>Bill has been passed and signed into law.</summary>
         Enacted,
+        ///<summary>Bill has been passed but vetoed by the President.</summary>
         Vetoed
     }
 }

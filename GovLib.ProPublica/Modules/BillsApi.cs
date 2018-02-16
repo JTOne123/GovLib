@@ -20,6 +20,12 @@ namespace GovLib.ProPublica.Modules
         }
 
         /// <summary> Get recent bills by status.</summary>
+        public Bill[] GetRecentBills(Chamber chamber, BillStatus status)
+        {
+            return GetRecentBills(chamber, _parent.CurrentCongress, status);
+        }
+
+        /// <summary> Get historical bills by status.</summary>
         public Bill[] GetRecentBills(Chamber chamber, int congress, BillStatus status)
         {
             using (var client = new HttpClient())
@@ -33,9 +39,9 @@ namespace GovLib.ProPublica.Modules
         }
 
         /// <summary> Get recent bills by member.</summary>
-        public Bill[] GetRecentBillsByMember(ICongressMember politician)
+        public Bill[] GetRecentBillsByMember(ICongressMember congressMember)
         {
-            return GetRecentBillsByMember(politician.CongressID);
+            return GetRecentBillsByMember(congressMember.CongressID);
         }
 
         /// <summary> Get recent bills by member id.</summary>
