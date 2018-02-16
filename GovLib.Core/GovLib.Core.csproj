@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <Description>Provides the core contracts and implementations for GovLib modules</Description>
     <PackageTags>government;api;netstandard;core</PackageTags>
   </PropertyGroup>

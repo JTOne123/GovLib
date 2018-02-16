@@ -10,7 +10,7 @@ namespace GovLib.Util
         {
             if (string.IsNullOrEmpty(str))
                 return str;
-            return $"{str.Substring(0, 1).ToUpper()} {str.Substring(1)}";
+            return str.Substring(0, 1).ToUpper() + str.Substring(1);
         }
 
         /// <summary>Attach an ordinal to the given number.</summary>
