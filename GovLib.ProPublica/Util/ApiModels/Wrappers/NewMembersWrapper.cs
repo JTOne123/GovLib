@@ -1,11 +1,11 @@
 using GovLib.ProPublica.Util.MemberModels;
+using Newtonsoft.Json;
 
 namespace GovLib.ProPublica.Util
 {
-    internal class NewMembersWrapper
+    internal class NewMembersWrapper : WrapperInfo
     {
-        public string num_results { get; set; }
-        public string offset { get; set; }
-        public ApiNewMembers[] members { get; set; }
+        [JsonProperty("members")]
+        public ApiNewMembers[] Members { get; set; }
     }
 }

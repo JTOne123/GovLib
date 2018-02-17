@@ -1,11 +1,17 @@
+using Newtonsoft.Json;
+
 namespace GovLib.ProPublica.Util
 {
-    internal class MembersWrapper<T>
+    internal class MembersWrapper<T> : WrapperInfo
     {
-        public string congress { get; set; }
-        public string chamber { get; set; }
-        public string num_results { get; set; }
-        public string offset { get; set; }
-        public T[] members { get; set; }
+        
+        [JsonProperty("congress")]
+        public string Congress { get; set; }
+        
+        [JsonProperty("chamber")]
+        public string Chamber { get; set; }
+        
+        [JsonProperty("members")]
+        public T[] Members { get; set; }
     }
 }

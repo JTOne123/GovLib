@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
+
 namespace GovLib.ProPublica.Util
 {
-    internal class BillsWrapper<T>
+    internal class BillsWrapper<T> : WrapperInfo
     {
-        public string num_results { get; set; }
-        public string offset { get; set; }
-        public T[] bills { get; set; }
+        [JsonProperty("bills")]
+        public T[] Bills { get; set; }
     }
 }
