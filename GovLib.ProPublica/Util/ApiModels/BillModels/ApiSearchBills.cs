@@ -45,7 +45,7 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
             if (entity.bill_type == "s") bill.Chamber = Chamber.Senate;
             else bill.Chamber = Chamber.House;
 
-            bill.ID = entity.bill_id;
+            bill.BillID = entity.bill_id;
             bill.Url = entity.bill_uri;
             bill.Title = entity.title;
             bill.Introduced = DateTime.Parse(entity.introduced_date);

@@ -34,7 +34,7 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
         public void BillsHaveAnID()
         {
             foreach (var bill in Fixture.BillsByMember)
-                Assert.False(string.IsNullOrEmpty(bill.ID));
+                Assert.False(string.IsNullOrEmpty(bill.BillID));
         }
 
         [Fact]

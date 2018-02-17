@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GovLib.Exceptions;
 using GovLib.ProPublica.Modules;
 using GovLib.ProPublica.Util;
 
@@ -39,7 +40,7 @@ namespace GovLib.ProPublica
         public Congress(string apiKey)
         {
             if (string.IsNullOrEmpty(apiKey))
-                throw new InvalidOperationException("ProPublica API key not provided.");
+                throw new EmptyApiKeyException("ProPublica API key not provided.");
 
             ApiKey = apiKey;
             Members = new MembersApi(this);

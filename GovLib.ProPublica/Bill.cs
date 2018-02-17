@@ -7,7 +7,7 @@ namespace GovLib.ProPublica
     {
         #pragma warning disable CS1591
 
-        public string ID { get; internal set; }
+        public string BillID { get; internal set; }
         public string BillType { get; internal set; }
         public string Number { get; internal set; }
         public string Url { get; internal set; }

@@ -44,7 +44,7 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
             
             var bill = new Bill();
 
-            bill.ID = entity.bill_id;
+            bill.BillID = entity.bill_id;
             bill.Url = entity.bill_uri;
             bill.Title = entity.short_title;
             bill.BillType = entity.bill_type;
