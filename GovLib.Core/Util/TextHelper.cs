@@ -10,35 +10,30 @@ namespace GovLib.Util
         {
             if (string.IsNullOrEmpty(str))
                 return str;
-            return $"{str.Substring(0, 1).ToUpper()} {str.Substring(1)}";
+            return str.Substring(0, 1).ToUpper() + str.Substring(1);
         }
 
         /// <summary>Attach an ordinal to the given number.</summary>
         public static string Ordinal(int num)
         {
-            if (num >= 10 && num < 21) return $"{num}th";
-            return $"{num}{GetEnd(num)}";
-        }
-
-        private static string GetEnd(int num)
-        {
-            string answer;
-            switch (num)
+            switch (num % 100)
+            {
+                case 11:
+                case 12:
+                case 13:
+                    return num + "th";
+            }
+            switch (num % 10)
             {
                 case 1:
-                    answer = "st";
-                    break;
+                    return num + "st";
                 case 2:
-                    answer = "nd";
-                    break;
+                    return num + "nd";
                 case 3:
-                    answer = "rd";
-                    break;
+                    return num + "rd";
                 default:
-                    answer = "th";
-                    break;
+                    return num + "th";
             }
-            return answer;
         }
     }
 }

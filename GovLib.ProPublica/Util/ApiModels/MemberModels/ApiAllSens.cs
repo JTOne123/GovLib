@@ -3,6 +3,7 @@ using System.Globalization;
 using GovLib.Contracts;
 using GovLib.Util;
 using AutoMapper;
+using Newtonsoft.Json;
 
 namespace GovLib.ProPublica.Util.MemberModels
 {
@@ -11,19 +12,22 @@ namespace GovLib.ProPublica.Util.MemberModels
         private static readonly IMapper _mapper = 
             new MapperConfiguration(cfg => cfg.CreateMap<Politician, Senator>()).CreateMapper();
             
-        public string senate_class { get; set; }
-        public string state_rank { get; set; }
+        [JsonProperty("senate_class")]
+        public string SenateClass { get; set; }
+
+        [JsonProperty("state_rank")]
+        public string StateRank { get; set; }
 
         internal static Senator Convert(ApiAllSenators entity)
         {
             var sen = _mapper.Map<Senator>(ApiAllMembers.Convert(entity, Chamber.Senate));
 
-            sen.Class = Int32.Parse(entity.senate_class);
+            sen.Class = Int32.Parse(entity.SenateClass);
 
             if (sen.InOffice)
             {
-                if (entity.state_rank == "") sen.Rank = "Junior";
-                else sen.Rank = TextHelper.Capitalize(entity.state_rank);
+                if (entity.StateRank == "") sen.Rank = "Junior";
+                else sen.Rank = TextHelper.Capitalize(entity.StateRank);
             }
             
             return sen;

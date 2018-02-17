@@ -1,14 +1,23 @@
 using System;
+using Newtonsoft.Json;
 
 namespace GovLib.ProPublica.Util.MemberModels
 {
     internal class ApiCommittee
     {
-        public string name {get;set;}
-        public string code {get;set;}
-        public string api_url {get;set;}
-        public string rank_in_party {get;set;}
-        public string begin_date{get;set;}
-        public string end_date {get;set;}
+        [JsonProperty("name")]
+        public string Name {get;set;}
+        
+        [JsonProperty("api_url")]
+        public string ApiUrl {get;set;}
+        
+        [JsonProperty("rank_in_party")]
+        public string RankInParty {get;set;}
+        
+        [JsonProperty("begin_date")]
+        public string BeginDate{get;set;}
+        
+        [JsonProperty("end_date")]
+        public string EndDate {get;set;}
     }
 }

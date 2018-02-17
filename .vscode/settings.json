@@ -8,6 +8,8 @@
 		"**/CVS": true,
 		"**/.DS_Store": true,
 		"**/bin": true,
-		"**/obj": true
+		"**/obj": true,
+		"**/*.userprefs": true,
+		"**/.vs": true
 	}
 }
