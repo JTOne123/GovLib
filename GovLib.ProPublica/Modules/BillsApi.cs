@@ -54,5 +54,53 @@ namespace GovLib.ProPublica.Modules
                 return result?.Results?[0].Bills.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).ToArray();
             }
         }
+
+        /// <summary>
+        /// Get the 20 most recently updated bills for a specific legislative subject.
+        /// </summary>
+        /// <param name="subject">Terms to search for.</param>
+        /// <returns><see cref="Bill"/>array.</returns>
+        public Bill[] GetRecentBillsBySubject(string subject)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = string.Format(BillUrls.BillsBySubject, subject);
+                var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
+                return result?.Results?[0].Bills.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Get bills that may be considered in the near future.
+        /// </summary>
+        /// <param name="chamber">Chamber of congress.</param>
+        /// <returns><see cref="BillSummary"/>array.</returns>
+        public BillSummary[] GetUpcomingBills(Chamber chamber)
+        {
+            using (var client = new HttpClient())
+            {
+                var chamberString = EnumConvert.ChamberEnumToString(chamber);
+                var url = string.Format(BillUrls.UpcomingBills, chamberString);
+                var result = client.Get<ResultWrapper<BillsWrapper<ApiUpcomingBills>>>(url, _parent.Headers);
+                return result?.Results?[0].Bills.Select(b => ApiUpcomingBills.Convert(b)).ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Get information about a specific bill.
+        /// </summary>
+        /// <param name="chamber">Chamber of congress.</param>
+        /// <param name="id">Bill ID.</param>
+        /// <returns><see cref="Bill"/> or null if bill could not be found.</returns>
+        public Bill GetBillByID(Chamber chamber, string id)
+        {
+            using (var client = new HttpClient())
+            {
+                var chamberString = EnumConvert.ChamberEnumToString(chamber);
+                var url = string.Format(BillUrls.BillByID, chamberString, id);
+                var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
+                return result?.Results?[0].Bills.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).FirstOrDefault();
+            }
+        }
     }
 }

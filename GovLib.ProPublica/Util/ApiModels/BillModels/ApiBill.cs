@@ -8,96 +8,96 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
     internal class ApiBill
     {
         [JsonProperty("bill_id")]
-        public string BillID;
+        internal string BillID;
         
         [JsonProperty("bill_type")]
-        public string BillType;
+        internal string BillType;
         
         [JsonProperty("number")]
-        public string Number;
+        internal string Number;
         
         [JsonProperty("bill_uri")]
-        public string BillUrl;
+        internal string BillUrl;
         
         [JsonProperty("title")]
-        public string Title;
+        internal string Title;
         
         [JsonProperty("short_title")]
-        public string ShortTitle;
+        internal string ShortTitle;
         
         [JsonProperty("sponsor_title")]
-        public string SponsorTitle;
+        internal string SponsorTitle;
         
         [JsonProperty("sponsor_id")]
-        public string SponsorID;
+        internal string SponsorID;
         
         [JsonProperty("sponsor_name")]
-        public string SponsorName;
+        internal string SponsorName;
         
         [JsonProperty("sponsor_state")]
-        public string SponsorState;
+        internal string SponsorState;
         
         [JsonProperty("sponsor_party")]
-        public string SponsorParty;
+        internal string SponsorParty;
         
         [JsonProperty("sponsor_uri")]
-        public string SponsorUri;
+        internal string SponsorUri;
         
         [JsonProperty("gpo_pdf_uri")]
-        public string GpoPdfUri;
+        internal string GpoPdfUri;
         
         [JsonProperty("congressdotgov_url")]
-        public string CongressDotGovUrl;
+        internal string CongressDotGovUrl;
         
         [JsonProperty("govtrack_url")]
-        public string GovTrackUrl;
+        internal string GovTrackUrl;
         
         [JsonProperty("introduced_date")]
-        public string IntroducedDate;
+        internal string IntroducedDate;
         
         [JsonProperty("active")]
-        public bool Active;
+        internal bool Active;
         
         [JsonProperty("house_passage")]
-        public string HousePassage;
+        internal string HousePassage;
         
         [JsonProperty("senate_passage")]
-        public string SenatePassage;
+        internal string SenatePassage;
         
         [JsonProperty("enacted")]
-        public string Enacted;
+        internal string Enacted;
         
         [JsonProperty("vetoed")]
-        public string Vetoed;
+        internal string Vetoed;
         
         [JsonProperty("cosponsors")]
-        public int CoSponsors;
+        internal int CoSponsors;
         
         [JsonProperty("committees")]
-        public string Committees;
+        internal string Committees;
         
         [JsonProperty("committee_codes")]
-        public string[] CommitteeCodes;
+        internal string[] CommitteeCodes;
         
         [JsonProperty("subcommittee_codes")]
-        public string[] SubCommitteeCodes;
+        internal string[] SubCommitteeCodes;
         
         [JsonProperty("primary_subject")]
-        public string PrimarySubject;
+        internal string PrimarySubject;
         
         [JsonProperty("summary")]
-        public string Summary;
+        internal string Summary;
         
         [JsonProperty("summary_short")]
-        public string ShortSummary;
+        internal string ShortSummary;
         
         [JsonProperty("latest_major_action_date")]
-        public string LatestMajorActionDate;
+        internal string LatestMajorActionDate;
         
         [JsonProperty("latest_major_action")]
-        public string LatestMajorAction;
+        internal string LatestMajorAction;
 
-        public static Bill Convert(ApiBill entity, MemberCache cache)
+        internal static Bill Convert(ApiBill entity, MemberCache cache)
         {
             if (entity == null)
                 return null;
