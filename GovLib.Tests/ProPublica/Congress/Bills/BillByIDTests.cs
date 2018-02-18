@@ -14,37 +14,37 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
         [Fact]
         public void BillIsNotNull()
         {
-            Assert.NotNull(bill);
+            Assert.NotNull(Fixture.BillByID);
         }
 
         [Fact]
         public void BillHasAnID()
         {
-            Assert.False(string.IsNullOrEmpty(bill.BillID));
+            Assert.False(string.IsNullOrEmpty(Fixture.BillByID.BillID));
         }
 
         [Fact]
         public void BillHasATitle()
         {
-            Assert.False(string.IsNullOrEmpty(bill.Title));
+            Assert.False(string.IsNullOrEmpty(Fixture.BillByID.Title));
         }
 
         [Fact]
         public void BillHasAChamber()
         {
-            Assert.NotNull(bill.Chamber);
+            Assert.NotNull(Fixture.BillByID.Chamber);
         }
 
         [Fact]
         public void BillSponsorIdMatchesSponsorObjectId()
         {
-            Assert.Equal(bill.SponsorID, bill.Sponsor.CongressID);
+            Assert.Equal(Fixture.BillByID.SponsorID, Fixture.BillByID.Sponsor.CongressID);
         }
 
         [Fact]
         public void BillHasAnIntroducedDate()
         {
-            Assert.NotNull(bill.Introduced);
+            Assert.NotNull(Fixture.BillByID.Introduced);
         }
     }
 }

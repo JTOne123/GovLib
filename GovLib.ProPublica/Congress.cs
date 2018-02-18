@@ -12,7 +12,8 @@ namespace GovLib.ProPublica
         internal string ApiKey { get; }
         internal Dictionary<string, string> Headers { get; }
         internal Dictionary<int, MemberCache> Cache { get; }
-        internal int CurrentCongress
+        
+        public int CurrentCongress
         {
             get
             {

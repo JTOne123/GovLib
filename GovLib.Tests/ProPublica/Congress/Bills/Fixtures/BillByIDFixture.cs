@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
 
         public BillByIDFixture()
         {
-            BillByID = Congress.Bills.GetBillByID(Chamber.House, "hr21");
+            BillByID = Congress.Bills.GetBillByID(Congress.CurrentCongress, "hr21");
         }
     }
 }

@@ -89,19 +89,19 @@ namespace GovLib.ProPublica.Modules
         }
 
         /// <summary>
-        /// Get information about a specific bill.
+        /// Get specific bill by ID.
         /// </summary>
-        /// <param name="chamber">Chamber of congress.</param>
+        /// <param name="congress">Congress number.</param>
         /// <param name="id">Bill ID.</param>
-        /// <returns><see cref="Bill"/> or null if bill could not be found.</returns>
-        public Bill GetBillByID(Chamber chamber, string id)
+        /// <returns><see cref="Bill"/></returns>
+        public Bill GetBillByID(int congress, string id)
         {
             using (var client = new HttpClient())
             {
-                var chamberString = EnumConvert.ChamberEnumToString(chamber);
-                var url = string.Format(BillUrls.BillByID, chamberString, id);
-                var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
-                return result?.Results?[0].Bills.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).FirstOrDefault();
+                var url = string.Format(BillUrls.BillByID, congress, id);
+                var stringResult = client.Get<JObject>(url, _parent.Headers);
+                var result = client.Get<ResultWrapper<ApiBill>>(url, _parent.Headers);
+                return result?.Results?.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).FirstOrDefault();
             }
         }
 
