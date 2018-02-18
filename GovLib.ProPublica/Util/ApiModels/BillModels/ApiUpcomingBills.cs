@@ -11,28 +11,28 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
     internal class ApiUpcomingBills
     {
         [JsonProperty("bill_id")]
-        internal string BillID;
+        internal string BillID { get; set; }
         
         [JsonProperty("bill_type")]
-        internal string BillType;
+        internal string BillType { get; set; }
 
         [JsonProperty("bill_slug")]
-        internal string BillSlug;
+        internal string BillSlug { get; set; }
         
         [JsonProperty("bill_uri")]
-        internal string BillUrl;
+        internal string BillUrl { get; set; }
         
         [JsonProperty("description")]
-        internal string Description;
+        internal string Description { get; set; }
 
         [JsonProperty("scheduled_at")]
-        internal string ScheduledAt;
+        internal string ScheduledAt { get; set; }
 
         [JsonProperty("chamber")]
-        internal string Chamber;
+        internal string Chamber { get; set; }
 
         [JsonProperty("congress")]
-        internal int Congress;
+        internal int Congress { get; set; }
 
 
         internal static BillSummary Convert(ApiUpcomingBills entity)

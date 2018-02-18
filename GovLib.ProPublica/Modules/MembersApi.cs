@@ -5,6 +5,7 @@ using GovLib.ProPublica.Urls;
 using GovLib.ProPublica.Util;
 using GovLib.ProPublica.Util.MemberModels;
 using GovLib.Util;
+using GovLib.ProPublica.Util.ApiModels.Wrappers;
 
 namespace GovLib.ProPublica.Modules
 {

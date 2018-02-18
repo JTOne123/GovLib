@@ -2,10 +2,11 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 using GovLib.ProPublica.Urls;
 using GovLib.Contracts;
-using GovLib.ProPublica.Util;
+using GovLib.ProPublica.Util.ApiModels.Wrappers;
 using GovLib.Util;
-using GovLib.ProPublica.Util.ApiModels.BillModels;
 using System.Linq;
+using GovLib.ProPublica.Util.ApiModels.BillModels;
+using GovLib.ProPublica.Util;
 
 namespace GovLib.ProPublica.Modules
 {
@@ -100,6 +101,38 @@ namespace GovLib.ProPublica.Modules
                 var url = string.Format(BillUrls.BillByID, chamberString, id);
                 var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
                 return result?.Results?[0].Bills.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// Get ammendments for a specific bill.
+        /// </summary>
+        /// <param name="congress">Congress number.</param>
+        /// <param name="id">Bill ID.</param>
+        /// <returns><see cref="Ammendment"/>array.</returns>
+        public Ammendment[] GetBillAmmendments(int congress, string id)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = string.Format(BillUrls.BillAmmendments, congress, id);
+                var result = client.Get<ResultWrapper<AmmendmentsWrapper<ApiAmmendment>>>(url, _parent.Headers);
+                return result?.Results?[0].Ammendments.Select(a => ApiAmmendment.Convert(a, _parent.Cache[congress])).ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Get subjects for a specific bill.
+        /// </summary>
+        /// <param name="congress">Congress number.</param>
+        /// <param name="id">Bill ID.</param>
+        /// <returns><see cref="Bill"/>array.</returns>
+        public BillSubject[] GetBillSubjects(int congress, string id)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = string.Format(BillUrls.BillAmmendments, congress, id);
+                var result = client.Get<ResultWrapper<SubjectsWrapper<ApiSubject>>>(url, _parent.Headers);
+                return result?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s)).ToArray();
             }
         }
     }
