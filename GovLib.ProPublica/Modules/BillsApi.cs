@@ -67,7 +67,6 @@ namespace GovLib.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(BillUrls.BillsBySubject, subject);
-                var stringResult = client.Get<JObject>(url, _parent.Headers);
                 var result = client.Get<ResultWrapper<ApiBill>>(url, _parent.Headers);
                 return result?.Results?.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).ToArray();
             }
