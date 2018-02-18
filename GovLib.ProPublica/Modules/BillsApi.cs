@@ -7,6 +7,7 @@ using GovLib.Util;
 using System.Linq;
 using GovLib.ProPublica.Util.ApiModels.BillModels;
 using GovLib.ProPublica.Util;
+using System.Collections.Generic;
 
 namespace GovLib.ProPublica.Modules
 {
@@ -125,14 +126,62 @@ namespace GovLib.ProPublica.Modules
         /// </summary>
         /// <param name="congress">Congress number.</param>
         /// <param name="id">Bill ID.</param>
-        /// <returns><see cref="Bill"/>array.</returns>
+        /// <returns><see cref="BillSubject"/>array.</returns>
         public BillSubject[] GetBillSubjects(int congress, string id)
         {
             using (var client = new HttpClient())
             {
-                var url = string.Format(BillUrls.BillAmmendments, congress, id);
+                var url = string.Format(BillUrls.BillSubjects, congress, id);
                 var result = client.Get<ResultWrapper<SubjectsWrapper<ApiSubject>>>(url, _parent.Headers);
                 return result?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s)).ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Get bills related to a specific bill.
+        /// </summary>
+        /// <param name="congress">Congress number.</param>
+        /// <param name="id">Bill ID.</param>
+        /// <returns><see cref="Bill"/>array.</returns>
+        public Bill[] GetRelatedBills(int congress, string id)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = string.Format(BillUrls.RelatedBills, congress, id);
+                var result = client.Get<ResultWrapper<RelatedBillsWrapper<ApiBill>>>(url, _parent.Headers);
+                return result?.Results?[0].RelatedBills.Select(b => ApiBill.Convert(b, _parent.Cache[congress])).ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Get subjects related to given search term.
+        /// </summary>
+        /// <param name="term">Term to search for.</param>
+        /// <returns><see cref="BillSubject"/>array.</returns>
+        public BillSubject[] GetSubjects(string term)
+        {
+            using (var client = new HttpClient())
+            {
+                var headers = new Dictionary<string, string>(_parent.Headers);
+                headers.Add("query", term);
+                var result = client.Get<ResultWrapper<SubjectsWrapper<ApiSubject>>>(BillUrls.Subjects, _parent.Headers);
+                return result?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s)).ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Get cosponsrs for a specific bill.
+        /// </summary>
+        /// <param name="congress">Congress number.</param>
+        /// <param name="id">Bill ID.</param>
+        /// <returns><see cref="Politician"/>array.</returns>
+        public Politician[] GetBillCosponsors(int congress, string id)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = string.Format(BillUrls.Cosponsors, congress, id);
+                var result = client.Get<ResultWrapper<CosponsorsWrapper<ApiCosponsor>>>(url, _parent.Headers);
+                return result?.Results?[0].Cosponsors.Select(c => ApiCosponsor.Convert(c, _parent.Cache[congress])).ToArray();
             }
         }
     }
