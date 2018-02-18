@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
 
         public BillsBySubjectFixture()
         {
-            BillsBySubject = Congress.Bills.GetRecentBillsByMember("tax");
+            BillsBySubject = Congress.Bills.GetRecentBillsBySubject("meat");
         }
     }
 }

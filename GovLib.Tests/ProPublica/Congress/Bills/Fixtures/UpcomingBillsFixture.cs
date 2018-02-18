@@ -11,6 +11,7 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
         public UpcomingBillsFixture()
         {
             UpcomingBills = Congress.Bills.GetUpcomingBills(Chamber.Senate);
+            System.Console.WriteLine();
         }
     }
 }

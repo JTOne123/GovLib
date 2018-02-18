@@ -67,8 +67,9 @@ namespace GovLib.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(BillUrls.BillsBySubject, subject);
-                var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
-                return result?.Results?[0].Bills.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).ToArray();
+                var stringResult = client.Get<JObject>(url, _parent.Headers);
+                var result = client.Get<ResultWrapper<ApiBill>>(url, _parent.Headers);
+                return result?.Results?.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).ToArray();
             }
         }
 
@@ -99,7 +100,6 @@ namespace GovLib.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(BillUrls.BillByID, congress, id);
-                var stringResult = client.Get<JObject>(url, _parent.Headers);
                 var result = client.Get<ResultWrapper<ApiBill>>(url, _parent.Headers);
                 return result?.Results?.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).FirstOrDefault();
             }

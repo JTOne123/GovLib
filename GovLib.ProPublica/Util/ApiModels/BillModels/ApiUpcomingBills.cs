@@ -47,7 +47,7 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
             bill.BillSlug = entity.BillSlug;
             bill.BillUrl = entity.BillUrl;
             bill.Description = entity.Description;
-            bill.ScheduledAt = DateTime.ParseExact(entity.ScheduledAt, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            bill.ScheduledAt = DateTime.Parse(entity.ScheduledAt, CultureInfo.InvariantCulture);
             bill.Congress = entity.Congress;
             
             if (entity.Chamber == "senate") bill.Chamber = GovLib.Chamber.Senate;
