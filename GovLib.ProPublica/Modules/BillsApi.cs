@@ -100,7 +100,7 @@ namespace GovLib.ProPublica.Modules
             {
                 var url = string.Format(BillUrls.BillByID, congress, id);
                 var result = client.Get<ResultWrapper<ApiBill>>(url, _parent.Headers);
-                return result?.Results?.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).FirstOrDefault();
+                return ApiBill.Convert(result?.Results?.FirstOrDefault(), _parent.Cache[_parent.CurrentCongress]);
             }
         }
 

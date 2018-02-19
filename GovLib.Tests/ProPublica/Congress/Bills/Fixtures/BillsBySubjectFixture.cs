@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using GovLib.Contracts;
-using GovLib.ProPublica;
+﻿using GovLib.ProPublica;
 
 namespace GovLib.Tests.ProPublica.Congress.Bills
 {

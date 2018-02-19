@@ -1,6 +1,4 @@
 using System;
-using System.Threading;
-using GovLib.ProPublica;
 
 namespace GovLib.Tests.ProPublica.Congress
 {
