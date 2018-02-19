@@ -8,7 +8,7 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
 
         public RecentBillsFixture()
         {
-            RecentBills = Congress.Bills.GetRecentBills(Chamber.Senate, 115, BillStatus.Passed);
+            RecentBills = Congress.Bills.GetRecentBills(Chamber.Senate, BillStatus.Passed, 115);
         }
     }
 }

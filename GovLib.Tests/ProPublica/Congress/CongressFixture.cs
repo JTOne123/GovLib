@@ -2,7 +2,7 @@ using System;
 
 namespace GovLib.Tests.ProPublica.Congress
 {
-    public abstract class CongressFixture
+    public class CongressFixture
     {
         public string ApiKey { get; }
         public GovLib.ProPublica.Congress Congress { get; }

@@ -1,46 +1,48 @@
-﻿using Xunit;
+﻿using GovLib.ProPublica;
+using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Bills
 {
-    public class UpcomingBillsTests : IClassFixture<UpcomingBillsFixture>
+    [Collection("BillTestCollection")]
+    public class UpcomingBillsTests : IClassFixture<CongressFixture>
     {
-        public UpcomingBillsFixture Fixture { get; }
+        public BillSummary[] UpcomingBills { get; }
 
-        public UpcomingBillsTests(UpcomingBillsFixture fixture)
+        public UpcomingBillsTests(CongressFixture fixture)
         {
-            Fixture = fixture;
+            UpcomingBills = fixture.Congress.Bills.GetUpcomingBills(Chamber.House);
         }
 
         [Fact]
         public void CollectionIsNotNull()
         {
-            Assert.NotNull(Fixture.UpcomingBills);
+            Assert.NotNull(UpcomingBills);
         }
 
         [Fact]
         public void CollectionIsNotEmpty()
         {
-            Assert.NotEmpty(Fixture.UpcomingBills);
+            Assert.NotEmpty(UpcomingBills);
         }
 
         [Fact]
         public void BillsAreNotNull()
         {
-            foreach (var bill in Fixture.UpcomingBills)
+            foreach (var bill in UpcomingBills)
                 Assert.NotNull(bill);
         }
 
         [Fact]
         public void BillsHaveAnID()
         {
-            foreach (var bill in Fixture.UpcomingBills)
+            foreach (var bill in UpcomingBills)
                 Assert.False(string.IsNullOrEmpty(bill.BillID));
         }
 
         [Fact]
         public void BillsHaveAChamber()
         {
-            foreach (var bill in Fixture.UpcomingBills)
+            foreach (var bill in UpcomingBills)
                 Assert.NotNull(bill.Chamber);
         }
     }

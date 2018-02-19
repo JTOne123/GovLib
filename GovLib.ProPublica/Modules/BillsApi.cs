@@ -24,11 +24,11 @@ namespace GovLib.ProPublica.Modules
         /// <summary> Get recent bills by status.</summary>
         public Bill[] GetRecentBills(Chamber chamber, BillStatus status)
         {
-            return GetRecentBills(chamber, _parent.CurrentCongress, status);
+            return GetRecentBills(chamber, status, _parent.CurrentCongress);
         }
 
         /// <summary> Get historical bills by status.</summary>
-        public Bill[] GetRecentBills(Chamber chamber, int congress, BillStatus status)
+        public Bill[] GetRecentBills(Chamber chamber, BillStatus status, int congress)
         {
             using (var client = new HttpClient())
             {

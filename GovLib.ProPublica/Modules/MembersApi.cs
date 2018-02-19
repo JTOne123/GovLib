@@ -138,7 +138,7 @@ namespace GovLib.ProPublica.Modules
         }
 
         /// <summary>Fetch all current representatives from the given state enum.</summary>
-        public Representative[] GetRepresentaivesByState(State state)
+        public Representative[] GetRepresentativesByState(State state)
         {
             return GetRepresentaivesByState(EnumConvert.StateEnumToCode(state));
         }

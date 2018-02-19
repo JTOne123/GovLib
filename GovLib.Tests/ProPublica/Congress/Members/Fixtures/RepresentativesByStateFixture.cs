@@ -9,7 +9,7 @@ namespace GovLib.Tests.ProPublica.Congress.Members
 
         public RepresentativesByStateFixture()
         {
-            StateReps = Congress.Members.GetRepresentaivesByState(State.California);
+            StateReps = Congress.Members.GetRepresentativesByState(State.California);
         }
     }
 }

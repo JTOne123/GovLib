@@ -1,50 +1,76 @@
-﻿using Xunit;
+﻿using GovLib.ProPublica;
+using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Bills
 {
-    public class BillByIDTests : IClassFixture<BillByIDFixture>
+    [Collection("BillTestCollection")]
+    public class BillByIDTests : IClassFixture<CongressFixture>
     {
-        public BillByIDFixture Fixture { get; }
+        public Bill BillByID { get; }
 
-        public BillByIDTests(BillByIDFixture fixture)
+        public BillByIDTests(CongressFixture fixture)
         {
-            Fixture = fixture;
+            BillByID = fixture.Congress.Bills.GetBillByID(115, "hr21");
         }
 
         [Fact]
         public void BillIsNotNull()
         {
-            Assert.NotNull(Fixture.BillByID);
+            Assert.NotNull(BillByID);
         }
 
         [Fact]
         public void BillHasAnID()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.BillByID.BillID));
+            Assert.False(string.IsNullOrEmpty(BillByID.BillID));
+        }
+
+        [Fact]
+        public void BillHasAType()
+        {
+            Assert.False(string.IsNullOrEmpty(BillByID.BillType));
         }
 
         [Fact]
         public void BillHasATitle()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.BillByID.Title));
+            Assert.False(string.IsNullOrEmpty(BillByID.Title));
         }
 
         [Fact]
         public void BillHasAChamber()
         {
-            Assert.NotNull(Fixture.BillByID.Chamber);
+            Assert.NotNull(BillByID.Chamber);
         }
 
         [Fact]
         public void BillSponsorIdMatchesSponsorObjectId()
         {
-            Assert.Equal(Fixture.BillByID.SponsorID, Fixture.BillByID.Sponsor.CongressID);
+            Assert.Equal(BillByID.SponsorID, BillByID.Sponsor.CongressID);
         }
 
         [Fact]
         public void BillHasAnIntroducedDate()
         {
-            Assert.NotNull(Fixture.BillByID.Introduced);
+            Assert.NotNull(BillByID.Introduced);
+        }
+
+        [Fact]
+        public void BillHasALatestAction()
+        {
+            Assert.False(string.IsNullOrEmpty(BillByID.LatestAction));
+        }
+
+        [Fact]
+        public void BillHasALatestActionDate()
+        {
+            Assert.NotNull(BillByID.LatestActionDate);
+        }
+
+        [Fact]
+        public void BillHasAUrl()
+        {
+            Assert.NotNull(BillByID.Url);
         }
     }
 }
