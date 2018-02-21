@@ -4,65 +4,65 @@ using Xunit;
 namespace GovLib.Tests.ProPublica.Congress.Bills
 {
     [Collection("BillTestCollection")]
-    public class BillAmmendmentTests : IClassFixture<CongressFixture>
+    public class BillAmendmentTests : IClassFixture<CongressFixture>
     {
-        public Ammendment[] BillAmmendments { get; }
+        public Amendment[] BillAmendments { get; }
 
-        public BillAmmendmentTests(CongressFixture fixture)
+        public BillAmendmentTests(CongressFixture fixture)
         {
-            BillAmmendments = fixture.Congress.Bills.GetBillAmmendments(115, "hr21");
+            BillAmendments = fixture.Congress.Bills.GetBillAmendments(115, "hr21");
         }
 
         [Fact]
-        public void AmmendmentIsNotNull()
+        public void AmendmentIsNotNull()
         {
-            Assert.NotNull(BillAmmendments);
+            Assert.NotNull(BillAmendments);
         }
 
         [Fact]
         public void CollectionIsNotNull()
         {
-            Assert.NotNull(BillAmmendments);
+            Assert.NotNull(BillAmendments);
         }
 
         [Fact]
         public void CollectionIsNotEmpty()
         {
-            Assert.NotEmpty(BillAmmendments);
+            Assert.NotEmpty(BillAmendments);
         }
 
         [Fact]
-        public void AmmendmentsAreNotNull()
+        public void AmendmentsAreNotNull()
         {
-            foreach (var ammendment in BillAmmendments)
+            foreach (var ammendment in BillAmendments)
                 Assert.NotNull(ammendment);
         }
 
         [Fact]
-        public void AmmendmentsHaveANumber()
+        public void AmendmentsHaveANumber()
         {
-            foreach (var ammendment in BillAmmendments)
+            foreach (var ammendment in BillAmendments)
                 Assert.False(string.IsNullOrEmpty(ammendment.Slug));
         }
 
         [Fact]
-        public void AmmendmentsHaveATitle()
+        public void AmendmentsHaveATitle()
         {
-            foreach (var ammendment in BillAmmendments)
+            foreach (var ammendment in BillAmendments)
                 Assert.False(string.IsNullOrEmpty(ammendment.Title));
         }
 
         [Fact]
         public void BillSponsorIdMatchesSponsorObjectId()
         {
-            foreach (var ammendment in BillAmmendments)
+            foreach (var ammendment in BillAmendments)
                 Assert.Equal(ammendment.SponsorID, ammendment.Sponsor.CongressID);
         }
 
         [Fact]
         public void BillsHaveAnIntroducedDate()
         {
-            foreach (var ammendment in BillAmmendments)
+            foreach (var ammendment in BillAmendments)
                 Assert.NotNull(ammendment.Introduced);
         }
     }

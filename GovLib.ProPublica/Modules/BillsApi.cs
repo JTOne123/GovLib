@@ -105,18 +105,18 @@ namespace GovLib.ProPublica.Modules
         }
 
         /// <summary>
-        /// Get ammendments for a specific bill.
+        /// Get amendments for a specific bill.
         /// </summary>
         /// <param name="congress">Congress number.</param>
         /// <param name="id">Bill ID.</param>
-        /// <returns><see cref="Ammendment"/>array.</returns>
-        public Ammendment[] GetBillAmmendments(int congress, string id)
+        /// <returns><see cref="Amendment"/>array.</returns>
+        public Amendment[] GetBillAmendments(int congress, string id)
         {
             using (var client = new HttpClient())
             {
                 var url = string.Format(BillUrls.BillAmmendments, congress, id);
-                var result = client.Get<ResultWrapper<AmmendmentsWrapper<ApiAmmendment>>>(url, _parent.Headers);
-                return result?.Results?[0].Ammendments.Select(a => ApiAmmendment.Convert(a, _parent.Cache[congress])).ToArray();
+                var result = client.Get<ResultWrapper<AmendmentsWrapper<ApiAmendment>>>(url, _parent.Headers);
+                return result?.Results?[0].Amendments.Select(a => ApiAmendment.Convert(a, _parent.Cache[congress])).ToArray();
             }
         }
 

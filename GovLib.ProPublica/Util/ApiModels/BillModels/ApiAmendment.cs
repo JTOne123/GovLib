@@ -4,10 +4,10 @@ using Newtonsoft.Json;
 
 namespace GovLib.ProPublica.Util.ApiModels.BillModels
 {
-    internal class ApiAmmendment
+    internal class ApiAmendment
     {
-        [JsonProperty("ammendment_number")]
-        internal string AmmendmentNmber { get; set; }
+        [JsonProperty("amendment_number")]
+        internal string AmendmentNmber { get; set; }
         
         [JsonProperty("slug")]
         internal string Slug { get; set; }
@@ -33,14 +33,14 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
         [JsonProperty("latest_major_action_date")]
         internal string LatestActionDate { get; set; }
 
-        internal static Ammendment Convert(ApiAmmendment entity, MemberCache cache)
+        internal static Amendment Convert(ApiAmendment entity, MemberCache cache)
         {
             if (entity == null)
                 return null;
             
-            var ammendment = new Ammendment()
+            var amendment = new Amendment()
             {
-                Number = entity.AmmendmentNmber,
+                Number = entity.AmendmentNmber,
                 Slug = entity.Slug,
                 Introduced = DateTime.ParseExact(entity.IntroducedDate, "yyyy-MM-dd", CultureInfo.InvariantCulture),
                 Title = entity.Title,
@@ -50,11 +50,11 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
             };
 
             if (entity.SponsorTitle == "Sen.")
-                ammendment.Sponsor = cache.Senators[entity.SponsorID];
+                amendment.Sponsor = cache.Senators[entity.SponsorID];
             else
-                ammendment.Sponsor = cache.Representatives[entity.SponsorID];
+                amendment.Sponsor = cache.Representatives[entity.SponsorID];
             
-            return ammendment;
+            return amendment;
         }
     }
 }

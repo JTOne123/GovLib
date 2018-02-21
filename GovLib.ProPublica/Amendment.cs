@@ -6,7 +6,7 @@ namespace GovLib.ProPublica
     /// <summary>
     /// Library model for a congressional bill ammendment.
     /// </summary>
-    public class Ammendment : IAmmendment
+    public class Amendment : IAmmendment
     {
         #pragma warning disable CS1591
 
