@@ -13,6 +13,10 @@ namespace GovLib.ProPublica
         internal Dictionary<string, string> Headers { get; }
         internal Dictionary<int, MemberCache> Cache { get; }
         
+        /// <summary>
+        /// Get the number of the current congressional session.
+        /// </summary>
+        /// <returns>Current congress session as a <see cref="int" /></returns>
         public int CurrentCongress
         {
             get
@@ -25,22 +29,33 @@ namespace GovLib.ProPublica
             }
         }
 
-        /// <summary>Get information about members of congress.</summary>
+        /// <summary>
+        /// ProPublica API members module.
+        /// </summary>
+        /// <returns><see cref="MembersApi" /></returns>
         public MembersApi Members { get; }
 
-        /// <summary>Get information about current or previous bills introduced.</summary>
+        /// <summary>
+        /// ProPublica API bills module.
+        /// </summary>
+        /// <returns><see cref="BillsApi" /></returns>
         public BillsApi Bills { get; }
 
-        /// <summary>Get congressional vote statistics.</summary>
+        /// <summary>
+        /// ProPublica API votes module.
+        /// </summary>
+        /// <returns><see cref="VotesApi" /></returns>
         [Obsolete("Unfished module, not recommended for use")]
         public VotesApi Votes { get; }
 
-
-        /// <summary>Instantiate the library using your ProPublica Congress API key.</summary>
+        /// <summary>
+        /// Instantiate the library using your API key.
+        /// </summary>
+        /// <param name="apiKey">ProPublica Congress API key.</param>
         public Congress(string apiKey)
         {
             if (string.IsNullOrEmpty(apiKey))
-                throw new EmptyApiKeyException("ProPublica API key not provided.");
+                throw new ApiKeyException("ProPublica API key not provided.");
 
             ApiKey = apiKey;
             Members = new MembersApi(this);

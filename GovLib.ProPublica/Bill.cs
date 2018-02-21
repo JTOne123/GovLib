@@ -3,12 +3,16 @@ using GovLib.Contracts;
 
 namespace GovLib.ProPublica
 {
+    /// <summary>
+    /// Library model for a congressional bill.
+    /// </summary>
     public class Bill : IBill
     {
         #pragma warning disable CS1591
 
         public string BillID { get; internal set; }
         public string BillType { get; internal set; }
+        public string BillSlug { get; internal set; }
         public string Number { get; internal set; }
         public string Url { get; internal set; }
         public string Title { get; internal set; }

@@ -12,6 +12,9 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
         
         [JsonProperty("bill_type")]
         internal string BillType { get; set; }
+
+        [JsonProperty("bill_slug")]
+        internal string BillSlug { get; set; }
         
         [JsonProperty("number")]
         internal string Number { get; set; }
@@ -59,10 +62,10 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
         internal bool Active { get; set; }
         
         [JsonProperty("house_passage")]
-        internal string HousePassage { get; set; }
+        internal bool HousePassage { get; set; }
         
         [JsonProperty("senate_passage")]
-        internal string SenatePassage { get; set; }
+        internal bool SenatePassage { get; set; }
         
         [JsonProperty("enacted")]
         internal string Enacted { get; set; }
@@ -105,13 +108,17 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
             var bill = new Bill()
             {
                 BillID = entity.BillID,
+                BillSlug = entity.BillSlug,
                 Url = entity.BillUrl,
+                Number = entity.Number,
                 Title = entity.ShortTitle,
                 BillType = entity.BillType,
                 Introduced = DateTime.ParseExact(entity.IntroducedDate, "yyyy-MM-dd", CultureInfo.InvariantCulture),
                 LatestAction = entity.LatestMajorAction,
                 LatestActionDate = DateTime.ParseExact(entity.LatestMajorActionDate, "yyyy-MM-dd", CultureInfo.InvariantCulture),
-                SponsorID = entity.SponsorID
+                SponsorID = entity.SponsorID,
+                PassedHouse = entity.HousePassage,
+                PassedSenate = entity.SenatePassage
             };
 
             if (entity.SponsorTitle == "Sen.")

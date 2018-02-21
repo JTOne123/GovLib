@@ -7,8 +7,8 @@ namespace GovLib.ProPublica
     {
         #pragma warning disable CS1591
 
-        public string Rank { get; set; }
-        public int Class { get; set; }
+        public string Rank { get; internal set; }
+        public int Class { get; internal set; }
 
         public override string ToString() =>
             $"Senator {FullName} ({Party}) [{EnumConvert.StateEnumToCode(State)}-{Class}]";
