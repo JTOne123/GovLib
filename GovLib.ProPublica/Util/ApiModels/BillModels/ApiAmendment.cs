@@ -8,28 +8,28 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
     {
         [JsonProperty("amendment_number")]
         internal string AmendmentNmber { get; set; }
-        
+
         [JsonProperty("slug")]
         internal string Slug { get; set; }
-        
+
         [JsonProperty("sponsor_id")]
         internal string SponsorID { get; set; }
 
         [JsonProperty("sponsor_title")]
         internal string SponsorTitle { get; set; }
-        
+
         [JsonProperty("introduced_date")]
         internal string IntroducedDate { get; set; }
-        
+
         [JsonProperty("title")]
         internal string Title { get; set; }
-        
+
         [JsonProperty("cogressdotgov_url")]
         internal string Url { get; set; }
-        
+
         [JsonProperty("latest_major_action")]
         internal string LatestAction { get; set; }
-        
+
         [JsonProperty("latest_major_action_date")]
         internal string LatestActionDate { get; set; }
 
@@ -37,7 +37,7 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
         {
             if (entity == null)
                 return null;
-            
+
             var amendment = new Amendment()
             {
                 Number = entity.AmendmentNmber,
@@ -49,11 +49,14 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
                 LatestActionDate = DateTime.ParseExact(entity.IntroducedDate, "yyyy-MM-dd", CultureInfo.InvariantCulture)
             };
 
-            if (entity.SponsorTitle == "Sen.")
-                amendment.Sponsor = cache.Senators[entity.SponsorID];
-            else
-                amendment.Sponsor = cache.Representatives[entity.SponsorID];
-            
+            if (!string.IsNullOrEmpty(entity.SponsorID))
+            {
+                if (entity.SponsorTitle == "Sen.")
+                    amendment.Sponsor = cache.Senators[entity.SponsorID];
+                else
+                    amendment.Sponsor = cache.Representatives[entity.SponsorID];
+            }
+
             return amendment;
         }
     }

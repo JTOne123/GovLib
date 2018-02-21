@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
 
         public BillAmendmentTests(CongressFixture fixture)
         {
-            BillAmendments = fixture.Congress.Bills.GetBillAmendments(115, "hr21");
+            BillAmendments = fixture.Congress.Bills.GetBillAmendments(115, "hr1628");
         }
 
         [Fact]
@@ -43,20 +43,6 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
         {
             foreach (var ammendment in BillAmendments)
                 Assert.False(string.IsNullOrEmpty(ammendment.Slug));
-        }
-
-        [Fact]
-        public void AmendmentsHaveATitle()
-        {
-            foreach (var ammendment in BillAmendments)
-                Assert.False(string.IsNullOrEmpty(ammendment.Title));
-        }
-
-        [Fact]
-        public void BillSponsorIdMatchesSponsorObjectId()
-        {
-            foreach (var ammendment in BillAmendments)
-                Assert.Equal(ammendment.SponsorID, ammendment.Sponsor.CongressID);
         }
 
         [Fact]
