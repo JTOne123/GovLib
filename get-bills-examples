@@ -1,39 +1,39 @@
 #!/usr/bin/env bash
 
-mkdir -p "Examples/Bills"
+mkdir -p "GovLib.Examples/Bills"
 
 # Search Bills
-curl "https://api.propublica.org/congress/v1/bills/search.json?query=megahertz" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/search-bills.json"
+curl "https://api.propublica.org/congress/v1/bills/search.json?query=megahertz" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/search-bills.json"
 
 # Get Recent House Bills
-curl "https://api.propublica.org/congress/v1/115/house/bills/introduced.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/get-recent-house-bills.json"
+curl "https://api.propublica.org/congress/v1/115/house/bills/introduced.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/get-recent-house-bills.json"
 
 # Get Recent Senate Bills
-curl "https://api.propublica.org/congress/v1/115/senate/bills/introduced.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/get-recent-senate-bills.json"
+curl "https://api.propublica.org/congress/v1/115/senate/bills/introduced.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/get-recent-senate-bills.json"
 
 # Get Bills By Member
-curl "https://api.propublica.org/congress/v1/members/L000287/bills/introduced.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/bills-by-member.json"
+curl "https://api.propublica.org/congress/v1/members/L000287/bills/introduced.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/bills-by-member.json"
 
 # Get Bills By Subject
-curl "https://api.propublica.org/congress/v1/bills/subjects/meat.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/bills-by-subject.json"
+curl "https://api.propublica.org/congress/v1/bills/subjects/meat.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/bills-by-subject.json"
 
 # Get Upcoming Bills
-curl "https://api.propublica.org/congress/v1/bills/upcoming/house.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/get-upcoming-bills.json"
+curl "https://api.propublica.org/congress/v1/bills/upcoming/house.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/get-upcoming-bills.json"
 
 # Get Specific Bill
-curl "https://api.propublica.org/congress/v1/115/bills/hr21.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/get-specific-bill.json"
+curl "https://api.propublica.org/congress/v1/115/bills/hr21.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/get-specific-bill.json"
 
 # Get Bill Ammendments
-curl "https://api.propublica.org/congress/v1/115/bills/hr1628/amendments.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/bill-ammendments.json"
+curl "https://api.propublica.org/congress/v1/115/bills/hr1628/amendments.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/bill-ammendments.json"
 
 # Get Bill Subjects
-curl "https://api.propublica.org/congress/v1/115/bills/hr2810/subjects.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/get-bill-subjects.json"
+curl "https://api.propublica.org/congress/v1/115/bills/hr2810/subjects.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/get-bill-subjects.json"
 
 # Get Related Bills
-curl "https://api.propublica.org/congress/v1/115/bills/hr3219/related.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/get-related-bills.json"
+curl "https://api.propublica.org/congress/v1/115/bills/hr3219/related.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/get-related-bills.json"
 
 # Get Bill Subjects By Term
-curl "https://api.propublica.org/congress/v1/bills/subjects/search.json?query=climate" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/get-related-bills.json"
+curl "https://api.propublica.org/congress/v1/bills/subjects/search.json?query=climate" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/get-related-bills.json"
 
 # Get Bill Cosponsors
-curl "https://api.propublica.org/congress/v1/114/bills/hr4249/cosponsors.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Bills/get-bill-cosponsors.json"
+curl "https://api.propublica.org/congress/v1/114/bills/hr4249/cosponsors.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Bills/get-bill-cosponsors.json"

@@ -1,36 +1,36 @@
 #!/usr/bin/env bash
 
-mkdir -p "Examples/Members"
+mkdir -p "GovLib.Examples/Members"
 
 # All Senators
-curl "https://api.propublica.org/congress/v1/115/senate/members.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Members/get-all-senators.json"
+curl "https://api.propublica.org/congress/v1/115/senate/members.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Members/get-all-senators.json"
 
 # All Representatives
-curl "https://api.propublica.org/congress/v1/115/house/members.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Members/get-all-representatives.json"
+curl "https://api.propublica.org/congress/v1/115/house/members.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Members/get-all-representatives.json"
 
 # Get Specific Member
-curl "https://api.propublica.org/congress/v1/members/K000388.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Members/get-specific-member.json"
+curl "https://api.propublica.org/congress/v1/members/K000388.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Members/get-specific-member.json"
 
 # Get New Members
-curl "https://api.propublica.org/congress/v1/members/new.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Members/get-new-members.json"
+curl "https://api.propublica.org/congress/v1/members/new.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Members/get-new-members.json"
 
 # Get Members By District
-curl "https://api.propublica.org/congress/v1/members/senate/RI/current.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Members/get-members-by-district.json"
+curl "https://api.propublica.org/congress/v1/members/senate/RI/current.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Members/get-members-by-district.json"
 
 # Get Leaving Members
-curl "https://api.propublica.org/congress/v1/115/house/members/leaving.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Members/get-leaving-members.json"
+curl "https://api.propublica.org/congress/v1/115/house/members/leaving.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Members/get-leaving-members.json"
 
 # Get Senators By State
-curl "https://api.propublica.org/congress/v1/members/senate/RI/current.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Members/get-senators-by-state.json"
+curl "https://api.propublica.org/congress/v1/members/senate/RI/current.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Members/get-senators-by-state.json"
 
 # Get Representatives By State
-curl "https://api.propublica.org/congress/v1/members/house/GA/current.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Members/get-representatives-by-state.json"
+curl "https://api.propublica.org/congress/v1/members/house/GA/current.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Members/get-representatives-by-state.json"
 
 # Get Representative From District
-curl "https://api.propublica.org/congress/v1/members/house/GA/6/current.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Members/get-representative-from-disctrict.json"
+curl "https://api.propublica.org/congress/v1/members/house/GA/6/current.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Members/get-representative-from-disctrict.json"
 
 # Get Senators Leaving Office
-curl "https://api.propublica.org/congress/v1/115/senate/members/leaving.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Members/get-senators-leaving-office.json"
+curl "https://api.propublica.org/congress/v1/115/senate/members/leaving.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Members/get-senators-leaving-office.json"
 
 # Get Senators Leaving Office
-curl "https://api.propublica.org/congress/v1/115/house/members/leaving.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "Examples/Members/get-representatives-leaving-office.json"
+curl "https://api.propublica.org/congress/v1/115/house/members/leaving.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "GovLib.Examples/Members/get-representatives-leaving-office.json"
