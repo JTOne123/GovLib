@@ -12,6 +12,6 @@ namespace GovLib.ProPublica.Urls
         internal const string BillSubjects = "https://api.propublica.org/congress/v1/{0}/bills/{1}/subjects.json";
         internal const string RelatedBills = "https://api.propublica.org/congress/v1/{0}/bills/{1}/related.json";
         internal const string Subjects = "https://api.propublica.org/congress/v1/bills/subjects/search.json";
-        internal const string Cosponsors = "https://api.propublica.org/congress/v1/{congress}/bills/{bill-id}/cosponsors.json";
+        internal const string Cosponsors = "https://api.propublica.org/congress/v1/{0}/bills/{1}/cosponsors.json";
     }
 }

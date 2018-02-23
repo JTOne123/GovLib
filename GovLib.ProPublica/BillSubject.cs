@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace GovLib.ProPublica.Util.ApiModels.BillModels
+namespace GovLib.ProPublica
 {
     /// <summary>
     /// Search term object.
