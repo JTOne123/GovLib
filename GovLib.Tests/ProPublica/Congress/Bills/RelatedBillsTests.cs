@@ -4,67 +4,67 @@ using Xunit;
 namespace GovLib.Tests.ProPublica.Congress.Bills
 {
     [Collection("MainTestCollection")]
-    public class RecentBillsTests : IClassFixture<CongressFixture>
+    public class RelatedBillsTests : IClassFixture<CongressFixture>
     {
-        public Bill[] RecentBills { get; }
+        public Bill[] RelatedBills { get; }
 
-        public RecentBillsTests(CongressFixture fixture)
+        public RelatedBillsTests(CongressFixture fixture)
         {
-            RecentBills = fixture.Congress.Bills.GetRecentBills(Chamber.Senate, BillStatus.Passed, 115);
+            RelatedBills = fixture.Congress.Bills.GetRelatedBills(115, "hr3219");
         }
 
         [Fact]
         public void CollectionIsNotNull()
         {
-            Assert.NotNull(RecentBills);
+            Assert.NotNull(RelatedBills);
         }
 
         [Fact]
         public void CollectionIsNotEmpty()
         {
-            Assert.NotEmpty(RecentBills);
+            Assert.NotEmpty(RelatedBills);
         }
 
         [Fact]
         public void BillsAreNotNull()
         {
-            foreach (var bill in RecentBills)
+            foreach (var bill in RelatedBills)
                 Assert.NotNull(bill);
         }
 
         [Fact]
         public void BillsHaveAnID()
         {
-            foreach (var bill in RecentBills)
+            foreach (var bill in RelatedBills)
                 Assert.False(string.IsNullOrEmpty(bill.BillID));
         }
 
         [Fact]
         public void BillsHaveATitle()
         {
-            foreach (var bill in RecentBills)
+            foreach (var bill in RelatedBills)
                 Assert.False(string.IsNullOrEmpty(bill.Title));
         }
 
         [Fact]
         public void BillsHaveAChamber()
         {
-            foreach (var bill in RecentBills)
+            foreach (var bill in RelatedBills)
                 Assert.NotNull(bill.Chamber);
-        }
-
-        [Fact]
-        public void BillsHaveAnIntroducedDate()
-        {
-            foreach (var bill in RecentBills)
-                Assert.NotNull(bill.Introduced);
         }
 
         [Fact]
         public void BillSponsorIdMatchesSponsorObjectId()
         {
-            foreach (var bill in RecentBills)
+            foreach (var bill in RelatedBills)
                 Assert.Equal(bill.SponsorID, bill.Sponsor.CongressID);
+        }
+
+        [Fact]
+        public void BillsHaveAnIntroducedDate()
+        {
+            foreach (var bill in RelatedBills)
+                Assert.NotNull(bill.Introduced);
         }
     }
 }

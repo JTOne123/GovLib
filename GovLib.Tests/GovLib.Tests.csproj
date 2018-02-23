@@ -17,4 +17,7 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="ProPublica\Congress\Bills\Fixtures\BillByID.cs" />
+  </ItemGroup>
 </Project>

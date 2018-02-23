@@ -220,7 +220,7 @@ _Pvt_Extensions
 *.AppImage
 
 # API examples folder
-Examples/
+GovLib.Examples/
 
 # Mac finder config
 *.DS_Store

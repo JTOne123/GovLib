@@ -5,6 +5,7 @@ using GovLib.ProPublica.Urls;
 using GovLib.ProPublica.Util;
 using GovLib.ProPublica.Util.MemberModels;
 using GovLib.Util;
+using GovLib.ProPublica.Util.ApiModels.Wrappers;
 
 namespace GovLib.ProPublica.Modules
 {
@@ -57,7 +58,7 @@ namespace GovLib.ProPublica.Modules
             {
                 var url = string.Format(MemberUrls.AllSenators, congressNum);
                 var result = client.Get<ResultWrapper<MembersWrapper<ApiAllSenators>>>(url, _parent.Headers);
-                var sens = result?.results?[0].members?.Select(s => ApiAllSenators.Convert(s));
+                var sens = result?.Results?[0].Members?.Select(s => ApiAllSenators.Convert(s));
                 _parent.Cache[congressNum].UpdateMembers(sens);
                 return sens.ToArray();
             }
@@ -78,7 +79,7 @@ namespace GovLib.ProPublica.Modules
             {
                 var url = string.Format(MemberUrls.AllRepresentatives, congressNum);
                 var result = client.Get<ResultWrapper<MembersWrapper<ApiAllReps>>>(url, _parent.Headers);
-                var reps = result?.results?[0].members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r));
+                var reps = result?.Results?[0].Members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r));
                 _parent.Cache[congressNum].UpdateMembers(reps);
                 return reps.ToArray();
             }
@@ -93,7 +94,7 @@ namespace GovLib.ProPublica.Modules
             {
                 var url = string.Format(MemberUrls.Member, id);
                 var result = client.Get<ResultWrapper<ApiMember>>(url, _parent.Headers);
-                return result?.results?.Where(r => r.IsVotingMember()).Select(p => ApiMember.Convert(p)).FirstOrDefault();
+                return result?.Results?.Where(r => r.IsVotingMember()).Select(p => ApiMember.Convert(p)).FirstOrDefault();
             }
         }
 
@@ -112,7 +113,7 @@ namespace GovLib.ProPublica.Modules
             {
                 var url = MemberUrls.NewMembers;
                 var result = client.Get<ResultWrapper<NewMembersWrapper>>(url, _parent.Headers);
-                var newMembers = result?.results?[0].members?.Where(r => r.IsVotingMember());
+                var newMembers = result?.Results?[0].Members?.Where(r => r.IsVotingMember());
                 return newMembers.Select(m => _parent.Cache[_parent.CurrentCongress].Search(m.ID)).Where(m => m != null).ToArray();
             }
         }
@@ -132,12 +133,12 @@ namespace GovLib.ProPublica.Modules
             {
                 var url = string.Format(MemberUrls.SenatorsByState, state);
                 var result = client.Get<ResultWrapper<ApiSenatorsByState>>(url, _parent.Headers);
-                return result?.results?.Select(s => _parent.Cache[_parent.CurrentCongress].Senators[s.ID]).ToArray();
+                return result?.Results?.Select(s => _parent.Cache[_parent.CurrentCongress].Senators[s.ID]).ToArray();
             }
         }
 
         /// <summary>Fetch all current representatives from the given state enum.</summary>
-        public Representative[] GetRepresentaivesByState(State state)
+        public Representative[] GetRepresentativesByState(State state)
         {
             return GetRepresentaivesByState(EnumConvert.StateEnumToCode(state));
         }
@@ -151,7 +152,7 @@ namespace GovLib.ProPublica.Modules
             {
                 var url = string.Format(MemberUrls.RepresentativesByState, state);
                 var result = client.Get<ResultWrapper<ApiRepresentativesByState>>(url, _parent.Headers);
-                return result?.results?.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).ToArray();
+                return result?.Results?.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).ToArray();
             }
         }
 
@@ -170,7 +171,7 @@ namespace GovLib.ProPublica.Modules
             {
                 var url = string.Format(MemberUrls.RepresentativeFromDistrict, state, district);
                 var result = client.Get<ResultWrapper<ApiRepresentativesByState>>(url, _parent.Headers);
-                return result?.results?.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).FirstOrDefault();
+                return result?.Results?.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).FirstOrDefault();
             }
         }
 
@@ -189,7 +190,7 @@ namespace GovLib.ProPublica.Modules
             {
                 var url = string.Format(MemberUrls.SenatorsLeaving, congressNum);
                 var result = client.Get<ResultWrapper<MembersWrapper<ApiSenatorsLeaving>>>(url, _parent.Headers);
-                return result?.results?[0].members.Select(s => _parent.Cache[_parent.CurrentCongress].Senators[s.ID]).ToArray();
+                return result?.Results?[0].Members.Select(s => _parent.Cache[_parent.CurrentCongress].Senators[s.ID]).ToArray();
             }
         }
 
@@ -208,7 +209,7 @@ namespace GovLib.ProPublica.Modules
             {
                 var url = string.Format(MemberUrls.RepresentativesLeaving, congressNum);
                 var result = client.Get<ResultWrapper<MembersWrapper<ApiRepsLeaving>>>(url, _parent.Headers);
-                return result?.results?[0].members.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).ToArray();
+                return result?.Results?[0].Members.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).ToArray();
             }
         }
     }
