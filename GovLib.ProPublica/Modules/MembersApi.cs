@@ -9,15 +9,21 @@ using GovLib.ProPublica.Util.ApiModels.Wrappers;
 
 namespace GovLib.ProPublica.Modules
 {
-    /// <summary>Get information about members of congress.</summary>
+    /// <summary>
+    /// Get information about members of congress.
+    /// </summary>
     public class MembersApi
     {
         private Congress _parent { get; }
 
-        /// <summary>Stored information of senators retrieved so far.</summary>
+        /// <summary>
+        /// Stored information of senators retrieved so far.
+        /// </summary>
         public Dictionary<string, Senator> Senators { get; }
 
-        /// <summary>Stored information of representatives retrieved so far.</summary>
+        /// <summary>
+        /// Stored information of representatives retrieved so far.
+        /// </summary>
         public Dictionary<string, Representative> Representatives { get; }
 
         internal MembersApi(Congress parent)
@@ -43,13 +49,20 @@ namespace GovLib.ProPublica.Modules
                 GetAllRepresentatives(congressNum);
         }
 
-        /// <summary>Fetch all senators from the current congress session.</summary>
+        /// <summary>
+        /// Fetch all senators from the current congress session.
+        /// </summary>
+        /// <returns><see cref="Senator" />array</returns>
         public Senator[] GetAllSenators()
         {
             return GetAllSenators(_parent.CurrentCongress);
         }
 
-        /// <summary>Fetch all senators from given congress session.</summary>
+        /// <summary>
+        /// Fetch all senators from given congress session.
+        /// </summary>
+        /// <param name="congressNum">Congress number</param>
+        /// <returns><see cref="Senator" />array.</returns>
         public Senator[] GetAllSenators(int congressNum)
         {
             ValidateCache(congressNum);
@@ -64,13 +77,20 @@ namespace GovLib.ProPublica.Modules
             }
         }
 
-        /// <summary>Fetch all senators from the current congress session.</summary>
+        /// <summary>
+        /// Fetch all representatives from the current congress session.
+        /// </summary>
+        /// <returns><see cref="Representative" />array.</returns>
         public Representative[] GetAllRepresentatives()
         {
             return GetAllRepresentatives(_parent.CurrentCongress);
         }
 
-        /// <summary>Fetch all representatives from given congress session.</summary>
+        /// <summary>
+        /// Fetch all representatives from given congress session.
+        /// </summary>
+        /// <param name="congressNum">Congress number</param>
+        /// <returns><see cref="Representative" />array.</returns>
         public Representative[] GetAllRepresentatives(int congressNum)
         {
             ValidateCache(congressNum);
@@ -85,7 +105,11 @@ namespace GovLib.ProPublica.Modules
             }
         }
 
-        /// <summary>Find congress member by BioGuide ID.</summary>
+        /// <summary>
+        /// Find congress member by BioGuide ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns><see cref="Politician" /></returns>
         public Politician GetMemberByID(string id)
         {
             PopulateCache(_parent.CurrentCongress);
@@ -98,13 +122,20 @@ namespace GovLib.ProPublica.Modules
             }
         }
 
-        /// <summary>Get full Politician info from a contract.</summary>
+        /// <summary>
+        /// Get full Politician info from a contract.
+        /// </summary>
+        /// <param name="politician"><see cref="ICongressMember" /></param>
+        /// <returns><see cref="Politician" /></returns>
         public Politician GetMemberByID(ICongressMember politician)
         {
             return GetMemberByID(politician.CongressID);
         }
 
-        /// <summary>Fetch new congress members from given congress session.</summary>
+        /// <summary>
+        /// Fetch new congress members from given congress session.
+        /// </summary>
+        /// <returns><see cref="Politician" /></returns>
         public Politician[] GetNewMembers()
         {
             PopulateCache(_parent.CurrentCongress);
@@ -118,13 +149,21 @@ namespace GovLib.ProPublica.Modules
             }
         }
 
-        /// <summary>Fetch both current senators from the given state enum.</summary>
+        /// <summary>
+        /// Fetch both current senators from the given state enum.
+        /// </summary>
+        /// <param name="state"><see cref="State" /></param>
+        /// <returns><see cref="Senator" />array.</returns>
         public Senator[] GetSenatorsByState(State state)
         {
             return GetSenatorsByState(EnumConvert.StateEnumToCode(state));
         }
 
-        /// <summary>Fetch both current senators from the given state.</summary>
+        /// <summary>
+        /// Fetch both current senators from the given state.
+        /// </summary>
+        /// <param name="state">State code.</param>
+        /// <returns><see cref="Senator" />array.</returns>
         public Senator[] GetSenatorsByState(string state)
         {
             PopulateCache(_parent.CurrentCongress);
@@ -137,13 +176,21 @@ namespace GovLib.ProPublica.Modules
             }
         }
 
-        /// <summary>Fetch all current representatives from the given state enum.</summary>
+        /// <summary>
+        /// Fetch all current representatives from the given state enum.
+        /// </summary>
+        /// <param name="state"><see cref="State" /></param>
+        /// <returns><see cref="Representative" />array.</returns>
         public Representative[] GetRepresentativesByState(State state)
         {
             return GetRepresentaivesByState(EnumConvert.StateEnumToCode(state));
         }
 
-        /// <summary>Fetch all current representatives from the given state.</summary>
+        /// <summary>
+        /// Fetch all current representatives from the given state.
+        /// </summary>
+        /// <param name="state">State code.</param>
+        /// <returns><see cref="Representative" />array.</returns>
         public Representative[] GetRepresentaivesByState(string state)
         {
             PopulateCache(_parent.CurrentCongress);
@@ -156,13 +203,23 @@ namespace GovLib.ProPublica.Modules
             }
         }
 
-        /// <summary>Fetch current representative from the given state enum and district.</summary>
+        /// <summary>
+        /// Fetch current representative from the given state enum and district.
+        /// </summary>
+        /// <param name="state"><see cref="State" /></param>
+        /// <param name="district">District number.</param>
+        /// <returns><see cref="Representative" /></returns>
         public Representative GetRepresentiveFromDistrict(State state, int district)
         {
             return GetRepresentiveFromDistrict(EnumConvert.StateEnumToCode(state), district);
         }
 
-        /// <summary>Fetch current representative from the given state and district.</summary>
+        /// <summary>
+        /// Fetch current representative from the given state and district.
+        /// </summary>
+        /// <param name="state">State code.</param>
+        /// <param name="district">District number.</param>
+        /// <returns><see cref="Representative" /></returns>
         public Representative GetRepresentiveFromDistrict(string state, int district)
         {
             PopulateCache(_parent.CurrentCongress);
@@ -175,13 +232,20 @@ namespace GovLib.ProPublica.Modules
             }
         }
 
-        /// <summary>Fetch all senators from the current congress session.</summary>
+        /// <summary>
+        /// Fetch all senators from the current congress session.
+        /// </summary>
+        /// <returns><see cref="Senator" />array.</returns>
         public Senator[] GetSenatorsLeavingOffice()
         {
             return GetSenatorsLeavingOffice(_parent.CurrentCongress);
         }
 
-        /// <summary>Fetch senators that were leaving office during the given congress session.</summary>
+        /// <summary>
+        /// Fetch senators that were leaving office during the given congress session.
+        /// </summary>
+        /// <param name="congressNum">Congress number</param>
+        /// <returns><see cref="Senator" />array.</returns>
         public Senator[] GetSenatorsLeavingOffice(int congressNum)
         {
             PopulateCache(_parent.CurrentCongress);
@@ -194,13 +258,20 @@ namespace GovLib.ProPublica.Modules
             }
         }
 
-        /// <summary>Fetch all senators from the current congress session.</summary>
+        /// <summary>
+        /// Fetch all senators from the current congress session.
+        /// </summary>
+        /// <returns><see cref="Representative" />array.</returns>
         public Representative[] GetRepresentativesLeavingOffice()
         {
             return GetRepresentativesLeavingOffice(_parent.CurrentCongress);
         }
 
-        /// <summary>Fetch representatives that were leaving office during the given congress session.</summary>
+        /// <summary>
+        /// Fetch representatives that were leaving office during the given congress session.
+        /// </summary>
+        /// <param name="congressNum">Congress number</param>
+        /// <returns><see cref="Representative" />array.</returns>
         public Representative[] GetRepresentativesLeavingOffice(int congressNum)
         {
             PopulateCache(_parent.CurrentCongress);
