@@ -6,6 +6,7 @@ using GovLib.ProPublica.Util;
 using GovLib.ProPublica.Util.MemberModels;
 using GovLib.Util;
 using GovLib.ProPublica.Util.ApiModels.Wrappers;
+using Newtonsoft.Json;
 
 namespace GovLib.ProPublica.Modules
 {
@@ -26,6 +27,7 @@ namespace GovLib.ProPublica.Modules
         /// </summary>
         public Dictionary<string, Representative> Representatives { get; }
 
+
         internal MembersApi(Congress parent)
         {
             _parent = parent;
@@ -42,7 +44,7 @@ namespace GovLib.ProPublica.Modules
         internal void PopulateCache(int congressNum)
         {
             ValidateCache(congressNum);
-            
+
             if (!_parent.Cache[congressNum].Senators.Any())
                 GetAllSenators(congressNum);
             if (!_parent.Cache[congressNum].Representatives.Any())
@@ -67,14 +69,12 @@ namespace GovLib.ProPublica.Modules
         {
             ValidateCache(congressNum);
 
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.AllSenators, congressNum);
-                var result = client.Get<ResultWrapper<MembersWrapper<ApiAllSenators>>>(url, _parent.Headers);
-                var sens = result?.Results?[0].Members?.Select(s => ApiAllSenators.Convert(s));
-                _parent.Cache[congressNum].UpdateMembers(sens);
-                return sens.ToArray();
-            }
+            var url = string.Format(MemberUrls.AllSenators, congressNum);
+            var result = _parent.HttpClient.Get(url, _parent.Headers);
+            var json = JsonConvert.DeserializeObject<ResultWrapper<MembersWrapper<ApiAllSenators>>>(result);
+            var sens = json?.Results?[0].Members?.Select(s => ApiAllSenators.Convert(s));
+            _parent.Cache[congressNum].UpdateMembers(sens);
+            return sens.ToArray();
         }
 
         /// <summary>
@@ -95,14 +95,12 @@ namespace GovLib.ProPublica.Modules
         {
             ValidateCache(congressNum);
 
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.AllRepresentatives, congressNum);
-                var result = client.Get<ResultWrapper<MembersWrapper<ApiAllReps>>>(url, _parent.Headers);
-                var reps = result?.Results?[0].Members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r));
-                _parent.Cache[congressNum].UpdateMembers(reps);
-                return reps.ToArray();
-            }
+            var url = string.Format(MemberUrls.AllRepresentatives, congressNum);
+            var result = _parent.HttpClient.Get(url, _parent.Headers);
+            var json = JsonConvert.DeserializeObject<ResultWrapper<MembersWrapper<ApiAllReps>>>(result);
+            var reps = json?.Results?[0].Members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r));
+            _parent.Cache[congressNum].UpdateMembers(reps);
+            return reps.ToArray();
         }
 
         /// <summary>
@@ -113,13 +111,11 @@ namespace GovLib.ProPublica.Modules
         public Politician GetMemberByID(string id)
         {
             PopulateCache(_parent.CurrentCongress);
-            
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.Member, id);
-                var result = client.Get<ResultWrapper<ApiMember>>(url, _parent.Headers);
-                return result?.Results?.Where(r => r.IsVotingMember()).Select(p => ApiMember.Convert(p)).FirstOrDefault();
-            }
+
+            var url = string.Format(MemberUrls.Member, id);
+            var result = _parent.HttpClient.Get(url, _parent.Headers);
+            var json = JsonConvert.DeserializeObject<ResultWrapper<ApiMember>>(result);
+            return json?.Results?.Where(r => r.IsVotingMember()).Select(p => ApiMember.Convert(p)).FirstOrDefault();
         }
 
         /// <summary>
@@ -140,13 +136,11 @@ namespace GovLib.ProPublica.Modules
         {
             PopulateCache(_parent.CurrentCongress);
 
-            using (var client = new HttpClient())
-            {
-                var url = MemberUrls.NewMembers;
-                var result = client.Get<ResultWrapper<NewMembersWrapper>>(url, _parent.Headers);
-                var newMembers = result?.Results?[0].Members?.Where(r => r.IsVotingMember());
-                return newMembers.Select(m => _parent.Cache[_parent.CurrentCongress].Search(m.ID)).Where(m => m != null).ToArray();
-            }
+            var url = MemberUrls.NewMembers;
+            var result = _parent.HttpClient.Get(url, _parent.Headers);
+            var json = JsonConvert.DeserializeObject<ResultWrapper<NewMembersWrapper>>(result);
+            var newMembers = json?.Results?[0].Members?.Where(r => r.IsVotingMember());
+            return newMembers.Select(m => _parent.Cache[_parent.CurrentCongress].Search(m.ID)).Where(m => m != null).ToArray();
         }
 
         /// <summary>
@@ -168,12 +162,10 @@ namespace GovLib.ProPublica.Modules
         {
             PopulateCache(_parent.CurrentCongress);
 
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.SenatorsByState, state);
-                var result = client.Get<ResultWrapper<ApiSenatorsByState>>(url, _parent.Headers);
-                return result?.Results?.Select(s => _parent.Cache[_parent.CurrentCongress].Senators[s.ID]).ToArray();
-            }
+            var url = string.Format(MemberUrls.SenatorsByState, state);
+            var result = _parent.HttpClient.Get(url, _parent.Headers);
+            var json = JsonConvert.DeserializeObject<ResultWrapper<ApiSenatorsByState>>(result);
+            return json?.Results?.Select(s => _parent.Cache[_parent.CurrentCongress].Senators[s.ID]).ToArray();
         }
 
         /// <summary>
@@ -195,12 +187,10 @@ namespace GovLib.ProPublica.Modules
         {
             PopulateCache(_parent.CurrentCongress);
 
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.RepresentativesByState, state);
-                var result = client.Get<ResultWrapper<ApiRepresentativesByState>>(url, _parent.Headers);
-                return result?.Results?.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).ToArray();
-            }
+            var url = string.Format(MemberUrls.RepresentativesByState, state);
+            var result = _parent.HttpClient.Get(url, _parent.Headers);
+            var json = JsonConvert.DeserializeObject<ResultWrapper<ApiRepresentativesByState>>(result);
+            return json?.Results?.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).ToArray();
         }
 
         /// <summary>
@@ -224,12 +214,10 @@ namespace GovLib.ProPublica.Modules
         {
             PopulateCache(_parent.CurrentCongress);
 
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.RepresentativeFromDistrict, state, district);
-                var result = client.Get<ResultWrapper<ApiRepresentativesByState>>(url, _parent.Headers);
-                return result?.Results?.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).FirstOrDefault();
-            }
+            var url = string.Format(MemberUrls.RepresentativeFromDistrict, state, district);
+            var result = _parent.HttpClient.Get(url, _parent.Headers);
+            var json = JsonConvert.DeserializeObject<ResultWrapper<ApiRepresentativeFromDistrict>>(result);
+            return json?.Results?.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).FirstOrDefault();
         }
 
         /// <summary>
@@ -250,12 +238,10 @@ namespace GovLib.ProPublica.Modules
         {
             PopulateCache(_parent.CurrentCongress);
 
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.SenatorsLeaving, congressNum);
-                var result = client.Get<ResultWrapper<MembersWrapper<ApiSenatorsLeaving>>>(url, _parent.Headers);
-                return result?.Results?[0].Members.Select(s => _parent.Cache[_parent.CurrentCongress].Senators[s.ID]).ToArray();
-            }
+            var url = string.Format(MemberUrls.SenatorsLeaving, congressNum);
+            var result = _parent.HttpClient.Get(url, _parent.Headers);
+            var json = JsonConvert.DeserializeObject<ResultWrapper<MembersWrapper<ApiSenatorsLeaving>>>(result);
+            return json?.Results?[0].Members.Select(s => _parent.Cache[_parent.CurrentCongress].Senators[s.ID]).ToArray();
         }
 
         /// <summary>
@@ -276,12 +262,10 @@ namespace GovLib.ProPublica.Modules
         {
             PopulateCache(_parent.CurrentCongress);
 
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.RepresentativesLeaving, congressNum);
-                var result = client.Get<ResultWrapper<MembersWrapper<ApiRepsLeaving>>>(url, _parent.Headers);
-                return result?.Results?[0].Members.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).ToArray();
-            }
+            var url = string.Format(MemberUrls.RepresentativesLeaving, congressNum);
+            var result = _parent.HttpClient.Get(url, _parent.Headers);
+            var json = JsonConvert.DeserializeObject<ResultWrapper<MembersWrapper<ApiRepsLeaving>>>(result);
+            return json?.Results?[0].Members.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.ID]).ToArray();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace GovLib.Tests.ProPublica.Congress.Members
         public GetAllSenatorsTests(CongressFixture fixture)
         {
             AllSenators = fixture.Congress.Members.GetAllSenators();
+            var sens = fixture.Congress.Members.GetSenatorsByState(State.Georgia);
         }
 
         [Fact]

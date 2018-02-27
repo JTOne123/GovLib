@@ -8,6 +8,7 @@ using System.Linq;
 using GovLib.ProPublica.Util.ApiModels.BillModels;
 using GovLib.ProPublica.Util;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace GovLib.ProPublica.Modules
 {
@@ -49,8 +50,9 @@ namespace GovLib.ProPublica.Modules
                 var chamberString = EnumConvert.ChamberEnumToString(chamber);
                 var statusString = EnumConvert.BillStatusEnumToString(status);
                 var url = string.Format(BillUrls.RecentBills, congressNum, chamberString, statusString);
-                var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
-                return result?.Results?[0].Bills.Select(b => ApiBill.Convert(b, _parent.Cache[congressNum])).ToArray();
+                var result = _parent.HttpClient.Get(url, _parent.Headers);
+                var json = JsonConvert.DeserializeObject<ResultWrapper<BillsWrapper<ApiBill>>>(result);
+                return json?.Results?[0].Bills.Select(b => ApiBill.Convert(b, _parent.Cache[congressNum])).ToArray();
             }
         }
 
@@ -75,8 +77,9 @@ namespace GovLib.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(BillUrls.MemberBills, id, "introduced");
-                var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
-                return result?.Results?[0].Bills.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).ToArray();
+                var result = _parent.HttpClient.Get(url, _parent.Headers);
+                var json = JsonConvert.DeserializeObject<ResultWrapper<BillsWrapper<ApiBill>>>(result);
+                return json?.Results?[0].Bills.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).ToArray();
             }
         }
 
@@ -100,8 +103,9 @@ namespace GovLib.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(BillUrls.BillsBySubject, subject);
-                var result = client.Get<ResultWrapper<ApiBill>>(url, _parent.Headers);
-                return result?.Results?.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).ToArray();
+                var result = _parent.HttpClient.Get(url, _parent.Headers);
+                var json = JsonConvert.DeserializeObject<ResultWrapper<ApiBill>>(result);
+                return json?.Results?.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).ToArray();
             }
         }
 
@@ -116,8 +120,9 @@ namespace GovLib.ProPublica.Modules
             {
                 var chamberString = EnumConvert.ChamberEnumToString(chamber);
                 var url = string.Format(BillUrls.UpcomingBills, chamberString);
-                var result = client.Get<ResultWrapper<BillsWrapper<ApiUpcomingBills>>>(url, _parent.Headers);
-                return result?.Results?[0].Bills.Select(b => ApiUpcomingBills.Convert(b)).ToArray();
+                var result = _parent.HttpClient.Get(url, _parent.Headers);
+                var json = JsonConvert.DeserializeObject<ResultWrapper<BillsWrapper<ApiUpcomingBills>>>(result);
+                return json?.Results?[0].Bills.Select(b => ApiUpcomingBills.Convert(b)).ToArray();
             }
         }
 
@@ -132,8 +137,9 @@ namespace GovLib.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(BillUrls.BillByID, congressNum, id);
-                var result = client.Get<ResultWrapper<ApiBill>>(url, _parent.Headers);
-                return ApiBill.Convert(result?.Results?.FirstOrDefault(), _parent.Cache[_parent.CurrentCongress]);
+                var result = _parent.HttpClient.Get(url, _parent.Headers);
+                var json = JsonConvert.DeserializeObject<ResultWrapper<ApiBill>>(result);
+                return ApiBill.Convert(json?.Results?.FirstOrDefault(), _parent.Cache[_parent.CurrentCongress]);
             }
         }
 
@@ -148,8 +154,9 @@ namespace GovLib.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(BillUrls.BillAmmendments, congressNum, id);
-                var result = client.Get<ResultWrapper<AmendmentsWrapper<ApiAmendment>>>(url, _parent.Headers);
-                return result?.Results?[0].Amendments.Select(a => ApiAmendment.Convert(a, _parent.Cache[congressNum])).ToArray();
+                var result = _parent.HttpClient.Get(url, _parent.Headers);
+                var json = JsonConvert.DeserializeObject<ResultWrapper<AmendmentsWrapper<ApiAmendment>>>(result);
+                return json?.Results?[0].Amendments.Select(a => ApiAmendment.Convert(a, _parent.Cache[congressNum])).ToArray();
             }
         }
 
@@ -164,8 +171,9 @@ namespace GovLib.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(BillUrls.BillSubjects, congressNum, id);
-                var result = client.Get<ResultWrapper<SubjectsWrapper<ApiSubject>>>(url, _parent.Headers);
-                return result?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s)).ToArray();
+                var result = _parent.HttpClient.Get(url, _parent.Headers);
+                var json = JsonConvert.DeserializeObject<ResultWrapper<SubjectsWrapper<ApiSubject>>>(result);
+                return json?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s)).ToArray();
             }
         }
 
@@ -180,8 +188,9 @@ namespace GovLib.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(BillUrls.RelatedBills, congressNum, id);
-                var result = client.Get<ResultWrapper<RelatedBillsWrapper<ApiBill>>>(url, _parent.Headers);
-                return result?.Results?[0].RelatedBills.Select(b => ApiBill.Convert(b, _parent.Cache[congressNum])).ToArray();
+                var result = _parent.HttpClient.Get(url, _parent.Headers);
+                var json = JsonConvert.DeserializeObject<ResultWrapper<RelatedBillsWrapper<ApiBill>>>(result);
+                return json?.Results?[0].RelatedBills.Select(b => ApiBill.Convert(b, _parent.Cache[congressNum])).ToArray();
             }
         }
 
@@ -196,8 +205,9 @@ namespace GovLib.ProPublica.Modules
             {
                 var headers = new Dictionary<string, string>(_parent.Headers);
                 headers.Add("query", term);
-                var result = client.Get<ResultWrapper<SubjectsWrapper<ApiSubject>>>(BillUrls.Subjects, _parent.Headers);
-                return result?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s)).ToArray();
+                var result = _parent.HttpClient.Get(BillUrls.Subjects, _parent.Headers);
+                var json = JsonConvert.DeserializeObject<ResultWrapper<SubjectsWrapper<ApiSubject>>>(result);
+                return json?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s)).ToArray();
             }
         }
 
@@ -212,8 +222,9 @@ namespace GovLib.ProPublica.Modules
             using (var client = new HttpClient())
             {
                 var url = string.Format(BillUrls.Cosponsors, congressNum, id);
-                var result = client.Get<ResultWrapper<CosponsorsWrapper<ApiCosponsor>>>(url, _parent.Headers);
-                return result?.Results?[0].Cosponsors.Select(c => ApiCosponsor.Convert(c, _parent.Cache[congressNum])).ToArray();
+                var result = _parent.HttpClient.Get(url, _parent.Headers);
+                var json = JsonConvert.DeserializeObject<ResultWrapper<CosponsorsWrapper<ApiCosponsor>>>(result);
+                return json?.Results?[0].Cosponsors.Select(c => ApiCosponsor.Convert(c, _parent.Cache[congressNum])).ToArray();
             }
         }
     }
