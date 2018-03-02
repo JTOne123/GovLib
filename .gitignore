@@ -224,3 +224,6 @@ GovLib.Examples/
 
 # Mac finder config
 *.DS_Store
+
+# JetBrains Rider config
+.idea/
