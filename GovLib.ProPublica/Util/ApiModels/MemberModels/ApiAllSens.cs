@@ -2,16 +2,12 @@ using System;
 using System.Globalization;
 using GovLib.Contracts;
 using GovLib.Util;
-using AutoMapper;
 using Newtonsoft.Json;
 
 namespace GovLib.ProPublica.Util.MemberModels
 {
     internal class ApiAllSenators : ApiAllMembers
     {
-        private static readonly IMapper _mapper = 
-            new MapperConfiguration(cfg => cfg.CreateMap<Politician, Senator>()).CreateMapper();
-            
         [JsonProperty("senate_class")]
         public string SenateClass { get; set; }
 
@@ -20,7 +16,7 @@ namespace GovLib.ProPublica.Util.MemberModels
 
         internal static Senator Convert(ApiAllSenators entity)
         {
-            var sen = _mapper.Map<Senator>(ApiAllMembers.Convert(entity, Chamber.Senate));
+            var sen = ApiAllMembers.Convert(entity, Chamber.Senate) as Senator;
 
             sen.Class = Int32.Parse(entity.SenateClass);
 
