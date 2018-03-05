@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using GovLib.Core.Util;
 using GovLib.Exceptions;
 using GovLib.ProPublica.Modules;
 using GovLib.ProPublica.Util;
+using GovLib.Util;
 
 namespace GovLib.ProPublica
 {

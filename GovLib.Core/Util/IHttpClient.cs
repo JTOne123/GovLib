@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GovLib.Core.Util
+namespace GovLib.Util
 {
     /// <summary>
     /// Contract for making HTTP requests.

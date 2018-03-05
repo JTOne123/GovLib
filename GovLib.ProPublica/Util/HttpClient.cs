@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using GovLib.Core.Util;
+using GovLib.Util;
 using System;
 
 namespace GovLib.ProPublica.Util

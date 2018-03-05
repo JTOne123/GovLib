@@ -1,5 +1,7 @@
 namespace GovLib.Core.Exceptions
 {
+    #pragma warning disable CS1591
+    
     [System.Serializable]
     public class HttpClientException : System.Exception
     {
