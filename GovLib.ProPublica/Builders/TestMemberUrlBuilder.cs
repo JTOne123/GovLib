@@ -11,7 +11,7 @@ namespace GovLib.ProPublica.Builders
         internal TestMemberUrlBuilder()
         {
             var assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            _memberPath = Path.Combine(assemblyPath, "Members");
+            _memberPath = Path.Combine(assemblyPath, "ProPublica", "Members");
         }
 
         public string AllSenators(string congressNum) =>

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MEMBER_PATH="GovLib.Examples/Members"
+MEMBER_PATH="GovLib.TestData/ProPublica/Members"
 
 mkdir -p "$MEMBER_PATH"
 
