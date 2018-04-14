@@ -6,7 +6,7 @@ namespace GovLib.Tests.ProPublica.Congress.Members
     [Collection("MainTestCollection")]
     public class GetRepresentativeFromDistrictTests : IClassFixture<CongressFixture>
     {
-        public Representative DistrictRep { get; }
+        public RepresentativeSummary DistrictRep { get; }
 
         public GetRepresentativeFromDistrictTests(CongressFixture fixture)
         {

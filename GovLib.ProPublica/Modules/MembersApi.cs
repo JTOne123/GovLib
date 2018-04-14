@@ -195,7 +195,7 @@ namespace GovLib.ProPublica.Modules
         /// <returns><see cref="Senator" />array.</returns>
         public SenatorSummary[] GetSenatorsLeavingOffice(int congressNum)
         {
-            var url = _memberUrlBuilder.AllSenators(congressNum.ToString());
+            var url = _memberUrlBuilder.SenatorsLeaving(congressNum.ToString());
             var result = _congress.HttpClient.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<MembersWrapper<ApiSenatorsLeaving>>>(result);
             return json?.Results?[0].Members.Select(r => ApiSenatorsLeaving.Convert(r)).ToArray();

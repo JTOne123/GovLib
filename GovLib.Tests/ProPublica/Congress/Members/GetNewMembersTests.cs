@@ -6,7 +6,7 @@ namespace GovLib.Tests.ProPublica.Congress.Members
     [Collection("MainTestCollection")]
     public class GetNewMembersTests : IClassFixture<CongressFixture>
     {
-        public Politician[] NewMembers { get; }
+        public PoliticianSummary[] NewMembers { get; }
 
         public GetNewMembersTests(CongressFixture fixture)
         {

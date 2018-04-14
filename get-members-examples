@@ -12,9 +12,13 @@ curl "https://api.propublica.org/congress/v1/115/senate/members.json" -H "X-API-
 sleep 1
 curl "https://api.propublica.org/congress/v1/115/house/members.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$MEMBER_PATH/get-all-representatives.json"
 
-# Get Member By ID
+# Get Member By ID (Bernie Sanders)
 sleep 1
-curl "https://api.propublica.org/congress/v1/members/K000388.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$MEMBER_PATH/get-member-by-id.json"
+curl "https://api.propublica.org/congress/v1/members/S000033.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$MEMBER_PATH/get-member-by-id-S000033.json"
+
+# Get Member By ID (Paul Ryan)
+sleep 1
+curl "https://api.propublica.org/congress/v1/members/R000570.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$MEMBER_PATH/get-member-by-id-R000570.json"
 
 # Get New Members
 sleep 1
@@ -34,7 +38,7 @@ curl "https://api.propublica.org/congress/v1/members/house/GA/current.json" -H "
 
 # Get Representative From District
 sleep 1
-curl "https://api.propublica.org/congress/v1/members/house/GA/6/current.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$MEMBER_PATH/get-representative-from-disctrict.json"
+curl "https://api.propublica.org/congress/v1/members/house/GA/6/current.json" -H "X-API-Key: $PROPUBLICA_API_KEY" > "$MEMBER_PATH/get-representative-from-district.json"
 
 # Get Senators Leaving Office
 sleep 1

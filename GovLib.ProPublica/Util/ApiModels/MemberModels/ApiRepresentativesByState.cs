@@ -24,7 +24,7 @@ namespace GovLib.ProPublica.Util.MemberModels
         public string Party { get; set; }
         
         [JsonProperty("district")]
-        public int District { get; set; }
+        public string District { get; set; }
 
         internal static RepresentativeSummary Convert(ApiRepresentativesByState entity, string state)
         {
@@ -37,7 +37,10 @@ namespace GovLib.ProPublica.Util.MemberModels
             pol.MiddleName = entity.MiddleName;
             pol.LastName = entity.LastName;
             pol.State = (State) EnumConvert.StateCodeToEnum(state);
-            pol.District = entity.District;
+            pol.Party = entity.Party;
+
+            if (entity.District == "At-Large") pol.District = 1;
+            else pol.District = int.Parse(entity.District);
 
             return pol;
         }

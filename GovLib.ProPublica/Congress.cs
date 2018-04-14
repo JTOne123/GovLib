@@ -43,7 +43,7 @@ namespace GovLib.ProPublica
         /// ProPublica API bills module.
         /// </summary>
         /// <returns><see cref="BillsApi" /></returns>
-        public BillsApi Bills { get; }
+        //public BillsApi Bills { get; }
 
         /// <summary>
         /// ProPublica API votes module.
@@ -62,7 +62,7 @@ namespace GovLib.ProPublica
             {
                 Members = new MembersApi(this, new TestMemberUrlBuilder());
                 Votes = new VotesApi(this);
-                Bills = new BillsApi(this);
+                //Bills = new BillsApi(this);
                 HttpClient =  new FileTestClient();
             }
             else
@@ -73,7 +73,7 @@ namespace GovLib.ProPublica
                 ApiKey = apiKey;
                 Members = new MembersApi(this, new MemberUrlBuilder());
                 Votes = new VotesApi(this);
-                Bills = new BillsApi(this);
+                //Bills = new BillsApi(this);
                 HttpClient = new HttpClient();
                 Headers = new Dictionary<string, string>
                 {

@@ -6,7 +6,7 @@ namespace GovLib.Tests.ProPublica.Congress.Members
     [Collection("MainTestCollection")]
     public class GetRepresentativesLeavingTests : IClassFixture<CongressFixture>
     {
-        public Representative[] RepsLeaving { get; }
+        public RepresentativeSummary[] RepsLeaving { get; }
 
         public GetRepresentativesLeavingTests(CongressFixture fixture)
         {

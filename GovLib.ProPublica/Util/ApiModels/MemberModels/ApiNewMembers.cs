@@ -30,7 +30,7 @@ namespace GovLib.ProPublica.Util.MemberModels
         public string State { get; set; }
         
         [JsonProperty("district")]
-        public int District { get; set; }
+        public string District { get; set; }
 
         internal bool IsVotingMember() =>
             EnumConvert.StateCodeToEnum(this.State) != null;
@@ -41,14 +41,24 @@ namespace GovLib.ProPublica.Util.MemberModels
 
             if (entity == null) return null;
             
-            if (entity.Chamber == "Senate") pol = new SenatorSummary();
-            else pol = new RepresentativeSummary { District = entity.District };
+            if (entity.Chamber == "Senate")
+            {
+                pol = new SenatorSummary();
+            }
+            else
+            {
+                int district;
+                if (entity.District == "At-Large") district = 1;
+                else district = int.Parse(entity.District);
+                pol = new RepresentativeSummary { District = district };
+            };
 
             pol.CongressID = entity.ID;
             pol.FirstName = entity.FirstName;
             pol.MiddleName = entity.MiddleName;
             pol.LastName = entity.LastName;
             pol.State = (State) EnumConvert.StateCodeToEnum(entity.State);
+            pol.Party = entity.Party;
 
             return pol;
         }

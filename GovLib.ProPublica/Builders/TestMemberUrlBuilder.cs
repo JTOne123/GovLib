@@ -10,8 +10,8 @@ namespace GovLib.ProPublica.Builders
 
         internal TestMemberUrlBuilder()
         {
-            var slnPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            _memberPath = Path.Combine(slnPath, "GovLib.Examples/Members");
+            var assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            _memberPath = Path.Combine(assemblyPath, "Members");
         }
 
         public string AllSenators(string congressNum) =>
@@ -21,7 +21,7 @@ namespace GovLib.ProPublica.Builders
             Path.Combine(_memberPath, TestMemberUrls.AllRepresentatives);
         
         public string MemberByID(string id) =>
-            Path.Combine(_memberPath, TestMemberUrls.MemberById);
+            Path.Combine(_memberPath, string.Format(TestMemberUrls.MemberById, id));
         
         public string NewMembers() =>
             Path.Combine(_memberPath, TestMemberUrls.NewMembers);

@@ -1,7 +1,7 @@
 using GovLib.ProPublica;
 using Xunit;
 
-namespace GovLib.Tests.ProPublica.Congress.Members.Fixtures
+namespace GovLib.Tests.ProPublica.Congress.Members
 {
     [Collection("MainTestCollection")]
     public class GetMemberByIDTests : IClassFixture<CongressFixture>
