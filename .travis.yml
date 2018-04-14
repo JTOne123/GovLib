@@ -7,6 +7,7 @@ env:
 - NUGET_API=https://api.nuget.org/v3/index.json
 
 before_script:
+- "git clone https://github.com/GovLib/GovLib.TestData.git GovLib.TestData"
 - "ls -lhaF"
 
 script:
