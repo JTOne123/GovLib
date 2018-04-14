@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GovLib.Exceptions;
+using GovLib.ProPublica.Builders;
 using GovLib.ProPublica.Modules;
 using GovLib.ProPublica.Util;
 using GovLib.Util;
@@ -14,7 +15,6 @@ namespace GovLib.ProPublica
     {
         internal string ApiKey { get; }
         internal Dictionary<string, string> Headers { get; }
-        internal Dictionary<int, MemberCache> Cache { get; }
         internal IHttpClient HttpClient { get; }
         
         /// <summary>
@@ -56,45 +56,30 @@ namespace GovLib.ProPublica
         /// Instantiate the library using your API key.
         /// </summary>
         /// <param name="apiKey">ProPublica Congress API key.</param>
-        public Congress(string apiKey)
+        public Congress(string apiKey, bool testClient = false)
         {
-            if (string.IsNullOrEmpty(apiKey))
-                throw new ApiKeyException("ProPublica API key not provided.");
-
-            ApiKey = apiKey;
-            Members = new MembersApi(this);
-            Votes = new VotesApi(this);
-            Bills = new BillsApi(this);
-            Cache = new Dictionary<int, MemberCache>();
-            HttpClient = new HttpClient();
-            Headers = new Dictionary<string, string>
+            if (testClient)
             {
-                { "X-API-Key", ApiKey }
-            };
-            Members.PopulateCache(CurrentCongress);
-        }
-
-        /// <summary>
-        /// Instantiate the library with a custom HttpClient (for debugging).
-        /// </summary>
-        /// <param name="apiKey">ProPublica Congress API key.</param>
-        /// <param name="httpClient"><see cref="IHttpClient" />implementation.</param>
-        public Congress(string apiKey, IHttpClient httpClient)
-        {
-            if (string.IsNullOrEmpty(apiKey))
-                throw new ApiKeyException("ProPublica API key not provided.");
-
-            ApiKey = apiKey;
-            Members = new MembersApi(this);
-            Votes = new VotesApi(this);
-            Bills = new BillsApi(this);
-            Cache = new Dictionary<int, MemberCache>();
-            HttpClient = httpClient;
-            Headers = new Dictionary<string, string>
+                Members = new MembersApi(this, new TestMemberUrlBuilder());
+                Votes = new VotesApi(this);
+                Bills = new BillsApi(this);
+                HttpClient =  new FileTestClient();
+            }
+            else
             {
-                { "X-API-Key", ApiKey }
-            };
-            Members.PopulateCache(CurrentCongress);
+                if (string.IsNullOrEmpty(apiKey))
+                    throw new ApiKeyException("ProPublica API key not provided.");
+
+                ApiKey = apiKey;
+                Members = new MembersApi(this, new MemberUrlBuilder());
+                Votes = new VotesApi(this);
+                Bills = new BillsApi(this);
+                HttpClient = new HttpClient();
+                Headers = new Dictionary<string, string>
+                {
+                    { "X-API-Key", ApiKey }
+                };
+            }
         }
     }
 }

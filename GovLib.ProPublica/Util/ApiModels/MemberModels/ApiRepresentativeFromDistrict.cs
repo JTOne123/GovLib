@@ -24,6 +24,22 @@ namespace GovLib.ProPublica.Util.MemberModels
         public string Party { get; set; }
         
         [JsonProperty("district")]
-        public string District { get; set; }
+        public int District { get; set; }
+
+        internal static RepresentativeSummary Convert(ApiRepresentativeFromDistrict entity, string state, int district)
+        {
+            if (entity == null) return null;
+
+            var pol = new RepresentativeSummary();
+
+            pol.CongressID = entity.ID;
+            pol.FirstName = entity.FirstName;
+            pol.MiddleName = entity.MiddleName;
+            pol.LastName = entity.LastName;
+            pol.State = (State) EnumConvert.StateCodeToEnum(state);
+            pol.District = district;
+
+            return pol;
+        }
     }
 }

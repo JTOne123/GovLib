@@ -1,6 +1,6 @@
 namespace GovLib.ProPublica.Urls
 {
-    internal class MemberUrls
+    internal static class MemberUrls
     {
         internal const string AllSenators = "https://api.propublica.org/congress/v1/{0}/senate/members.json";
         internal const string AllRepresentatives = "https://api.propublica.org/congress/v1/{0}/house/members.json";

@@ -6,7 +6,7 @@ using System;
 
 namespace GovLib.ProPublica.Util
 {
-    internal class HttpClient: WebClient, IHttpClient
+    internal class HttpClient : WebClient, IHttpClient
     {
         public string Get(string url, Dictionary<string, string> headers = null)
         {

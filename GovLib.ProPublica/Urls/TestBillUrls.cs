@@ -1,6 +1,6 @@
 namespace GovLib.ProPublica.Urls
 {
-    internal class BillUrls : IBillUrls
+    internal class TestBillUrls : IBillUrls
     {
         public string RecentBills => "https://api.propublica.org/congress/v1/{0}/{1}/bills/{2}.json";
         public string MemberBills => "https://raw.githubusercontent.com/GovLib/ApiResponses/master/propublica/bills/bills-by-member.json";

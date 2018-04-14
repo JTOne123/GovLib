@@ -22,5 +22,20 @@ namespace GovLib.ProPublica.Util.MemberModels
         
         [JsonProperty("party")]
         public string Party { get; set; }
+
+        internal static SenatorSummary Convert(ApiSenatorsByState entity, string state)
+        {
+            if (entity == null) return null;
+
+            var pol = new SenatorSummary();
+
+            pol.CongressID = entity.ID;
+            pol.FirstName = entity.FirstName;
+            pol.MiddleName = entity.MiddleName;
+            pol.LastName = entity.LastName;
+            pol.State = (State) EnumConvert.StateCodeToEnum(state);
+
+            return pol;
+        }
     }
 }
