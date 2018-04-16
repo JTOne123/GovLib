@@ -31,7 +31,7 @@ namespace GovLib.ProPublica.Builders
             Path.Combine(_billPath, string.Format(TestBillUrls.BillByID, id));
         
         public string BillAmmendments(int congressNum, string id) =>
-            Path.Combine(_billPath, TestBillUrls.BillAmmendments);
+            Path.Combine(_billPath, string.Format(TestBillUrls.BillAmmendments, id));
         
         public string BillSubjects(int congressNum, string id) =>
             Path.Combine(_billPath, string.Format(TestBillUrls.BillSubjects, id));
@@ -43,7 +43,7 @@ namespace GovLib.ProPublica.Builders
             Path.Combine(_billPath, string.Format(TestBillUrls.SubjectsByTerm, term));
         
         public string Cosponsors(int congressNum, string id) =>
-            Path.Combine(_billPath, TestBillUrls.Cosponsors);
+            Path.Combine(_billPath, string.Format(TestBillUrls.Cosponsors, id));
         
     }
 }
