@@ -3,7 +3,7 @@ using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Members
 {
-    [Collection("MainTestCollection")]
+    [Collection("ProPublica Test Collection")]
     public class GetRepresentativeFromDistrictTests : IClassFixture<CongressFixture>
     {
         public RepresentativeSummary DistrictRep { get; }

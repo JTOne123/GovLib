@@ -3,7 +3,7 @@ using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Bills
 {
-    [Collection("MainTestCollection")]
+    [Collection("ProPublica Test Collection")]
     public class SubjectsByTerm : IClassFixture<CongressFixture>
     {
         public BillSubject[] Subjects { get; }
