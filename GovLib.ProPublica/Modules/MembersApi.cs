@@ -19,7 +19,6 @@ namespace GovLib.ProPublica.Modules
         private Congress _congress { get; }
         private IMemberUrlBuilder _memberUrlBuilder { get; }
 
-
         internal MembersApi(Congress congress, IMemberUrlBuilder memberUrlBuilder)
         {
             _congress = congress;
@@ -43,7 +42,7 @@ namespace GovLib.ProPublica.Modules
         public Senator[] GetAllSenators(int congressNum)
         {
             var url = _memberUrlBuilder.AllSenators(congressNum.ToString());
-            var result = _congress.HttpClient.Get(url, _congress.Headers);
+            var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<MembersWrapper<ApiAllSenators>>>(result);
             var sens = json?.Results?[0].Members?.Select(s => ApiAllSenators.Convert(s));
             return sens.ToArray();
@@ -66,7 +65,7 @@ namespace GovLib.ProPublica.Modules
         public Representative[] GetAllRepresentatives(int congressNum)
         {
             var url = _memberUrlBuilder.AllRepresentatives(congressNum.ToString());
-            var result = _congress.HttpClient.Get(url, _congress.Headers);
+            var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<MembersWrapper<ApiAllReps>>>(result);
             var reps = json?.Results?[0].Members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r));
             return reps.ToArray();
@@ -80,7 +79,7 @@ namespace GovLib.ProPublica.Modules
         public Politician GetMemberByID(string id)
         {
             var url = _memberUrlBuilder.MemberByID(id);
-            var result = _congress.HttpClient.Get(url, _congress.Headers);
+            var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<ApiMember>>(result);
             return json?.Results?.Where(r => r.IsVotingMember()).Select(p => ApiMember.Convert(p)).FirstOrDefault();
         }
@@ -102,7 +101,7 @@ namespace GovLib.ProPublica.Modules
         public PoliticianSummary[] GetNewMembers()
         {
             var url = _memberUrlBuilder.NewMembers();
-            var result = _congress.HttpClient.Get(url, _congress.Headers);
+            var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<NewMembersWrapper>>(result);
             var newMembers = json?.Results?[0].Members?.Where(r => r.IsVotingMember());
             return newMembers.Select(m => ApiNewMembers.Convert(m)).ToArray();
@@ -126,7 +125,7 @@ namespace GovLib.ProPublica.Modules
         public SenatorSummary[] GetSenatorsByState(string state)
         {
             var url = _memberUrlBuilder.SenatorsByState(state);
-            var result = _congress.HttpClient.Get(url, _congress.Headers);
+            var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<ApiSenatorsByState>>(result);
             return json?.Results?.Select(s => ApiSenatorsByState.Convert(s, state)).ToArray();
         }
@@ -149,7 +148,7 @@ namespace GovLib.ProPublica.Modules
         public RepresentativeSummary[] GetRepresentaivesByState(string state)
         {
             var url = _memberUrlBuilder.RepresentativesByState(state);
-            var result = _congress.HttpClient.Get(url, _congress.Headers);
+            var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<ApiRepresentativesByState>>(result);
             return json?.Results?.Select(r => ApiRepresentativesByState.Convert(r, state)).ToArray();
         }
@@ -174,7 +173,7 @@ namespace GovLib.ProPublica.Modules
         public RepresentativeSummary GetRepresentiveFromDistrict(string state, int district)
         {
             var url = _memberUrlBuilder.RepresentativeFromDistrict(state, district.ToString());
-            var result = _congress.HttpClient.Get(url, _congress.Headers);
+            var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<ApiRepresentativeFromDistrict>>(result);
             return json?.Results?.Select(r => ApiRepresentativeFromDistrict.Convert(r, state, district)).FirstOrDefault();
         }
@@ -196,7 +195,7 @@ namespace GovLib.ProPublica.Modules
         public SenatorSummary[] GetSenatorsLeavingOffice(int congressNum)
         {
             var url = _memberUrlBuilder.SenatorsLeaving(congressNum.ToString());
-            var result = _congress.HttpClient.Get(url, _congress.Headers);
+            var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<MembersWrapper<ApiSenatorsLeaving>>>(result);
             return json?.Results?[0].Members.Select(r => ApiSenatorsLeaving.Convert(r)).ToArray();
         }
@@ -218,7 +217,7 @@ namespace GovLib.ProPublica.Modules
         public RepresentativeSummary[] GetRepresentativesLeavingOffice(int congressNum)
         {
             var url = _memberUrlBuilder.RepresentativesLeaving(congressNum.ToString());
-            var result = _congress.HttpClient.Get(url, _congress.Headers);
+            var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<MembersWrapper<ApiRepsLeaving>>>(result);
             return json?.Results?[0].Members.Select(r => ApiRepsLeaving.Convert(r)).ToArray();
         }

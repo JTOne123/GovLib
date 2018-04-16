@@ -21,20 +21,5 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
 
         [JsonProperty("date")]
         internal string Date { get; set; }
-
-        internal static Politician Convert(ApiCosponsor entity, MemberCache cache)
-        {
-            if (entity == null)
-                return null;
-            
-            Politician pol;
-
-            if (entity.Title == "Sen.")
-                pol = cache.Senators[entity.ID];
-            else
-                pol = cache.Representatives[entity.ID];
-            
-            return pol;
-        }
     }
 }

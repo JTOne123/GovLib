@@ -15,7 +15,7 @@ namespace GovLib.ProPublica
     {
         internal string ApiKey { get; }
         internal Dictionary<string, string> Headers { get; }
-        internal IHttpClient HttpClient { get; }
+        internal IHttpClient Client { get; }
         
         /// <summary>
         /// Get the number of the current congressional session.
@@ -43,7 +43,7 @@ namespace GovLib.ProPublica
         /// ProPublica API bills module.
         /// </summary>
         /// <returns><see cref="BillsApi" /></returns>
-        //public BillsApi Bills { get; }
+        public BillsApi Bills { get; }
 
         /// <summary>
         /// ProPublica API votes module.
@@ -56,14 +56,15 @@ namespace GovLib.ProPublica
         /// Instantiate the library using your API key.
         /// </summary>
         /// <param name="apiKey">ProPublica Congress API key.</param>
+        /// <param name="testClient">Set to true for testing.</param>
         public Congress(string apiKey, bool testClient = false)
         {
             if (testClient)
             {
                 Members = new MembersApi(this, new TestMemberUrlBuilder());
+                Bills = new BillsApi(this, new TestBillUrlBuilder());
                 Votes = new VotesApi(this);
-                //Bills = new BillsApi(this);
-                HttpClient =  new FileTestClient();
+                Client =  new FileTestClient();
             }
             else
             {
@@ -72,9 +73,9 @@ namespace GovLib.ProPublica
 
                 ApiKey = apiKey;
                 Members = new MembersApi(this, new MemberUrlBuilder());
+                Bills = new BillsApi(this, new BillUrlBuilder());
                 Votes = new VotesApi(this);
-                //Bills = new BillsApi(this);
-                HttpClient = new HttpClient();
+                Client = new HttpClient();
                 Headers = new Dictionary<string, string>
                 {
                     { "X-API-Key", ApiKey }

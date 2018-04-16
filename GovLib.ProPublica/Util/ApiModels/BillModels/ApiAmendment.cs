@@ -33,7 +33,7 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
         [JsonProperty("latest_major_action_date")]
         internal string LatestActionDate { get; set; }
 
-        internal static Amendment Convert(ApiAmendment entity, MemberCache cache)
+        internal static Amendment Convert(ApiAmendment entity)
         {
             if (entity == null)
                 return null;
@@ -48,14 +48,6 @@ namespace GovLib.ProPublica.Util.ApiModels.BillModels
                 LatestAction = entity.LatestAction,
                 LatestActionDate = DateTime.ParseExact(entity.IntroducedDate, "yyyy-MM-dd", CultureInfo.InvariantCulture)
             };
-
-            if (!string.IsNullOrEmpty(entity.SponsorID))
-            {
-                if (entity.SponsorTitle == "Sen.")
-                    amendment.Sponsor = cache.Senators[entity.SponsorID];
-                else
-                    amendment.Sponsor = cache.Representatives[entity.SponsorID];
-            }
 
             return amendment;
         }

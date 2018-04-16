@@ -227,3 +227,23 @@ GovLib.TestData/
 
 # JetBrains Rider config
 .idea/
+
+GovLib\.Tests/ProPublica/Congress/Bills/BillAmendmentsTests\.cs
+
+GovLib\.Tests/ProPublica/Congress/Bills/BillByIDTests\.cs
+
+GovLib\.Tests/ProPublica/Congress/Bills/BillCosponsorsTests\.cs
+
+GovLib\.Tests/ProPublica/Congress/Bills/BillsByMemberTests\.cs
+
+GovLib\.Tests/ProPublica/Congress/Bills/BillsBySubjectTests\.cs
+
+GovLib\.Tests/ProPublica/Congress/Bills/BillSubjectsTests\.cs
+
+GovLib\.Tests/ProPublica/Congress/Bills/RecentBillsTests\.cs
+
+GovLib\.Tests/ProPublica/Congress/Bills/RelatedBillsTests\.cs
+
+GovLib\.Tests/ProPublica/Congress/Bills/SubjectsByTerm\.cs
+
+GovLib\.Tests/ProPublica/Congress/Bills/UpcomingBillsTests\.cs

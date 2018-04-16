@@ -12,5 +12,6 @@
 		"**/*.userprefs": true,
 		"**/.vs": true,
 		"**/.idea": true
-	}
+	},
+	"dotnet-test-explorer.testProjectPath": "GovLib.Tests"
 }
