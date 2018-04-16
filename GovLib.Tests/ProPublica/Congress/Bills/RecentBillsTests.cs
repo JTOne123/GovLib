@@ -59,12 +59,5 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
             foreach (var bill in RecentBills)
                 Assert.NotNull(bill.Introduced);
         }
-
-        [Fact]
-        public void BillSponsorIdMatchesSponsorObjectId()
-        {
-            foreach (var bill in RecentBills)
-                Assert.Equal(bill.SponsorID, bill.Sponsor.CongressID);
-        }
     }
 }

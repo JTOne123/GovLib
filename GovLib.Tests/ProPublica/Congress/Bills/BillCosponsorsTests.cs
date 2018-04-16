@@ -10,7 +10,6 @@ namespace GovLib.Tests.ProPublica.Congress.Members
 
         public BillCosponsorsTests(CongressFixture fixture)
         {
-            BillCosponsors = fixture.Congress.Bills.GetBillCosponsors(115, "sres413");
         }
 
         [Fact]

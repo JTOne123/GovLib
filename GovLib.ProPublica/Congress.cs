@@ -65,6 +65,7 @@ namespace GovLib.ProPublica
                 Bills = new BillsApi(this, new TestBillUrlBuilder());
                 Votes = new VotesApi(this);
                 Client =  new FileTestClient();
+                Headers = new Dictionary<string, string>();
             }
             else
             {

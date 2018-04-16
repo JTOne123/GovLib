@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
 
         public SubjectsByTerm(CongressFixture fixture)
         {
-            Subjects = fixture.Congress.Bills.GetSubjects("climate");
+            Subjects = fixture.Congress.Bills.GetSubjectsByTerm("climate");
         }
 
         [Fact]

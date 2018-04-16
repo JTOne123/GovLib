@@ -44,12 +44,6 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
         }
 
         [Fact]
-        public void BillSponsorIdMatchesSponsorObjectId()
-        {
-            Assert.Equal(BillByID.SponsorID, BillByID.Sponsor.CongressID);
-        }
-
-        [Fact]
         public void BillHasAnIntroducedDate()
         {
             Assert.NotNull(BillByID.Introduced);

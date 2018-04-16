@@ -16,13 +16,13 @@ namespace GovLib.ProPublica.Builders
         }
         
         public string RecentBills(Chamber chamber, BillStatus status, int congressNum) =>
-            Path.Combine(_billPath, TestBillUrls.RecentBills);
+            Path.Combine(_billPath, string.Format(TestBillUrls.RecentBills, ChamberEnumToString(chamber)));
         
         public string BillsByMember(string congressID) =>
-            Path.Combine(_billPath, TestBillUrls.BillsByMember);
+            Path.Combine(_billPath, string.Format(TestBillUrls.BillsByMember, congressID));
         
         public string BillsBySubject(string subject) =>
-            Path.Combine(_billPath, TestBillUrls.BillsBySubject);
+            Path.Combine(_billPath, string.Format(TestBillUrls.BillsBySubject, subject));
         
         public string UpcomingBills(Chamber chamber) =>
             Path.Combine(_billPath, string.Format(TestBillUrls.UpcomingBills, ChamberEnumToString(chamber)));
