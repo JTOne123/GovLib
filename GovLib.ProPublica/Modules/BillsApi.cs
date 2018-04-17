@@ -33,7 +33,7 @@ namespace GovLib.ProPublica.Modules
         /// <param name="chamber"><see cref="Chamber" /></param>
         /// <param name="status"><see cref="BillStatus" /></param>
         /// <returns><see cref="Bill" /> array.</returns>
-        public Bill[] GetRecentBills(Chamber chamber, BillStatus status)
+        public IEnumerable<Bill> GetRecentBills(Chamber chamber, BillStatus status)
         {
             return GetRecentBills(chamber, status, _congress.CurrentCongress);
         }
@@ -46,12 +46,12 @@ namespace GovLib.ProPublica.Modules
         /// <param name="status"><see cref="BillStatus" /></param>
         /// <param name="congressNum">Congress number</param>
         /// <returns><see cref="Bill" /> array.</returns>
-        public Bill[] GetRecentBills(Chamber chamber, BillStatus status, int congressNum)
+        public IEnumerable<Bill> GetRecentBills(Chamber chamber, BillStatus status, int congressNum)
         {
             var url = _billUrlBuilder.RecentBills(chamber, status, congressNum);
             var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<BillsWrapper<ApiBill>>>(result);
-            return json?.Results?[0].Bills.Select(bill => ApiBill.Convert(bill)).ToArray();
+            return json?.Results?[0].Bills.Select(bill => ApiBill.Convert(bill));
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace GovLib.ProPublica.Modules
         /// </summary>
         /// <param name="congressNumMember"><see cref="ICongressMember" /></param>
         /// <returns><see cref="Bill" /> array.</returns>
-        public Bill[] GetRecentBillsByMember(ICongressMember congressNumMember)
+        public IEnumerable<Bill> GetRecentBillsByMember(ICongressMember congressNumMember)
         {
             return GetRecentBillsByMember(congressNumMember.CongressID);
         }
@@ -70,12 +70,12 @@ namespace GovLib.ProPublica.Modules
         /// </summary>
         /// <param name="id">Congress member bio ID.</param>
         /// <returns><see cref="Bill" /> array.</returns>
-        public Bill[] GetRecentBillsByMember(string id)
+        public IEnumerable<Bill> GetRecentBillsByMember(string id)
         {
             var url = _billUrlBuilder.BillsByMember(id);
             var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<BillsWrapper<ApiBill>>>(result);
-            return json?.Results?[0].Bills.Select(bill => ApiBill.Convert(bill)).ToArray();
+            return json?.Results?[0].Bills.Select(bill => ApiBill.Convert(bill));
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace GovLib.ProPublica.Modules
         /// </summary>
         /// <param name="subject"><see cref="BillSubject" /></param>
         /// <returns><see cref="Bill"/>array.</returns>
-        public Bill[] GetRecentBillsBySubject(BillSubject subject)
+        public IEnumerable<Bill> GetRecentBillsBySubject(BillSubject subject)
         {
             return GetRecentBillsBySubject(subject.Name);
         }
@@ -93,12 +93,12 @@ namespace GovLib.ProPublica.Modules
         /// </summary>
         /// <param name="subject">Search term.</param>
         /// <returns><see cref="Bill"/>array.</returns>
-        public Bill[] GetRecentBillsBySubject(string subject)
+        public IEnumerable<Bill> GetRecentBillsBySubject(string subject)
         {
             var url = _billUrlBuilder.BillsBySubject(subject);
             var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<ApiBill>>(result);
-            return json?.Results?.Select(b => ApiBill.Convert(b)).ToArray();
+            return json?.Results?.Select(b => ApiBill.Convert(b));
         }
 
         /// <summary>
@@ -106,12 +106,12 @@ namespace GovLib.ProPublica.Modules
         /// </summary>
         /// <param name="chamber"><see cref="Chamber" /></param>
         /// <returns><see cref="BillSummary"/>array.</returns>
-        public BillSummary[] GetUpcomingBills(Chamber chamber)
+        public IEnumerable<BillSummary> GetUpcomingBills(Chamber chamber)
         {
             var url = _billUrlBuilder.UpcomingBills(chamber);
             var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<BillsWrapper<ApiUpcomingBills>>>(result);
-            return json?.Results?[0].Bills.Select(b => ApiUpcomingBills.Convert(b)).ToArray();
+            return json?.Results?[0].Bills.Select(b => ApiUpcomingBills.Convert(b));
         }
 
         /// <summary>
@@ -134,12 +134,12 @@ namespace GovLib.ProPublica.Modules
         /// <param name="congressNum">Congress number.</param>
         /// <param name="id">Bill ID.</param>
         /// <returns><see cref="Amendment"/>array.</returns>
-        public Amendment[] GetBillAmendments(int congressNum, string id)
+        public IEnumerable<Amendment> GetBillAmendments(int congressNum, string id)
         {
             var url = _billUrlBuilder.BillAmmendments(congressNum, id);
             var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<AmendmentsWrapper<ApiAmendment>>>(result);
-            return json?.Results?[0].Amendments.Select(a => ApiAmendment.Convert(a)).ToArray();
+            return json?.Results?[0].Amendments.Select(a => ApiAmendment.Convert(a));
         }
 
         /// <summary>
@@ -148,12 +148,12 @@ namespace GovLib.ProPublica.Modules
         /// <param name="congressNum">Congress number.</param>
         /// <param name="id">Bill ID.</param>
         /// <returns><see cref="BillSubject"/>array.</returns>
-        public BillSubject[] GetBillSubjects(int congressNum, string id)
+        public IEnumerable<BillSubject> GetBillSubjects(int congressNum, string id)
         {
             var url = _billUrlBuilder.BillSubjects(congressNum, id);
             var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<SubjectsWrapper<ApiSubject>>>(result);
-            return json?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s)).ToArray();
+            return json?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s));
         }
 
         /// <summary>
@@ -162,12 +162,12 @@ namespace GovLib.ProPublica.Modules
         /// <param name="congressNum">Congress number.</param>
         /// <param name="id">Bill ID.</param>
         /// <returns><see cref="Bill"/>array.</returns>
-        public Bill[] GetRelatedBills(int congressNum, string id)
+        public IEnumerable<Bill> GetRelatedBills(int congressNum, string id)
         {
             var url = _billUrlBuilder.RelatedBills(congressNum, id);
             var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<RelatedBillsWrapper<ApiBill>>>(result);
-            return json?.Results?[0].RelatedBills.Select(b => ApiBill.Convert(b)).ToArray();
+            return json?.Results?[0].RelatedBills.Select(b => ApiBill.Convert(b));
         }
 
         /// <summary>
@@ -175,13 +175,13 @@ namespace GovLib.ProPublica.Modules
         /// </summary>
         /// <param name="term">Term to search for.</param>
         /// <returns><see cref="BillSubject"/>array.</returns>
-        public BillSubject[] GetSubjectsByTerm(string term)
+        public IEnumerable<BillSubject> GetSubjectsByTerm(string term)
         {
             var headers = new Dictionary<string, string>(_congress.Headers);
             headers.Add("query", term);
             var result = _congress.Client.Get(_billUrlBuilder.SubjectsByTerm(term), headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<SubjectsWrapper<ApiSubject>>>(result);
-            return json?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s)).ToArray();
+            return json?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s));
         }
 
         /// <summary>
@@ -190,12 +190,12 @@ namespace GovLib.ProPublica.Modules
         /// <param name="congressNum">Congress number.</param>
         /// <param name="id">Bill ID.</param>
         /// <returns>Cosponsor CongressID array.</returns>
-        public string[] GetBillCosponsors(int congressNum, string id)
+        public IEnumerable<string> GetBillCosponsors(int congressNum, string id)
         {
             var url = _billUrlBuilder.Cosponsors(congressNum, id);
             var result = _congress.Client.Get(url, _congress.Headers);
             var json = JsonConvert.DeserializeObject<ResultWrapper<CosponsorsWrapper<ApiCosponsor>>>(result);
-            return json?.Results?[0].Cosponsors.Select(c => c.ID).ToArray();
+            return json?.Results?[0].Cosponsors.Select(c => c.ID);
         }
     }
 }

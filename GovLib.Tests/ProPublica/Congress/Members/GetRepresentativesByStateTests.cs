@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using GovLib.ProPublica;
 using Xunit;
 
@@ -6,11 +8,12 @@ namespace GovLib.Tests.ProPublica.Congress.Members
     [Collection("ProPublica Test Collection")]
     public class GetRepresentativesByStateTests : IClassFixture<CongressFixture>
     {
-        public RepresentativeSummary[] StateReps { get; }
+        public IEnumerable<RepresentativeSummary> StateReps { get; }
 
         public GetRepresentativesByStateTests(CongressFixture fixture)
         {
             StateReps = fixture.Congress.Members.GetRepresentativesByState(State.Texas);
+            var ids = StateReps.Select(rep => rep.CongressID);
         }
 
         [Fact]

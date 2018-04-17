@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GovLib.ProPublica;
 using Xunit;
 
@@ -6,7 +7,7 @@ namespace GovLib.Tests.ProPublica.Congress.Members
     [Collection("ProPublica Test Collection")]
     public class GetNewMembersTests : IClassFixture<CongressFixture>
     {
-        public PoliticianSummary[] NewMembers { get; }
+        public IEnumerable<PoliticianSummary> NewMembers { get; }
 
         public GetNewMembersTests(CongressFixture fixture)
         {
