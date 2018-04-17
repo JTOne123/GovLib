@@ -3,7 +3,6 @@
   <PropertyGroup>
     <Authors>Phil Hawkins</Authors>
     <VersionPrefix>0.2.0</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
     <Copyright>MIT</Copyright>
     <PackageProjectUrl>https://phil-harmoniq.github.io/GovLib</PackageProjectUrl>
     <RepositoryUrl>https://github.com/phil-harmoniq/GovLib</RepositoryUrl>

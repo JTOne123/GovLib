@@ -9,15 +9,7 @@ GovLib is a .NET Standard library that provides intuitive access to various gove
 Install using the .NET CLI (explicit version is required in pre-releases):
 
 ```bash
-dotnet add package GovLib --version 0.1.1-alpha
-```
-
-Install by adding the NuGet package reference to your `.csproj`:
-
-```xml
-<ItemGroup>
-  <PackageReference Include="GovLib" Version="0.1.1-alpha"/>
-</ItemGroup>
+dotnet add package GovLib
 ```
 
 ## Usage guide
