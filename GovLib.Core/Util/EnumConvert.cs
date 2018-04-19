@@ -236,6 +236,19 @@ namespace GovLib.Util
             }
         }
 
+        public static Chamber? ChamberStringToEnum(string chamber)
+        {
+            switch (chamber.ToLowerInvariant())
+            {
+                case "house":
+                    return Chamber.House;
+                case "senate":
+                    return Chamber.Senate;
+                default:
+                    return null;
+            }
+        }
+
         public static string BillStatusEnumToString(BillStatus status)
         {
             switch (status)

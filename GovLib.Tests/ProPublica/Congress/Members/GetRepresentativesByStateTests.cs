@@ -13,7 +13,6 @@ namespace GovLib.Tests.ProPublica.Congress.Members
         public GetRepresentativesByStateTests(CongressFixture fixture)
         {
             StateReps = fixture.Congress.Members.GetRepresentativesByState(State.Texas);
-            var ids = StateReps.Select(rep => rep.CongressID);
         }
 
         [Fact]

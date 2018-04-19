@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace GovLib.ProPublica.Util.ApiModels.Wrappers
 {
-    internal class ResultWrapper<T>
+    internal class ResultsWrapper<T>
     {
         [JsonProperty("status")]
         public string Status { get; set; }
@@ -11,6 +11,6 @@ namespace GovLib.ProPublica.Util.ApiModels.Wrappers
         public string Copyright { get; set; }
         
         [JsonProperty("results")]
-        public T Result { get; set; }
+        public T[] Results { get; set; }
     }
 }

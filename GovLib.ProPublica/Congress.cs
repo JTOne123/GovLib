@@ -49,7 +49,6 @@ namespace GovLib.ProPublica
         /// ProPublica API votes module.
         /// </summary>
         /// <returns><see cref="VotesApi" /></returns>
-        [Obsolete("Unfished module, not recommended for use")]
         public VotesApi Votes { get; }
 
         /// <summary>
@@ -63,7 +62,7 @@ namespace GovLib.ProPublica
             {
                 Members = new MembersApi(this, new TestMemberUrlBuilder());
                 Bills = new BillsApi(this, new TestBillUrlBuilder());
-                Votes = new VotesApi(this);
+                Votes = new VotesApi(this, new TestVoteUrlBuilder());
                 Client =  new FileTestClient();
                 Headers = new Dictionary<string, string>();
             }
@@ -75,7 +74,7 @@ namespace GovLib.ProPublica
                 ApiKey = apiKey;
                 Members = new MembersApi(this, new MemberUrlBuilder());
                 Bills = new BillsApi(this, new BillUrlBuilder());
-                Votes = new VotesApi(this);
+                Votes = new VotesApi(this, new VoteUrlBuilder());
                 Client = new HttpClient();
                 Headers = new Dictionary<string, string>
                 {
