@@ -227,3 +227,6 @@ GovLib.TestData/
 
 # JetBrains Rider config
 .idea/
+
+# Coverage Results
+coverage.json
