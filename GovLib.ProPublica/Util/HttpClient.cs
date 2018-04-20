@@ -13,7 +13,6 @@ namespace GovLib.ProPublica.Util
             using (var wc = new WebClient())
             {
                 AddHeaders(wc, headers);
-                var jsonStr = wc.DownloadString(url);
                 try
                 {
                     return wc.DownloadString(url);
