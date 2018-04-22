@@ -4,7 +4,7 @@ using GovLib.ProPublica.Util;
 
 namespace GovLib.ProPublica
 {
-    public class Vote
+    public abstract class Vote
     {
         #pragma warning disable CS1591
 
@@ -12,9 +12,8 @@ namespace GovLib.ProPublica
         public Chamber Chamber { get; internal set; }
         public int Session { get; internal set; }
         public int RollCall { get; internal set; }
-        public string BillID { get; internal set; }
-        public IList<string> AmendmentIDs { get; internal set; }
         public string Question { get; internal set; }
+        public string Title { get; internal set; }
         public string Description { get; internal set; }
         public string VoteType { get; internal set; }
         public DateTime TimeStamp { get; internal set; }

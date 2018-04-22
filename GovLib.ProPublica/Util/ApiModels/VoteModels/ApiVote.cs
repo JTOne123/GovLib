@@ -14,11 +14,11 @@ namespace GovLib.ProPublica.Util.ApiModels.VoteModels
         [JsonProperty("session")]
         internal int Session { get; set; }
         
+        [JsonProperty("chamber")]
+        internal string Chamber { get; set; }
+        
         [JsonProperty("roll_call")]
         internal int RollCall { get; set; }
-        
-        [JsonProperty("bill")]
-        internal ApiBill Bill { get; set; }
         
         [JsonProperty("question")]
         internal string Question { get; set; }
@@ -38,6 +38,21 @@ namespace GovLib.ProPublica.Util.ApiModels.VoteModels
         [JsonProperty("result")]
         internal string Result { get; set; }
         
+        [JsonProperty("title")]
+        internal string Title { get; set; }
+        
+        [JsonProperty("document_title")]
+        internal string DocumentTitle { get; set; }
+        
+        [JsonProperty("bill")]
+        internal ApiVoteBill Bill { get; set; }
+        
+        [JsonProperty("amendment")]
+        internal ApiVoteAmendment Amendment { get; set; }
+        
+        [JsonProperty("nomination")]
+        internal ApiVoteNomination Nomination { get; set; }
+        
         [JsonProperty("republican")]
         internal ApiPartyVote RepublicanVotes { get; set; }
         
@@ -54,6 +69,38 @@ namespace GovLib.ProPublica.Util.ApiModels.VoteModels
         {
             if (entity == null)
                 return null;
+            
+            Vote vote;
+
+            if (!string.IsNullOrEmpty(entity.Nomination?.NominationID))
+            {
+                var nominationVote = new NominationVote();
+                nominationVote.NominationID = entity.Nomination.NominationID;
+                nominationVote.Number = entity.Nomination.Number;
+                nominationVote.Name = entity.Nomination.Name;
+                nominationVote.Agency = entity.Nomination.Agency;
+                vote = nominationVote;
+            }
+            else if (!string.IsNullOrEmpty(entity.Amendment?.AmendmentID))
+            {
+                var amendmentVote = new AmendmentVote();
+                amendmentVote.AmendmentID = entity.Amendment.AmendmentID;
+                vote = amendmentVote;
+            }
+            else if (entity.Bill.Number.Equals("JOURNAL", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var jounralVote = new JournalVote();
+                jounralVote.BillID = entity.Bill.BillID;
+                vote = jounralVote;
+            }
+            else
+            {
+                var billVote = new BillVote();
+                billVote.BillID = entity.Bill.BillID;
+                billVote.SponsorID = entity.Bill.SponsorID;
+                billVote.Number = entity.Bill.Number;
+                vote = billVote;
+            }
             
             var democraticVotes = new VoteResult
             {
@@ -87,22 +134,26 @@ namespace GovLib.ProPublica.Util.ApiModels.VoteModels
                 Present = entity.TotalVotes.Present,
             };
             
-            return new Vote
-            {
-                Congress = entity.Congress,
-                Session = entity.Session,
-                RollCall = entity.RollCall,
-                BillID = entity.Bill.BillID,
-                Question = entity.Question,
-                Description = entity.Description,
-                VoteType = entity.VoteType,
-                TimeStamp = DateTime.Parse($"{entity.Date} {entity.Time}"),
-                Passed = entity.Result.Equals("Passed", StringComparison.InvariantCultureIgnoreCase),
-                DemocraticVotes = democraticVotes,
-                RepublicanVotes = republicanVotes,
-                IndependentVotes = independentVotes,
-                TotalVotes = totalVotes
-            };
+            if (entity.Chamber.Equals("senate", StringComparison.InvariantCultureIgnoreCase))
+                vote.Chamber = GovLib.Chamber.Senate;
+            else
+                vote.Chamber = GovLib.Chamber.House;
+
+            vote.Congress = entity.Congress;
+            vote.Session = entity.Session;
+            vote.RollCall = entity.RollCall;
+            vote.Question = entity.Question;
+            vote.Title = entity.Title ?? entity.DocumentTitle;
+            vote.Description = entity.Description;
+            vote.VoteType = entity.VoteType;
+            vote.TimeStamp = DateTime.Parse($"{entity.Date} {entity.Time}");
+            vote.Passed = entity.Result.Equals("Passed", StringComparison.InvariantCultureIgnoreCase);
+            vote.DemocraticVotes = democraticVotes;
+            vote.RepublicanVotes = republicanVotes;
+            vote.IndependentVotes = independentVotes;
+            vote.TotalVotes = totalVotes;
+
+            return vote;
         }
     }
 }
