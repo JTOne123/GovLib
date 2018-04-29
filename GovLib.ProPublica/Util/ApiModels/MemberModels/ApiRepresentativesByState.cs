@@ -37,7 +37,7 @@ namespace GovLib.ProPublica.Util.MemberModels
             pol.MiddleName = entity.MiddleName;
             pol.LastName = entity.LastName;
             pol.State = (State) EnumConvert.StateCodeToEnum(state);
-            pol.Party = entity.Party;
+            pol.Party = (Party) EnumConvert.PartyLetterToEnum(entity.Party);
 
             if (entity.District == "At-Large") pol.District = 1;
             else pol.District = int.Parse(entity.District);

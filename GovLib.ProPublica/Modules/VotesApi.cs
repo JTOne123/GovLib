@@ -47,13 +47,13 @@ namespace GovLib.ProPublica.Modules
         /// <param name="sessionNum">Session number (1 for odd year, 2 for even year)</param>
         /// <param name="rollCallNum">Roll call number</param>
         /// <returns>The specified roll call vote result.</returns>
-        public IEnumerable<Vote> GetRollCallVote(Chamber chamber, int congressNum, int sessionNum, int rollCallNum)
+        public VoteRollCall GetRollCallVote(Chamber chamber, int congressNum, int sessionNum, int rollCallNum)
         {
             var ch = EnumConvert.ChamberEnumToString(chamber);
             var url = _voteUrlBuilder.RollCallVote(ch, congressNum.ToString(), sessionNum.ToString(), rollCallNum.ToString());
             var result = _congress.Client.Get(url);
-            var json = JsonConvert.DeserializeObject<ResultWrapper<VotesWrapper<ApiVote>>>(result);
-            return json?.Result?.Votes?.Select(v => ApiVote.Convert(v));
+            var json = JsonConvert.DeserializeObject<ResultWrapper<VotesSingularWrapper<VoteRollCallWrapper<ApiRollCallVote>>>>(result);
+            return ApiRollCallVote.Convert(json?.Result?.Votes?.Vote);
         }
         
         /// <summary>

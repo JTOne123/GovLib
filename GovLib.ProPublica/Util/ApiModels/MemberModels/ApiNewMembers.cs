@@ -58,7 +58,7 @@ namespace GovLib.ProPublica.Util.MemberModels
             pol.MiddleName = entity.MiddleName;
             pol.LastName = entity.LastName;
             pol.State = (State) EnumConvert.StateCodeToEnum(entity.State);
-            pol.Party = entity.Party;
+            pol.Party = (Party) EnumConvert.PartyLetterToEnum(entity.Party);
 
             return pol;
         }

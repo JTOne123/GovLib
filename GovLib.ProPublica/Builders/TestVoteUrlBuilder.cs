@@ -18,7 +18,7 @@ namespace GovLib.ProPublica.Builders
         public string RecentVotes(string chamber) =>
             Path.Combine(_votePath, string.Format(TestVoteUrls.RecentVotes, chamber));
 
-        public string RollCallVote(string congressNum, string chamber, string sessionNum, string rollCallNum) =>
+        public string RollCallVote(string chamber, string congressNum, string sessionNum, string rollCallNum) =>
             Path.Combine(_votePath, string.Format(TestVoteUrls.RollCallVote, chamber));
 
         public string VotesByType(string congressNum, string chamber, string voteType) =>

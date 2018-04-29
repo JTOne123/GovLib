@@ -12,7 +12,7 @@ namespace GovLib.ProPublica
         public string LastName { get; internal set; }
         public string FullName =>
             string.IsNullOrEmpty(MiddleName) ? $"{FirstName} {LastName}" : $"{FirstName} {MiddleName} {LastName}";
-        public string Party { get; internal set; }
+        public Party Party { get; internal set; }
         public State State { get; internal set; }
     }
 }

@@ -49,11 +49,5 @@ namespace GovLib.Tests.ProPublica.Congress.Members
         {
             Assert.NotNull(DistrictRep.State);
         }
-
-        [Fact]
-        public void MemberCardsHaveAParty()
-        {
-            Assert.False(string.IsNullOrEmpty(DistrictRep.Party));
-        }
     }
 }

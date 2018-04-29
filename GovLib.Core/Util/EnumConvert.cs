@@ -154,5 +154,71 @@ namespace GovLib.Util
                 default: return null;
             }
         }
+
+        public static string PartyEnumToLetter(Party party)
+        {
+            switch (party)
+            {
+                case Party.Democratic: return "D";
+                case Party.Republican: return "R";
+                case Party.Independent: return "I";
+                default: return null;
+            }
+        }
+
+        public static Party? PartyLetterToEnum(string party)
+        {
+            switch (party.ToUpper())
+            {
+                case "D": return Party.Democratic;
+                case "R": return Party.Republican;
+                case "I": return Party.Independent;
+                default: return null;
+            }
+        }
+
+        public static string PartyEnumToCode(Party party)
+        {
+            switch (party)
+            {
+                case Party.Democratic: return "Dem";
+                case Party.Republican: return "Rep";
+                case Party.Independent: return "Ind";
+                default: return null;
+            }
+        }
+
+        public static Party? PartyCodeToEnum(string party)
+        {
+            switch (party.ToLower())
+            {
+                case "dem": return Party.Democratic;
+                case "rep": return Party.Republican;
+                case "ind": return Party.Independent;
+                default: return null;
+            }
+        }
+
+        public static string PartyEnumToString(Party party)
+        {
+            switch (party)
+            {
+                case Party.Democratic: return "Democratic";
+                case Party.Republican: return "Republican";
+                case Party.Independent: return "Independent";
+                default: return null;
+            }
+        }
+
+        public static Party? PartyStringToEnum(string party)
+        {
+            switch (party.ToUpper())
+            {
+                case "democratic": return Party.Democratic;
+                case "republican": return Party.Republican;
+                case "independent": return Party.Independent;
+                default: return null;
+            }
+        }
     }
 }

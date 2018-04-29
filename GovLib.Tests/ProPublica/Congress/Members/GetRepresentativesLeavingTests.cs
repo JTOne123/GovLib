@@ -67,12 +67,5 @@ namespace GovLib.Tests.ProPublica.Congress.Members
             foreach (var representativeCard in RepsLeaving)
                 Assert.NotNull(representativeCard.State);
         }
-
-        [Fact]
-        public void MemberCardsHaveAParty()
-        {
-            foreach (var representativeCard in RepsLeaving)
-                Assert.False(string.IsNullOrEmpty(representativeCard.Party));
-        }
     }
 }

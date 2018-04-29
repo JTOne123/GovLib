@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../GovLib/GovLib.csproj" />
+    <ProjectReference Include="../GovLib.Core/GovLib.Core.csproj" />
+    <ProjectReference Include="../GovLib.ProPublica/GovLib.ProPublica.csproj" />
   </ItemGroup>
 
   <ItemGroup>
