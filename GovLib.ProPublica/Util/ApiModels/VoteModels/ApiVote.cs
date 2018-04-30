@@ -65,7 +65,7 @@ namespace GovLib.ProPublica.Util.ApiModels.VoteModels
         [JsonProperty("total")]
         internal ApiPartyVote TotalVotes { get; set; }
 
-        public static Vote Convert(ApiVote entity)
+        internal static Vote Convert(ApiVote entity)
         {
             if (entity == null)
                 return null;

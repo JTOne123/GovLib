@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace GovLib.ProPublica.Util.ApiModels.VoteModels
 {
-    public class ApiVoteNomination
+    internal class ApiVoteNomination
     {
         [JsonProperty("nomination_id")]
         internal string NominationID { get; set; }

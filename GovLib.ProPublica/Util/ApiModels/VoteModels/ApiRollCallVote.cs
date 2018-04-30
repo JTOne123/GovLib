@@ -69,7 +69,7 @@ namespace GovLib.ProPublica.Util.ApiModels.VoteModels
         [JsonProperty("positions")]
         internal ApiVoteRollCallPosition[] Positions { get; set; }
 
-        public static VoteRollCall Convert(ApiRollCallVote entity)
+        internal static VoteRollCall Convert(ApiRollCallVote entity)
         {
             if (entity == null)
                 return null;
