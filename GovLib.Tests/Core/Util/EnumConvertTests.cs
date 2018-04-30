@@ -58,6 +58,7 @@ namespace GovLib.Tests.Core.Util
             Assert.Equal(StateEnumToCode(State.WestVirginia), "WV");
             Assert.Equal(StateEnumToCode(State.Wisconsin), "WI");
             Assert.Equal(StateEnumToCode(State.Wyoming), "WY");
+            Assert.Equal(StateEnumToCode(State.Wyoming), "WY");
         }
 
         [Fact]
@@ -113,6 +114,7 @@ namespace GovLib.Tests.Core.Util
             Assert.Equal(StateCodeToEnum("WV"), State.WestVirginia);
             Assert.Equal(StateCodeToEnum("WI"), State.Wisconsin);
             Assert.Equal(StateCodeToEnum("WY"), State.Wyoming);
+            Assert.Null(StateCodeToEnum("XX"));
         }
 
 
@@ -128,6 +130,7 @@ namespace GovLib.Tests.Core.Util
         {
             Assert.Equal(ChamberStringToEnum("SenaTe"), Chamber.Senate);
             Assert.Equal(ChamberStringToEnum("HouSE"), Chamber.House);
+            Assert.Null(ChamberStringToEnum("President"));
         }
     }
 }
