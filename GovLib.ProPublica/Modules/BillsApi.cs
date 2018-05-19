@@ -2,51 +2,200 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 using GovLib.ProPublica.Urls;
 using GovLib.Contracts;
-using GovLib.ProPublica.Util;
+using GovLib.ProPublica.Util.ApiModels.Wrappers;
 using GovLib.Util;
-using GovLib.ProPublica.Util.ApiModels.BillModels;
 using System.Linq;
+using GovLib.ProPublica.Util.ApiModels.BillModels;
+using GovLib.ProPublica.Util;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using GovLib.ProPublica.Builders;
 
 namespace GovLib.ProPublica.Modules
 {
-    /// <summary> Get information about bills introduced to congress.</summary>
+    /// <summary>
+    /// Get information about bills introduced to congress.
+    /// </summary>
     public class BillsApi
     {
-        private Congress _parent { get; }
+        private Congress _congress { get; }
+        private IBillUrlBuilder _billUrlBuilder { get; }
 
-        internal BillsApi(Congress parent)
+        internal BillsApi(Congress parent, IBillUrlBuilder billUrlBuilder)
         {
-            _parent = parent;
+            _congress = parent;
+            _billUrlBuilder = billUrlBuilder;
         }
 
-        /// <summary> Get recent bills by status.</summary>
-        public Bill[] GetRecentBills(Chamber chamber, int congress, BillStatus status)
+        /// <summary>
+        /// Get the 20 most recent bills by type in the current congress session.
+        /// </summary>
+        /// <param name="chamber"><see cref="Chamber" /></param>
+        /// <param name="status"><see cref="BillStatus" /></param>
+        /// <returns><see cref="Bill" /> array.</returns>
+        public IEnumerable<Bill> GetRecentBills(Chamber chamber, BillStatus status)
         {
-            using (var client = new HttpClient())
-            {
-                var chamberString = EnumConvert.ChamberEnumToString(chamber);
-                var statusString = EnumConvert.BillStatusEnumToString(status);
-                var url = string.Format(BillUrls.RecentBills, congress, chamberString, statusString);
-                var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
-                return result?.results?[0].bills.Select(b => ApiBill.Convert(b, _parent.Cache[congress])).ToArray();
-            }
+            return GetRecentBills(chamber, status, _congress.CurrentCongress);
         }
 
-        /// <summary> Get recent bills by member.</summary>
-        public Bill[] GetRecentBillsByMember(ICongressMember politician)
+        /// <summary>
+        /// Get the 20 most recent bills by type in the current congress session
+        /// or the 20 last bills of a previous session.
+        /// </summary>
+        /// <param name="chamber"><see cref="Chamber" /></param>
+        /// <param name="status"><see cref="BillStatus" /></param>
+        /// <param name="congressNum">Congress number</param>
+        /// <returns><see cref="Bill" /> array.</returns>
+        public IEnumerable<Bill> GetRecentBills(Chamber chamber, BillStatus status, int congressNum)
         {
-            return GetRecentBillsByMember(politician.CongressID);
+            var url = _billUrlBuilder.RecentBills(chamber, status, congressNum);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<BillsWrapper<ApiBill>>>(result);
+            return json?.Results?[0].Bills.Select(bill => ApiBill.Convert(bill));
         }
 
-        /// <summary> Get recent bills by member id.</summary>
-        public Bill[] GetRecentBillsByMember(string id)
+        /// <summary>
+        /// Get the 20 bills most recently introduced or updated by a particular member.
+        /// </summary>
+        /// <param name="congressNumMember"><see cref="ICongressMember" /></param>
+        /// <returns><see cref="Bill" /> array.</returns>
+        public IEnumerable<Bill> GetRecentBillsByMember(ICongressMember congressNumMember)
         {
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(BillUrls.MemberBills, id, "introduced");
-                var result = client.Get<ResultWrapper<BillsWrapper<ApiBill>>>(url, _parent.Headers);
-                return result?.results?[0].bills.Select(b => ApiBill.Convert(b, _parent.Cache[_parent.CurrentCongress])).ToArray();
-            }
+            return GetRecentBillsByMember(congressNumMember.CongressID);
+        }
+
+
+        /// <summary>
+        /// Get the 20 bills most recently introduced or updated by a particular member.
+        /// </summary>
+        /// <param name="id">Congress member bio ID.</param>
+        /// <returns><see cref="Bill" /> array.</returns>
+        public IEnumerable<Bill> GetRecentBillsByMember(string id)
+        {
+            var url = _billUrlBuilder.BillsByMember(id);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<BillsWrapper<ApiBill>>>(result);
+            return json?.Results?[0].Bills.Select(bill => ApiBill.Convert(bill));
+        }
+
+        /// <summary>
+        /// Get the 20 most recently updated bills for a specific legislative subject.
+        /// </summary>
+        /// <param name="subject"><see cref="BillSubject" /></param>
+        /// <returns><see cref="Bill"/>array.</returns>
+        public IEnumerable<Bill> GetRecentBillsBySubject(BillSubject subject)
+        {
+            return GetRecentBillsBySubject(subject.Name);
+        }
+
+        /// <summary>
+        /// Get the 20 most recently updated bills for a specific legislative subject.
+        /// </summary>
+        /// <param name="subject">Search term.</param>
+        /// <returns><see cref="Bill"/>array.</returns>
+        public IEnumerable<Bill> GetRecentBillsBySubject(string subject)
+        {
+            var url = _billUrlBuilder.BillsBySubject(subject);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<ApiBill>>(result);
+            return json?.Results?.Select(b => ApiBill.Convert(b));
+        }
+
+        /// <summary>
+        /// Get bills that may be considered in the near future.
+        /// </summary>
+        /// <param name="chamber"><see cref="Chamber" /></param>
+        /// <returns><see cref="BillSummary"/>array.</returns>
+        public IEnumerable<BillSummary> GetUpcomingBills(Chamber chamber)
+        {
+            var url = _billUrlBuilder.UpcomingBills(chamber);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<BillsWrapper<ApiUpcomingBills>>>(result);
+            return json?.Results?[0].Bills.Select(b => ApiUpcomingBills.Convert(b));
+        }
+
+        /// <summary>
+        /// Get specific bill by ID.
+        /// </summary>
+        /// <param name="congressNum">Congress number.</param>
+        /// <param name="id">Bill ID.</param>
+        /// <returns><see cref="Bill"/></returns>
+        public Bill GetBillByID(int congressNum, string id)
+        {
+            var url = _billUrlBuilder.BillByID(congressNum, id);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<ApiBill>>(result);
+            return ApiBill.Convert(json?.Results?.FirstOrDefault());
+        }
+
+        /// <summary>
+        /// Get amendments for a specific bill.
+        /// </summary>
+        /// <param name="congressNum">Congress number.</param>
+        /// <param name="id">Bill ID.</param>
+        /// <returns><see cref="Amendment"/>array.</returns>
+        public IEnumerable<Amendment> GetBillAmendments(int congressNum, string id)
+        {
+            var url = _billUrlBuilder.BillAmmendments(congressNum, id);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<AmendmentsWrapper<ApiAmendment>>>(result);
+            return json?.Results?[0].Amendments.Select(a => ApiAmendment.Convert(a));
+        }
+
+        /// <summary>
+        /// Get subjects for a specific bill.
+        /// </summary>
+        /// <param name="congressNum">Congress number.</param>
+        /// <param name="id">Bill ID.</param>
+        /// <returns><see cref="BillSubject"/>array.</returns>
+        public IEnumerable<BillSubject> GetBillSubjects(int congressNum, string id)
+        {
+            var url = _billUrlBuilder.BillSubjects(congressNum, id);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<SubjectsWrapper<ApiSubject>>>(result);
+            return json?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s));
+        }
+
+        /// <summary>
+        /// Get bills related to a specific bill.
+        /// </summary>
+        /// <param name="congressNum">Congress number.</param>
+        /// <param name="id">Bill ID.</param>
+        /// <returns><see cref="Bill"/>array.</returns>
+        public IEnumerable<Bill> GetRelatedBills(int congressNum, string id)
+        {
+            var url = _billUrlBuilder.RelatedBills(congressNum, id);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<RelatedBillsWrapper<ApiBill>>>(result);
+            return json?.Results?[0].RelatedBills.Select(b => ApiBill.Convert(b));
+        }
+
+        /// <summary>
+        /// Get subjects related to given search term.
+        /// </summary>
+        /// <param name="term">Term to search for.</param>
+        /// <returns><see cref="BillSubject"/>array.</returns>
+        public IEnumerable<BillSubject> GetSubjectsByTerm(string term)
+        {
+            var headers = new Dictionary<string, string>(_congress.Headers);
+            headers.Add("query", term);
+            var result = _congress.Client.Get(_billUrlBuilder.SubjectsByTerm(term), headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<SubjectsWrapper<ApiSubject>>>(result);
+            return json?.Results?[0].Subjects.Select(s => ApiSubject.Convert(s));
+        }
+
+        /// <summary>
+        /// Get cosponsrs for a specific bill.
+        /// </summary>
+        /// <param name="congressNum">Congress number.</param>
+        /// <param name="id">Bill ID.</param>
+        /// <returns>Cosponsor CongressID array.</returns>
+        public IEnumerable<string> GetBillCosponsors(int congressNum, string id)
+        {
+            var url = _billUrlBuilder.Cosponsors(congressNum, id);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<CosponsorsWrapper<ApiCosponsor>>>(result);
+            return json?.Results?[0].Cosponsors.Select(c => c.ID);
         }
     }
 }

@@ -1,76 +1,71 @@
+using System.Collections.Generic;
+using GovLib.ProPublica;
 using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Members
 {
-    public class GetSenatorsByStateTests : IClassFixture<SenatorsByStateFixture>
+    [Collection("ProPublica Test Collection")]
+    public class GetSenatorsByStateTests : IClassFixture<CongressFixture>
     {
-        
-        public SenatorsByStateFixture Fixture { get; }
+        public IEnumerable<SenatorSummary> StateSenators { get; }
 
-        public GetSenatorsByStateTests(SenatorsByStateFixture fixture)
+        public GetSenatorsByStateTests(CongressFixture fixture)
         {
-            this.Fixture = fixture;
+            StateSenators = fixture.Congress.Members.GetSenatorsByState(State.Colorado);
         }
 
         [Fact]
         public void CollectionIsNotNull()
         {
-            Assert.NotNull(Fixture.StateSenators);
+            Assert.NotNull(StateSenators);
         }
 
         [Fact]
         public void CollectionIsNotEmpty()
         {
-            Assert.NotEmpty(Fixture.StateSenators);
+            Assert.NotEmpty(StateSenators);
         }
 
         [Fact]
         public void MemberCardsAreNotNull()
         {
-            foreach (var member in Fixture.StateSenators)
+            foreach (var member in StateSenators)
                 Assert.NotNull(member);
         }
 
         [Fact]
         public void MemberCardsHaveFirstName()
         {
-            foreach (var member in Fixture.StateSenators)
+            foreach (var member in StateSenators)
                 Assert.False(string.IsNullOrEmpty(member.FirstName));
         }
 
         [Fact]
         public void MemberCardsHaveLastName()
         {
-            foreach (var member in Fixture.StateSenators)
+            foreach (var member in StateSenators)
                 Assert.False(string.IsNullOrEmpty(member.LastName));
         }
 
         [Fact]
         public void MemberCardsHaveFullName()
         {
-            foreach (var member in Fixture.StateSenators)
+            foreach (var member in StateSenators)
                 Assert.False(string.IsNullOrEmpty(member.FullName));
         }
 
         [Fact]
         public void MemberCardsHaveAnID()
         {
-            foreach (var member in Fixture.StateSenators)
+            foreach (var member in StateSenators)
                 Assert.False(string.IsNullOrEmpty(member.CongressID));
         }
 
         [Fact]
         public void MemberCardsHaveAHomeState()
         {
-            foreach (var member in Fixture.StateSenators)
+            foreach (var member in StateSenators)
                 Assert.NotNull(member.State);
-        }
-
-        [Fact]
-        public void MemberCardsHaveAParty()
-        {
-            foreach (var member in Fixture.StateSenators)
-                Assert.False(string.IsNullOrEmpty(member.Party));
         }
     }
 }

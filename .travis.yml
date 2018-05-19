@@ -7,6 +7,7 @@ env:
 - NUGET_API=https://api.nuget.org/v3/index.json
 
 before_script:
+- "./clone-test-data.sh"
 - "ls -lhaF"
 
 script:

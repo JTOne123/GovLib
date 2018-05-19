@@ -1,57 +1,53 @@
+using GovLib.ProPublica;
 using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Members
 {
-    public class GetRepresentativesFromDistrictTests : IClassFixture<RepresentativeFromDistrictFixture>
+    [Collection("ProPublica Test Collection")]
+    public class GetRepresentativeFromDistrictTests : IClassFixture<CongressFixture>
     {
-        
-        public RepresentativeFromDistrictFixture Fixture { get; }
+        public RepresentativeSummary DistrictRep { get; }
 
-        public GetRepresentativesFromDistrictTests(RepresentativeFromDistrictFixture fixture)
+        public GetRepresentativeFromDistrictTests(CongressFixture fixture)
         {
-            this.Fixture = fixture;
+            // John Lewis
+            DistrictRep = fixture.Congress.Members.GetRepresentiveFromDistrict(State.Georgia, 6);
         }
 
         [Fact]
         public void MemberCardsAreNotNull()
         {
-            Assert.NotNull(Fixture.DistrictRep);
+            Assert.NotNull(DistrictRep);
         }
 
         [Fact]
         public void MemberCardsHaveFirstName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.DistrictRep.FirstName));
+            Assert.False(string.IsNullOrEmpty(DistrictRep.FirstName));
         }
 
         [Fact]
         public void MemberCardsHaveLastName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.DistrictRep.LastName));
+            Assert.False(string.IsNullOrEmpty(DistrictRep.LastName));
         }
 
         [Fact]
         public void MemberCardsHaveFullName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.DistrictRep.FullName));
+            Assert.False(string.IsNullOrEmpty(DistrictRep.FullName));
         }
 
         [Fact]
         public void MemberCardsHaveAnID()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.DistrictRep.CongressID));
+            Assert.False(string.IsNullOrEmpty(DistrictRep.CongressID));
         }
 
         [Fact]
         public void MemberCardsHaveAHomeState()
         {
-            Assert.NotNull(Fixture.DistrictRep.State);
-        }
-
-        [Fact]
-        public void MemberCardsHaveAParty()
-        {
-            Assert.False(string.IsNullOrEmpty(Fixture.DistrictRep.Party));
+            Assert.NotNull(DistrictRep.State);
         }
     }
 }

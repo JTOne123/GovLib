@@ -220,7 +220,13 @@ _Pvt_Extensions
 *.AppImage
 
 # API examples folder
-Examples/
+GovLib.TestData/
 
 # Mac finder config
 *.DS_Store
+
+# JetBrains Rider config
+.idea/
+
+# Coverage Results
+coverage.json

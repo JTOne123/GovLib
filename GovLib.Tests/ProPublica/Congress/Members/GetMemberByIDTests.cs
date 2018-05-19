@@ -1,93 +1,97 @@
+using GovLib.ProPublica;
 using Xunit;
 
-namespace GovLib.Tests.ProPublica.Congress.Members.Fixtures
+namespace GovLib.Tests.ProPublica.Congress.Members
 {
-    public class GetMemberByIDTests : IClassFixture<MemberByIDFixture>
+    [Collection("ProPublica Test Collection")]
+    public class GetMemberByIDTests : IClassFixture<CongressFixture>
     {
-        public MemberByIDFixture Fixture { get; }
+        public Representative Representative { get; }
+        public Senator Senator { get; }
 
-        public GetMemberByIDTests(MemberByIDFixture fixture)
+        public GetMemberByIDTests(CongressFixture fixture)
         {
-            this.Fixture = fixture;
+            Senator = fixture.Congress.Members.GetMemberByID("S000033") as Senator;
+            Representative = fixture.Congress.Members.GetMemberByID("R000570") as Representative;
         }
 
         #region Representative Tests
         [Fact]
         public void RepresentativeIsNotNull()
         {
-            Assert.NotNull(Fixture.Representative);
+            Assert.NotNull(Representative);
         }
 
         [Fact]
         public void RepresentativeHasFirstName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Representative.FirstName));
+            Assert.False(string.IsNullOrEmpty(Representative.FirstName));
         }
 
         [Fact]
         public void RepresentativeHasLastName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Representative.LastName));
+            Assert.False(string.IsNullOrEmpty(Representative.LastName));
         }
 
         [Fact]
         public void RepresentativeHasFullName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Representative.FullName));
+            Assert.False(string.IsNullOrEmpty(Representative.FullName));
         }
 
         [Fact]
         public void RepresentativeHasAnID()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Representative.CongressID));
+            Assert.False(string.IsNullOrEmpty(Representative.CongressID));
         }
 
         [Fact]
         public void RepresentativesHasAGender()
         {
-            Assert.NotNull(Fixture.Representative.Gender);
+            Assert.NotNull(Representative.Gender);
         }
 
         [Fact]
         public void RepresentativeHasAHomeState()
         {
-            Assert.NotNull(Fixture.Representative.State);
+            Assert.NotNull(Representative.State);
         }
 
         [Fact]
         public void RepresentativeHasAParty()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Representative.Party));
+            Assert.False(string.IsNullOrEmpty(Representative.Party));
         }
 
         [Fact]
         public void RepresentativeHasABirthDate()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Representative.BirthDate.ToString()));
+            Assert.False(string.IsNullOrEmpty(Representative.BirthDate.ToString()));
         }
 
         [Fact]
         public void RepresentativeInOfficeHasADistrict()
         {
-            Assert.NotNull(Fixture.Representative.District);
+            Assert.NotNull(Representative.District);
         }
 
         [Fact]
         public void RepresentativeInOfficeHasAnAtLargeBool()
         {
-            Assert.NotNull(Fixture.Representative.AtLargeDistrict);
+            Assert.NotNull(Representative.AtLargeDistrict);
         }
 
         [Fact]
         public void RepresentativeHasPartyLoyaltyRatio()
         {
-            Assert.NotNull(Fixture.Representative.PartyLoyaltyRatio);
+            Assert.NotNull(Representative.PartyLoyaltyRatio);
         }
 
         [Fact]
         public void RepresentativeHasMissedVotesRatio()
         {
-            Assert.NotNull(Fixture.Representative.MissedVotesRatio);
+            Assert.NotNull(Representative.MissedVotesRatio);
         }
         #endregion
 
@@ -95,87 +99,87 @@ namespace GovLib.Tests.ProPublica.Congress.Members.Fixtures
         [Fact]
         public void SenatorArentNull()
         {
-            Assert.NotNull(Fixture.Senator);
+            Assert.NotNull(Senator);
         }
 
         [Fact]
         public void SenatorHasFirstName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Senator.FirstName));
+            Assert.False(string.IsNullOrEmpty(Senator.FirstName));
         }
 
         [Fact]
         public void SenatorHasLastName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Senator.LastName));
+            Assert.False(string.IsNullOrEmpty(Senator.LastName));
         }
 
         [Fact]
         public void SenatorHasFullName()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Senator.FullName));
+            Assert.False(string.IsNullOrEmpty(Senator.FullName));
         }
 
         [Fact]
         public void SenatorHasAnID()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Senator.CongressID));
+            Assert.False(string.IsNullOrEmpty(Senator.CongressID));
         }
 
         [Fact]
         public void SenatorHasAGender()
         {
-            Assert.NotNull(Fixture.Senator.Gender);
+            Assert.NotNull(Senator.Gender);
         }
 
         [Fact]
         public void SenatorHasAHomeState()
         {
-            Assert.NotNull(Fixture.Senator.State);
+            Assert.NotNull(Senator.State);
         }
 
         [Fact]
         public void SenatorHasAParty()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Senator.Party));
+            Assert.False(string.IsNullOrEmpty(Senator.Party));
         }
 
         [Fact]
         public void SenatorHasABirthDate()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Senator.BirthDate.ToString()));
+            Assert.False(string.IsNullOrEmpty(Senator.BirthDate.ToString()));
         }
 
         [Fact]
         public void SenatorHasANextElection()
         {
-            Assert.False(string.IsNullOrEmpty(Fixture.Senator.NextElection.ToString()));
+            Assert.False(string.IsNullOrEmpty(Senator.NextElection.ToString()));
         }
 
         [Fact]
         public void SenatorHasASenateClass()
         {
-            Assert.NotNull(Fixture.Senator.Class);
-            Assert.False(Fixture.Senator.Class == 0);
+            Assert.NotNull(Senator.Class);
+            Assert.False(Senator.Class == 0);
         }
 
         [Fact]
         public void SenatorInOfficeHasAStateRank()
         {
-            if (Fixture.Senator.InOffice)
-                Assert.False(string.IsNullOrEmpty(Fixture.Senator.Rank));
+            if (Senator.InOffice)
+                Assert.False(string.IsNullOrEmpty(Senator.Rank));
         }
 
         [Fact]
         public void SenatorHasPartyLoyaltyRatio()
         {
-            Assert.NotNull(Fixture.Senator.PartyLoyaltyRatio);
+            Assert.NotNull(Senator.PartyLoyaltyRatio);
         }
 
         [Fact]
         public void SenatorHasMissedVotesRatio()
         {
-            Assert.NotNull(Fixture.Senator.MissedVotesRatio);
+            Assert.NotNull(Senator.MissedVotesRatio);
         }
         #endregion
     }

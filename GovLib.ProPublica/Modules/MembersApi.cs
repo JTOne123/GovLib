@@ -5,211 +5,221 @@ using GovLib.ProPublica.Urls;
 using GovLib.ProPublica.Util;
 using GovLib.ProPublica.Util.MemberModels;
 using GovLib.Util;
+using GovLib.ProPublica.Util.ApiModels.Wrappers;
+using Newtonsoft.Json;
+using GovLib.ProPublica.Builders;
 
 namespace GovLib.ProPublica.Modules
 {
-    /// <summary>Get information about members of congress.</summary>
+    /// <summary>
+    /// Get information about members of congress.
+    /// </summary>
     public class MembersApi
     {
-        private Congress _parent { get; }
+        private Congress _congress { get; }
+        private IMemberUrlBuilder _memberUrlBuilder { get; }
 
-        /// <summary>Stored information of senators retrieved so far.</summary>
-        public Dictionary<string, Senator> Senators { get; }
-
-        /// <summary>Stored information of representatives retrieved so far.</summary>
-        public Dictionary<string, Representative> Representatives { get; }
-
-        internal MembersApi(Congress parent)
+        internal MembersApi(Congress congress, IMemberUrlBuilder memberUrlBuilder)
         {
-            _parent = parent;
-            Senators = new Dictionary<string, Senator>();
-            Representatives = new Dictionary<string, Representative>();
+            _congress = congress;
+            _memberUrlBuilder = memberUrlBuilder;
         }
 
-        internal void ValidateCache(int congressNum)
+        /// <summary>
+        /// Fetch all senators from the current congress session.
+        /// </summary>
+        /// <returns><see cref="Senator" />array</returns>
+        public IEnumerable<Senator> GetAllSenators()
         {
-            if (!_parent.Cache.ContainsKey(congressNum))
-                _parent.Cache[congressNum] = new MemberCache(congressNum);
+            return GetAllSenators(_congress.CurrentCongress);
         }
 
-        internal void PopulateCache(int congressNum)
+        /// <summary>
+        /// Fetch all senators from given congress session.
+        /// </summary>
+        /// <param name="congressNum">Congress number</param>
+        /// <returns><see cref="Senator" />array.</returns>
+        public IEnumerable<Senator> GetAllSenators(int congressNum)
         {
-            ValidateCache(congressNum);
-            
-            if (!_parent.Cache[congressNum].Senators.Any())
-                GetAllSenators(congressNum);
-            if (!_parent.Cache[congressNum].Representatives.Any())
-                GetAllRepresentatives(congressNum);
+            var url = _memberUrlBuilder.AllSenators(congressNum.ToString());
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<MembersWrapper<ApiAllSenators>>>(result);
+            var sens = json?.Results?[0].Members?.Select(s => ApiAllSenators.Convert(s));
+            return sens;
         }
 
-        /// <summary>Fetch all senators from the current congress session.</summary>
-        public Senator[] GetAllSenators()
+        /// <summary>
+        /// Fetch all representatives from the current congress session.
+        /// </summary>
+        /// <returns><see cref="Representative" />array.</returns>
+        public IEnumerable<Representative> GetAllRepresentatives()
         {
-            return GetAllSenators(_parent.CurrentCongress);
+            return GetAllRepresentatives(_congress.CurrentCongress);
         }
 
-        /// <summary>Fetch all senators from given congress session.</summary>
-        public Senator[] GetAllSenators(int congressNum)
+        /// <summary>
+        /// Fetch all representatives from given congress session.
+        /// </summary>
+        /// <param name="congressNum">Congress number</param>
+        /// <returns><see cref="Representative" />array.</returns>
+        public IEnumerable<Representative> GetAllRepresentatives(int congressNum)
         {
-            ValidateCache(congressNum);
-
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.AllSenators, congressNum);
-                var result = client.Get<ResultWrapper<MembersWrapper<ApiAllSenators>>>(url, _parent.Headers);
-                var sens = result?.results?[0].members?.Select(s => ApiAllSenators.Convert(s));
-                _parent.Cache[congressNum].UpdateMembers(sens);
-                return sens.ToArray();
-            }
+            var url = _memberUrlBuilder.AllRepresentatives(congressNum.ToString());
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<MembersWrapper<ApiAllReps>>>(result);
+            var reps = json?.Results?[0].Members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r));
+            return reps;
         }
 
-        /// <summary>Fetch all senators from the current congress session.</summary>
-        public Representative[] GetAllRepresentatives()
-        {
-            return GetAllRepresentatives(_parent.CurrentCongress);
-        }
-
-        /// <summary>Fetch all representatives from given congress session.</summary>
-        public Representative[] GetAllRepresentatives(int congressNum)
-        {
-            ValidateCache(congressNum);
-
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.AllRepresentatives, congressNum);
-                var result = client.Get<ResultWrapper<MembersWrapper<ApiAllReps>>>(url, _parent.Headers);
-                var reps = result?.results?[0].members?.Where(r => r.IsVotingMember()).Select(r => ApiAllReps.Convert(r));
-                _parent.Cache[congressNum].UpdateMembers(reps);
-                return reps.ToArray();
-            }
-        }
-
-        /// <summary>Find congress member by BioGuide ID.</summary>
+        /// <summary>
+        /// Find congress member by BioGuide ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns><see cref="Politician" /></returns>
         public Politician GetMemberByID(string id)
         {
-            PopulateCache(_parent.CurrentCongress);
-            
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.Member, id);
-                var result = client.Get<ResultWrapper<ApiMember>>(url, _parent.Headers);
-                return result?.results?.Where(r => r.IsVotingMember()).Select(p => ApiMember.Convert(p)).FirstOrDefault();
-            }
+            var url = _memberUrlBuilder.MemberByID(id);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<ApiMember>>(result);
+            return json?.Results?.Where(r => r.IsVotingMember()).Select(p => ApiMember.Convert(p)).FirstOrDefault();
         }
 
-        /// <summary>Get full Politician info from a contract.</summary>
+        /// <summary>
+        /// Get full Politician info from a contract.
+        /// </summary>
+        /// <param name="politician"><see cref="ICongressMember" /></param>
+        /// <returns><see cref="Politician" /></returns>
         public Politician GetMemberByID(ICongressMember politician)
         {
             return GetMemberByID(politician.CongressID);
         }
 
-        /// <summary>Fetch new congress members from given congress session.</summary>
-        public Politician[] GetNewMembers()
+        /// <summary>
+        /// Fetch new congress members from given congress session.
+        /// </summary>
+        /// <returns><see cref="Politician" /></returns>
+        public IEnumerable<PoliticianSummary> GetNewMembers()
         {
-            PopulateCache(_parent.CurrentCongress);
-
-            using (var client = new HttpClient())
-            {
-                var url = MemberUrls.NewMembers;
-                var result = client.Get<ResultWrapper<NewMembersWrapper>>(url, _parent.Headers);
-                var newMembers = result?.results?[0].members?.Where(r => r.IsVotingMember());
-                return newMembers.Select(m => _parent.Cache[_parent.CurrentCongress].Search(m.id)).Where(m => m != null).ToArray();
-            }
+            var url = _memberUrlBuilder.NewMembers();
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<NewMembersWrapper>>(result);
+            var newMembers = json?.Results?[0].Members?.Where(r => r.IsVotingMember());
+            return newMembers.Select(m => ApiNewMembers.Convert(m));
         }
 
-        /// <summary>Fetch both current senators from the given state enum.</summary>
-        public Senator[] GetSenatorsByState(State state)
+        /// <summary>
+        /// Fetch both current senators from the given state enum.
+        /// </summary>
+        /// <param name="state"><see cref="State" /></param>
+        /// <returns><see cref="Senator" />array.</returns>
+        public IEnumerable<SenatorSummary> GetSenatorsByState(State state)
         {
             return GetSenatorsByState(EnumConvert.StateEnumToCode(state));
         }
 
-        /// <summary>Fetch both current senators from the given state.</summary>
-        public Senator[] GetSenatorsByState(string state)
+        /// <summary>
+        /// Fetch both current senators from the given state.
+        /// </summary>
+        /// <param name="state">State code.</param>
+        /// <returns><see cref="Senator" />array.</returns>
+        public IEnumerable<SenatorSummary> GetSenatorsByState(string state)
         {
-            PopulateCache(_parent.CurrentCongress);
-
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.SenatorsByState, state);
-                var result = client.Get<ResultWrapper<ApiSenatorsByState>>(url, _parent.Headers);
-                return result?.results?.Select(s => _parent.Cache[_parent.CurrentCongress].Senators[s.id]).ToArray();
-            }
+            var url = _memberUrlBuilder.SenatorsByState(state);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<ApiSenatorsByState>>(result);
+            return json?.Results?.Select(s => ApiSenatorsByState.Convert(s, state));
         }
 
-        /// <summary>Fetch all current representatives from the given state enum.</summary>
-        public Representative[] GetRepresentaivesByState(State state)
+        /// <summary>
+        /// Fetch all current representatives from the given state enum.
+        /// </summary>
+        /// <param name="state"><see cref="State" /></param>
+        /// <returns><see cref="Representative" />array.</returns>
+        public IEnumerable<RepresentativeSummary> GetRepresentativesByState(State state)
         {
             return GetRepresentaivesByState(EnumConvert.StateEnumToCode(state));
         }
 
-        /// <summary>Fetch all current representatives from the given state.</summary>
-        public Representative[] GetRepresentaivesByState(string state)
+        /// <summary>
+        /// Fetch all current representatives from the given state.
+        /// </summary>
+        /// <param name="state">State code.</param>
+        /// <returns><see cref="Representative" />array.</returns>
+        public IEnumerable<RepresentativeSummary> GetRepresentaivesByState(string state)
         {
-            PopulateCache(_parent.CurrentCongress);
-
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.RepresentativesByState, state);
-                var result = client.Get<ResultWrapper<ApiRepresentativesByState>>(url, _parent.Headers);
-                return result?.results?.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.id]).ToArray();
-            }
+            var url = _memberUrlBuilder.RepresentativesByState(state);
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<ApiRepresentativesByState>>(result);
+            return json?.Results?.Select(r => ApiRepresentativesByState.Convert(r, state));
         }
 
-        /// <summary>Fetch current representative from the given state enum and district.</summary>
-        public Representative GetRepresentiveFromDistrict(State state, int district)
+        /// <summary>
+        /// Fetch current representative from the given state enum and district.
+        /// </summary>
+        /// <param name="state"><see cref="State" /></param>
+        /// <param name="district">District number.</param>
+        /// <returns><see cref="Representative" /></returns>
+        public RepresentativeSummary GetRepresentiveFromDistrict(State state, int district)
         {
             return GetRepresentiveFromDistrict(EnumConvert.StateEnumToCode(state), district);
         }
 
-        /// <summary>Fetch current representative from the given state and district.</summary>
-        public Representative GetRepresentiveFromDistrict(string state, int district)
+        /// <summary>
+        /// Fetch current representative from the given state and district.
+        /// </summary>
+        /// <param name="state">State code.</param>
+        /// <param name="district">District number.</param>
+        /// <returns><see cref="Representative" /></returns>
+        public RepresentativeSummary GetRepresentiveFromDistrict(string state, int district)
         {
-            PopulateCache(_parent.CurrentCongress);
-
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.RepresentativeFromDistrict, state, district);
-                var result = client.Get<ResultWrapper<ApiRepresentativesByState>>(url, _parent.Headers);
-                return result?.results?.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.id]).FirstOrDefault();
-            }
+            var url = _memberUrlBuilder.RepresentativeFromDistrict(state, district.ToString());
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<ApiRepresentativeFromDistrict>>(result);
+            return json?.Results?.Select(r => ApiRepresentativeFromDistrict.Convert(r, state, district)).FirstOrDefault();
         }
 
-        /// <summary>Fetch all senators from the current congress session.</summary>
-        public Senator[] GetSenatorsLeavingOffice()
+        /// <summary>
+        /// Fetch all senators from the current congress session.
+        /// </summary>
+        /// <returns><see cref="Senator" />array.</returns>
+        public IEnumerable<SenatorSummary> GetSenatorsLeavingOffice()
         {
-            return GetSenatorsLeavingOffice(_parent.CurrentCongress);
+            return GetSenatorsLeavingOffice(_congress.CurrentCongress);
         }
 
-        /// <summary>Fetch senators that were leaving office during the given congress session.</summary>
-        public Senator[] GetSenatorsLeavingOffice(int congressNum)
+        /// <summary>
+        /// Fetch senators that were leaving office during the given congress session.
+        /// </summary>
+        /// <param name="congressNum">Congress number</param>
+        /// <returns><see cref="Senator" />array.</returns>
+        public IEnumerable<SenatorSummary> GetSenatorsLeavingOffice(int congressNum)
         {
-            PopulateCache(_parent.CurrentCongress);
-
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.SenatorsLeaving, congressNum);
-                var result = client.Get<ResultWrapper<MembersWrapper<ApiSenatorsLeaving>>>(url, _parent.Headers);
-                return result?.results?[0].members.Select(s => _parent.Cache[_parent.CurrentCongress].Senators[s.id]).ToArray();
-            }
+            var url = _memberUrlBuilder.SenatorsLeaving(congressNum.ToString());
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<MembersWrapper<ApiSenatorsLeaving>>>(result);
+            return json?.Results?[0].Members.Select(r => ApiSenatorsLeaving.Convert(r));
         }
 
-        /// <summary>Fetch all senators from the current congress session.</summary>
-        public Representative[] GetRepresentativesLeavingOffice()
+        /// <summary>
+        /// Fetch all senators from the current congress session.
+        /// </summary>
+        /// <returns><see cref="Representative" />array.</returns>
+        public IEnumerable<RepresentativeSummary> GetRepresentativesLeavingOffice()
         {
-            return GetRepresentativesLeavingOffice(_parent.CurrentCongress);
+            return GetRepresentativesLeavingOffice(_congress.CurrentCongress);
         }
 
-        /// <summary>Fetch representatives that were leaving office during the given congress session.</summary>
-        public Representative[] GetRepresentativesLeavingOffice(int congressNum)
+        /// <summary>
+        /// Fetch representatives that were leaving office during the given congress session.
+        /// </summary>
+        /// <param name="congressNum">Congress number</param>
+        /// <returns><see cref="Representative" />array.</returns>
+        public IEnumerable<RepresentativeSummary> GetRepresentativesLeavingOffice(int congressNum)
         {
-            PopulateCache(_parent.CurrentCongress);
-
-            using (var client = new HttpClient())
-            {
-                var url = string.Format(MemberUrls.RepresentativesLeaving, congressNum);
-                var result = client.Get<ResultWrapper<MembersWrapper<ApiRepsLeaving>>>(url, _parent.Headers);
-                return result?.results?[0].members.Select(r => _parent.Cache[_parent.CurrentCongress].Representatives[r.id]).ToArray();
-            }
+            var url = _memberUrlBuilder.RepresentativesLeaving(congressNum.ToString());
+            var result = _congress.Client.Get(url, _congress.Headers);
+            var json = JsonConvert.DeserializeObject<ResultsWrapper<MembersWrapper<ApiRepsLeaving>>>(result);
+            return json?.Results?[0].Members.Select(r => ApiRepsLeaving.Convert(r));
         }
     }
 }

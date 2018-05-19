@@ -13,6 +13,7 @@ namespace GovLib.ProPublica.Util
 
         internal MemberCache(int congressNum)
         {
+            CongressNum = congressNum;
             Senators = new Dictionary<string, Senator>();
             Representatives = new Dictionary<string, Representative>();
         }
