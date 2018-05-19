@@ -49,6 +49,7 @@ namespace GovLib.ProPublica
         /// ProPublica API votes module.
         /// </summary>
         /// <returns><see cref="VotesApi" /></returns>
+        [Obsolete("Unfinished module not recommended for use.")]
         public VotesApi Votes { get; }
 
         /// <summary>
