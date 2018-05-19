@@ -9,7 +9,7 @@ GovLib is a .NET Standard library that provides intuitive access to various gove
 Install using the .NET CLI (explicit version is required in pre-releases):
 
 ```bash
-dotnet add package GovLib
+dotnet add package govlib
 ```
 
 ## Usage guide
