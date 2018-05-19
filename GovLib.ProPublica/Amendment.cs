@@ -1,5 +1,5 @@
 using System;
-using GovLib.Core.Contracts;
+using GovLib.Contracts;
 
 namespace GovLib.ProPublica
 {
@@ -13,7 +13,6 @@ namespace GovLib.ProPublica
         public string Number { get; set; }
         public string Slug { get; set; }
         public string SponsorID { get; set; }
-        public Politician Sponsor { get; set; }
         public DateTime Introduced { get; set; }
         public string Title { get; set; }
         public string Url { get; set; }

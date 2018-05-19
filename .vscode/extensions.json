@@ -6,6 +6,8 @@
 		"ms-vscode.csharp",
 		"k--kato.docomment",
 		"jchannon.csharpextensions",
-		"eamodio.gitlens"
+		"eamodio.gitlens",
+		"tintoy.msbuild-project-tools",
+		"formulahendry.dotnet-test-explorer"
 	]
 }

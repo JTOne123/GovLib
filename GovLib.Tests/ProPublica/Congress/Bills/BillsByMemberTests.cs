@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using GovLib.ProPublica;
 using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Bills
 {
-    [Collection("MainTestCollection")]
+    [Collection("ProPublica Test Collection")]
     public class BillsByMemberTests : IClassFixture<CongressFixture>
     {
-        public Bill[] BillsByMember { get; }
+        public IEnumerable<Bill> BillsByMember { get; }
 
         public BillsByMemberTests(CongressFixture fixture)
         {
@@ -51,13 +52,6 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
         {
             foreach (var bill in BillsByMember)
                 Assert.NotNull(bill.Chamber);
-        }
-
-        [Fact]
-        public void BillSponsorIdMatchesSponsorObjectId()
-        {
-            foreach (var bill in BillsByMember)
-                Assert.Equal(bill.SponsorID, bill.Sponsor.CongressID);
         }
 
         [Fact]

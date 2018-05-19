@@ -17,11 +17,10 @@ namespace GovLib.ProPublica
         public string Url { get; internal set; }
         public string Title { get; internal set; }
         public string SponsorID { get; internal set; }
-        public Politician Sponsor { get; internal set; }
         public Chamber Chamber { get; internal set; }
         public string CongressUrl { get; internal set; }
         public string GovTrackUrl { get; internal set; }
-        public DateTime Introduced { get; set; }
+        public DateTime Introduced { get; internal set; }
         public string LatestAction { get; internal set; }
         public DateTime LatestActionDate { get; internal set; }
         public bool Active { get; internal set; }

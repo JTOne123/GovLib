@@ -11,6 +11,6 @@ namespace GovLib.ProPublica.Util.ApiModels.Wrappers
         public string Copyright { get; set; }
         
         [JsonProperty("results")]
-        public T[] Results { get; set; }
+        public T Result { get; set; }
     }
 }

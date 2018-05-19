@@ -1,16 +1,17 @@
+using System.Collections.Generic;
 using GovLib.ProPublica;
 using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Bills
 {
-    [Collection("MainTestCollection")]
+    [Collection("ProPublica Test Collection")]
     public class SubjectsByTerm : IClassFixture<CongressFixture>
     {
-        public BillSubject[] Subjects { get; }
+        public IEnumerable<BillSubject> Subjects { get; }
 
         public SubjectsByTerm(CongressFixture fixture)
         {
-            Subjects = fixture.Congress.Bills.GetSubjects("climate");
+            Subjects = fixture.Congress.Bills.GetSubjectsByTerm("climate");
         }
 
         [Fact]

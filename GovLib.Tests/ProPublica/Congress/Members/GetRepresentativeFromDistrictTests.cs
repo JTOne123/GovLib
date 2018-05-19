@@ -3,10 +3,10 @@ using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Members
 {
-    [Collection("MainTestCollection")]
+    [Collection("ProPublica Test Collection")]
     public class GetRepresentativeFromDistrictTests : IClassFixture<CongressFixture>
     {
-        public Representative DistrictRep { get; }
+        public RepresentativeSummary DistrictRep { get; }
 
         public GetRepresentativeFromDistrictTests(CongressFixture fixture)
         {
@@ -48,12 +48,6 @@ namespace GovLib.Tests.ProPublica.Congress.Members
         public void MemberCardsHaveAHomeState()
         {
             Assert.NotNull(DistrictRep.State);
-        }
-
-        [Fact]
-        public void MemberCardsHaveAParty()
-        {
-            Assert.False(string.IsNullOrEmpty(DistrictRep.Party));
         }
     }
 }

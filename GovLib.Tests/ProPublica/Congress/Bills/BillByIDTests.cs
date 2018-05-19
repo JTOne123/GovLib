@@ -3,7 +3,7 @@ using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Bills
 {
-    [Collection("MainTestCollection")]
+    [Collection("ProPublica Test Collection")]
     public class BillByIDTests : IClassFixture<CongressFixture>
     {
         public Bill BillByID { get; }
@@ -41,12 +41,6 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
         public void BillHasAChamber()
         {
             Assert.NotNull(BillByID.Chamber);
-        }
-
-        [Fact]
-        public void BillSponsorIdMatchesSponsorObjectId()
-        {
-            Assert.Equal(BillByID.SponsorID, BillByID.Sponsor.CongressID);
         }
 
         [Fact]

@@ -1,22 +1,17 @@
+using System.Collections.Generic;
 using GovLib.ProPublica;
 using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Bills
 {
-    [Collection("MainTestCollection")]
-    public class BillAmendmentTests : IClassFixture<CongressFixture>
+    [Collection("ProPublica Test Collection")]
+    public class BillAmendmentsTests : IClassFixture<CongressFixture>
     {
-        public Amendment[] BillAmendments { get; }
+        public IEnumerable<Amendment> BillAmendments { get; }
 
-        public BillAmendmentTests(CongressFixture fixture)
+        public BillAmendmentsTests(CongressFixture fixture)
         {
             BillAmendments = fixture.Congress.Bills.GetBillAmendments(115, "hr1628");
-        }
-
-        [Fact]
-        public void AmendmentIsNotNull()
-        {
-            Assert.NotNull(BillAmendments);
         }
 
         [Fact]
@@ -32,24 +27,45 @@ namespace GovLib.Tests.ProPublica.Congress.Bills
         }
 
         [Fact]
-        public void AmendmentsAreNotNull()
+        public void AmendmentsHaveAnIntroducedDate()
         {
-            foreach (var ammendment in BillAmendments)
-                Assert.NotNull(ammendment);
+            foreach (var amendment in BillAmendments)
+                Assert.NotNull(amendment.Introduced);
+        }
+
+        [Fact]
+        public void AmendmentsHaveALatestAction()
+        {
+            foreach (var amendment in BillAmendments)
+                Assert.False(string.IsNullOrEmpty(amendment.LatestAction));
+        }
+
+        [Fact]
+        public void AmendmentsHaveALatestActionDate()
+        {
+            foreach (var amendment in BillAmendments)
+                Assert.NotNull(amendment.LatestActionDate);
         }
 
         [Fact]
         public void AmendmentsHaveANumber()
         {
-            foreach (var ammendment in BillAmendments)
-                Assert.False(string.IsNullOrEmpty(ammendment.Slug));
+            foreach (var amendment in BillAmendments)
+                Assert.NotNull(amendment.Number);
         }
 
         [Fact]
-        public void BillsHaveAnIntroducedDate()
+        public void AmendmentsHaveASlug()
         {
-            foreach (var ammendment in BillAmendments)
-                Assert.NotNull(ammendment.Introduced);
+            foreach (var amendment in BillAmendments)
+                Assert.NotNull(amendment.Slug);
+        }
+
+        [Fact]
+        public void AmendmentsHaveATitle()
+        {
+            foreach (var amendment in BillAmendments)
+                Assert.NotNull(amendment.Title);
         }
     }
 }

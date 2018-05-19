@@ -14,6 +14,13 @@ namespace GovLib
         Female
     }
 
+    public enum Party
+    {
+        Republican,
+        Democratic,
+        Independent
+    }
+
     public enum State
     {
         Alabama,

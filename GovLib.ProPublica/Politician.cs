@@ -4,7 +4,7 @@ using GovLib.Contracts;
 namespace GovLib.ProPublica
 {
     /// <summary>Abstract implementation for a generic politician.</summary>
-    public abstract class Politician : ICongressMember
+    public abstract class Politician : PoliticianSummary
     {
         #pragma warning disable CS1591
 

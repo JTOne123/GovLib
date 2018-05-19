@@ -1,4 +1,4 @@
-namespace GovLib.Core.Contracts
+namespace GovLib.Contracts
 {
     /// <summary>Contract for ammendments with a valid number.</summary>
     public interface IAmmendment

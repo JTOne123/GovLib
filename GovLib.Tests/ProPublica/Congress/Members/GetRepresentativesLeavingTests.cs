@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using GovLib.ProPublica;
 using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Members
 {
-    [Collection("MainTestCollection")]
+    [Collection("ProPublica Test Collection")]
     public class GetRepresentativesLeavingTests : IClassFixture<CongressFixture>
     {
-        public Representative[] RepsLeaving { get; }
+        public IEnumerable<RepresentativeSummary> RepsLeaving { get; }
 
         public GetRepresentativesLeavingTests(CongressFixture fixture)
         {
@@ -65,13 +66,6 @@ namespace GovLib.Tests.ProPublica.Congress.Members
         {
             foreach (var representativeCard in RepsLeaving)
                 Assert.NotNull(representativeCard.State);
-        }
-
-        [Fact]
-        public void MemberCardsHaveAParty()
-        {
-            foreach (var representativeCard in RepsLeaving)
-                Assert.False(string.IsNullOrEmpty(representativeCard.Party));
         }
     }
 }

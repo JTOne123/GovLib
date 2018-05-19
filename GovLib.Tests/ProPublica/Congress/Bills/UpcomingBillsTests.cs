@@ -1,12 +1,13 @@
-﻿using GovLib.ProPublica;
+﻿using System.Collections.Generic;
+using GovLib.ProPublica;
 using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Bills
 {
-    [Collection("MainTestCollection")]
+    [Collection("ProPublica Test Collection")]
     public class UpcomingBillsTests : IClassFixture<CongressFixture>
     {
-        public BillSummary[] UpcomingBills { get; }
+        public IEnumerable<BillSummary> UpcomingBills { get; }
 
         public UpcomingBillsTests(CongressFixture fixture)
         {

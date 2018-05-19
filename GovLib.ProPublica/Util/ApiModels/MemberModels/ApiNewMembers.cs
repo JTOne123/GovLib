@@ -34,5 +34,33 @@ namespace GovLib.ProPublica.Util.MemberModels
 
         internal bool IsVotingMember() =>
             EnumConvert.StateCodeToEnum(this.State) != null;
+
+        internal static PoliticianSummary Convert(ApiNewMembers entity)
+        {
+            PoliticianSummary pol;
+
+            if (entity == null) return null;
+            
+            if (entity.Chamber == "Senate")
+            {
+                pol = new SenatorSummary();
+            }
+            else
+            {
+                int district;
+                if (entity.District == "At-Large") district = 1;
+                else district = int.Parse(entity.District);
+                pol = new RepresentativeSummary { District = district };
+            };
+
+            pol.CongressID = entity.ID;
+            pol.FirstName = entity.FirstName;
+            pol.MiddleName = entity.MiddleName;
+            pol.LastName = entity.LastName;
+            pol.State = (State) EnumConvert.StateCodeToEnum(entity.State);
+            pol.Party = (Party) EnumConvert.PartyLetterToEnum(entity.Party);
+
+            return pol;
+        }
     }
 }

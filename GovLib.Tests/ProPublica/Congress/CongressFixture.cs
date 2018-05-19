@@ -10,7 +10,7 @@ namespace GovLib.Tests.ProPublica.Congress
         public CongressFixture()
         {
             ApiKey = Environment.GetEnvironmentVariable("PROPUBLICA_API_KEY");
-            Congress = new GovLib.ProPublica.Congress(ApiKey);
+            Congress = new GovLib.ProPublica.Congress(ApiKey, testClient: true);
         }
     }
 }

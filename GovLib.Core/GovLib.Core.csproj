@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Provides the core contracts and implementations for GovLib modules</Description>
     <PackageTags>government;api;netstandard;core</PackageTags>
     <RootNamespace>GovLib</RootNamespace>

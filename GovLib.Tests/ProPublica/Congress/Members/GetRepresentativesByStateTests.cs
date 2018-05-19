@@ -1,12 +1,14 @@
+using System.Collections.Generic;
+using System.Linq;
 using GovLib.ProPublica;
 using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Members
 {
-    [Collection("MainTestCollection")]
+    [Collection("ProPublica Test Collection")]
     public class GetRepresentativesByStateTests : IClassFixture<CongressFixture>
     {
-        public Representative[] StateReps { get; }
+        public IEnumerable<RepresentativeSummary> StateReps { get; }
 
         public GetRepresentativesByStateTests(CongressFixture fixture)
         {
@@ -65,13 +67,6 @@ namespace GovLib.Tests.ProPublica.Congress.Members
         {
             foreach (var member in StateReps)
                 Assert.NotNull(member.State);
-        }
-
-        [Fact]
-        public void MemberCardsHaveAParty()
-        {
-            foreach (var member in StateReps)
-                Assert.False(string.IsNullOrEmpty(member.Party));
         }
     }
 }

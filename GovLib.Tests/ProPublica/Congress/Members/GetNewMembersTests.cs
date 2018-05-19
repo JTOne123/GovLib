@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using GovLib.ProPublica;
 using Xunit;
 
 namespace GovLib.Tests.ProPublica.Congress.Members
 {
-    [Collection("MainTestCollection")]
+    [Collection("ProPublica Test Collection")]
     public class GetNewMembersTests : IClassFixture<CongressFixture>
     {
-        public Politician[] NewMembers { get; }
+        public IEnumerable<PoliticianSummary> NewMembers { get; }
 
         public GetNewMembersTests(CongressFixture fixture)
         {
@@ -65,13 +66,6 @@ namespace GovLib.Tests.ProPublica.Congress.Members
         {
             foreach (var member in NewMembers)
                 Assert.NotNull(member.State);
-        }
-
-        [Fact]
-        public void MemberCardsHaveAParty()
-        {
-            foreach (var member in NewMembers)
-                Assert.False(string.IsNullOrEmpty(member.Party));
         }
     }
 }

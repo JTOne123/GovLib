@@ -25,5 +25,21 @@ namespace GovLib.ProPublica.Util.MemberModels
         
         [JsonProperty("state")]
         public string State { get; set; }
+
+        internal static SenatorSummary Convert(ApiSenatorsLeaving entity)
+        {
+            if (entity == null) return null;
+
+            var pol = new SenatorSummary();
+
+            pol.CongressID = entity.ID;
+            pol.FirstName = entity.FirstName;
+            pol.MiddleName = entity.MiddleName;
+            pol.LastName = entity.LastName;
+            pol.State = (State) EnumConvert.StateCodeToEnum(entity.State);
+            pol.Party = (Party) EnumConvert.PartyLetterToEnum(entity.Party);
+
+            return pol;
+        }
     }
 }

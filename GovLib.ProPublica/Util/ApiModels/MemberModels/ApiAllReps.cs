@@ -1,17 +1,12 @@
 using System;
 using System.Globalization;
 using GovLib.Contracts;
-using AutoMapper;
 using Newtonsoft.Json;
 
 namespace GovLib.ProPublica.Util.MemberModels
 {
     internal class ApiAllReps : ApiAllMembers
     {
-        private static readonly MapperConfiguration _mapperConfig =
-            new MapperConfiguration(cfg => cfg.CreateMap<Politician, Representative>());
-        private static readonly IMapper _mapper = _mapperConfig.CreateMapper();
-
         [JsonProperty("district")]
         public string District { get; set; }
 
@@ -20,7 +15,7 @@ namespace GovLib.ProPublica.Util.MemberModels
 
         internal static Representative Convert(ApiAllReps entity)
         {
-            var rep = _mapper.Map<Representative>(ApiAllMembers.Convert(entity, Chamber.House));
+            var rep = ApiAllMembers.Convert(entity, Chamber.House) as Representative;
 
             if (entity.District == "At-Large")
             {
