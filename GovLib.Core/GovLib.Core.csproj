@@ -6,6 +6,14 @@
     <Description>Provides the core contracts and implementations for GovLib modules</Description>
     <PackageTags>government;api;netstandard;core</PackageTags>
     <RootNamespace>GovLib</RootNamespace>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
   
 </Project>
