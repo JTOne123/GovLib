@@ -5,7 +5,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>GovLib module for interacting with ProPublica APIs</Description>
     <PackageTags>govlib;api;propublica;congress</PackageTags>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="../GovLib.Core/GovLib.Core.csproj" />
